@@ -1,0 +1,19 @@
+query TaxSetting($id: String!) {
+    taxSetting(id: $id) {
+    id
+    dispensaryId
+    name
+    rate
+    categories{
+      value
+      label
+      color
+    }
+    applyTo
+    compoundTaxes
+    isExcludeFromRecreational
+    isExcludeFromTaxExempt
+    createdAt
+    updatedAt
+    }
+}

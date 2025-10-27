@@ -1,0 +1,21 @@
+query AllDiscountsByDispensaryId( $dispensaryId: String!) {
+  allDiscountsByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    dispensaryId
+    applyTarget
+    name
+    type
+    applyDurationSet
+    applyTo
+    applyFrom
+    discountPercent
+    isActive
+    isAdminPin
+    isEnterManualAmount
+    isLimitManualAmount
+    manualDiscountLimitPercent
+    color
+    createdAt
+    updatedAt   
+  }
+}

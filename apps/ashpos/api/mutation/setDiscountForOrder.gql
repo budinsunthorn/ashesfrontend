@@ -1,0 +1,10 @@
+mutation setDiscountForOrder($input: DiscountSetInput!) {
+  setDiscountForOrder(input: $input) {
+    id
+    dispensaryId
+    orderId
+    discountName
+    discountMethod
+    value
+  }
+}

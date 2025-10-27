@@ -1,0 +1,5 @@
+mutation deleteDispensary($id: String!) {
+  deleteDispensary(id: $id) {
+    name
+  }
+}

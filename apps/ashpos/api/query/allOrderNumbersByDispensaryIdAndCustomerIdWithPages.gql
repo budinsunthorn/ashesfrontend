@@ -1,0 +1,10 @@
+query AllOrderNumbersByDispensaryIdAndCustomerIdWithPages( $dispensaryId: String!, $customerId: String!, $pageNumber: Int!, $onePageRecords: Int!) {
+  allOrderNumbersByDispensaryIdAndCustomerIdWithPages(dispensaryId: $dispensaryId, customerId: $customerId, pageNumber: $pageNumber, onePageRecords: $onePageRecords) {
+    orderHistory{
+      id          
+      orderDate
+      amount 
+    },
+    totalCount
+  }
+}

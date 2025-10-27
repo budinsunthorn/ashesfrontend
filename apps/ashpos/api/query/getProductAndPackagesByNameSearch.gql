@@ -1,0 +1,29 @@
+query GetProductAndPackagesByNameSearch($searchQuery: String!, $dispensaryId: String!, $itemCategoryId: String!, $pageNumber: Int!, $onePageRecords: Int!) {
+  getProductAndPackagesByNameSearch(searchQuery: $searchQuery, dispensaryId: $dispensaryId, itemCategoryId: $itemCategoryId, pageNumber: $pageNumber, onePageRecords: $onePageRecords) {
+    id
+    posQty
+    packageLabel
+    cost
+    productId
+    product {
+      name
+      price
+      sku
+      productUnitOfMeasure
+      unitOfUnitWeight
+      unitOfNetWeight
+      unitWeight
+      netWeight
+      isApplyUnitWeight
+      itemCategory {
+        name
+        color
+      }
+    }
+    package {
+      packageId
+      packageStatus
+      UnitOfMeasureName
+    }
+  }
+}

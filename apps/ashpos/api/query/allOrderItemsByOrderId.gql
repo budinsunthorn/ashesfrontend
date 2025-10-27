@@ -1,0 +1,27 @@
+query AllOrderItemsByOrderId( $orderId: Int!) {
+  allOrderItemsByOrderId(orderId: $orderId) {
+    id
+    mjType
+    orderId
+    product {
+      name
+      productUnitOfMeasure
+      itemCategory{
+        name
+        color
+        metrcCategory
+        containMj
+      }
+    }
+    productId
+    packageLabel
+    quantity
+    price
+    amount
+    discountedAmount
+    isRestockForReturn
+    isReturned
+    createdAt
+    updatedAt
+  }
+}

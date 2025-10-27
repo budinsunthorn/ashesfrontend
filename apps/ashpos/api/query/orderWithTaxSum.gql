@@ -1,0 +1,115 @@
+query OrderWithTaxSum($id: Int!) {
+    orderWithTaxSum(id: $id) {
+      order {
+        id           
+        dispensaryId 
+        userId       
+        customerId   
+        description  
+        orderType
+        cost  
+        tax
+        cashAmount 
+        otherAmount
+        changeDue
+        loyalty
+        discount
+        mjType
+        status       
+        orderDate
+        isReportedToMetrc
+        metrcId
+        originalOrder
+        voidReason
+        voidedAt
+        createdAt    
+        updatedAt    
+        OrderItem {
+          id
+          mjType
+          product {
+            name
+            price
+            productUnitOfMeasure
+            unitOfUnitWeight
+            unitOfNetWeight
+            unitWeight
+            netWeight
+            isApplyUnitWeight
+            itemCategory{
+              name
+              color
+              metrcCategory
+              containMj
+            }
+          }
+          package{
+            itemName
+          }
+          productId
+          packageLabel
+          price
+          amount
+          discountedAmount
+          loyaltyAmount
+          quantity
+          isRestockForReturn
+          isReturned
+          TaxHistory{
+            taxName
+            taxPercent
+            compoundPercent
+            taxAmount
+          }
+        }
+        DiscountHistory {
+          discountMethod
+          discountName
+          value
+        }
+        LoyaltyHistory {
+          txType
+          loyaltyName
+          loyaltyType
+          loyaltyWorth
+          value
+        }
+        customer {
+          id
+          name
+          MFType
+          birthday
+          email
+          phone
+          isActive
+          isMedical
+          driverLicense
+          driverLicenseExpirationDate
+          medicalLicense
+          medicalLicenseExpirationDate
+          loyaltyPoints
+          status
+          isTaxExempt
+          createdAt
+          updatedAt
+        }
+        dispensary {
+          id
+          name
+        }
+        user {
+          id
+          name
+        }
+        drawer {
+          id
+          register
+        }
+      }
+      tax
+      purchaseLimit {
+        purchaseLimitType
+        totalQuantity
+      }
+    }
+}

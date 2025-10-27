@@ -1,0 +1,5 @@
+query GetEditOrderCountByDrawerId( $drawerId: String!) {
+  getEditOrderCountByDrawerId(drawerId: $drawerId) {
+    count
+  }
+}

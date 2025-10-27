@@ -1,0 +1,9 @@
+query AllOrganizations {
+    allOrganizations{
+        id
+        name
+        phone
+        createdAt
+        updatedAt
+    }
+}

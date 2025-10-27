@@ -1,0 +1,5 @@
+mutation finishZeroPackage($dispensaryId: String!) {
+  finishZeroPackage(dispensaryId: $dispensaryId) {
+    count
+  }
+}

@@ -1,0 +1,19 @@
+query AllSuppliersByOrganizationId($organizationId: String!) {
+    allSuppliersByOrganizationId(organizationId: $organizationId){
+        id             
+        name           
+        businessLicense
+        UBI            
+        phone          
+        email          
+        locationAddress
+        locationCity   
+        locationState  
+        locationZipCode
+        organizationId
+        supplierType   
+        isActive       
+        createdAt      
+        updatedAt      
+    }
+}

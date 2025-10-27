@@ -1,0 +1,6 @@
+mutation setRestockForOrderItem($input: SetRestockForOrderItemInput!) {
+  setRestockForOrderItem(input: $input) {
+    id
+    isRestockForReturn
+  }
+}

@@ -1,0 +1,16 @@
+mutation endDrawer($input: DrawerEndInput!) {
+  endDrawer(input: $input) {
+    userId
+    updatedAt
+    status
+    startAmount
+    register
+    note
+    id
+    endAmount
+    dispensaryId
+    createdAt
+    comment
+    totalDeposite
+  }
+}

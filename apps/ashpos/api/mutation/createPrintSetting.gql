@@ -1,0 +1,19 @@
+mutation createPrintSetting($input: createPrintSettingInput!) {
+  createPrintSetting(input: $input) {
+    id
+    dispensaryId
+    printType
+    isEnabled
+    dimensionWidth
+    dimensionHeight
+    marginTop
+    marginBottom
+    marginLeft
+    marginRight
+    fontSize
+    topText
+    bottomText
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,22 @@
+query Dispensary($id: String!) {
+    dispensary(id: $id) {
+        id
+        name
+        organizationId
+        dispensaryType
+        email
+        phone
+        locationAddress
+        locationCity
+        locationState
+        locationZipCode
+        cannabisLicense
+        cannabisLicenseExpireDate
+        businessLicense
+        isCustomerAgeVerify
+        customerAgeLimit
+        storeTimeZone
+        smsOrderStart
+        smsOrderEnd
+    }
+}

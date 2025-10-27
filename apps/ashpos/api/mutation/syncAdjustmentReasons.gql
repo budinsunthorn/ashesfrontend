@@ -1,0 +1,5 @@
+mutation syncAdjustmentReasons($input: DispensaryIdInput!) {
+  syncAdjustmentReasons(input: $input) {
+    count  
+  }
+}

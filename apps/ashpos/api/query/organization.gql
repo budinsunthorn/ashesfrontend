@@ -1,0 +1,23 @@
+query Organization($id: String!) {
+    organization(id: $id) {
+        id
+        name
+        phone
+        dispensaries{
+            id
+            name
+            dispensaryType
+            email
+            phone
+            locationAddress
+            locationCity
+            locationState
+            locationZipCode
+            businessLicense
+            createdAt
+            updatedAt    
+        }
+        createdAt
+        updatedAt
+    }
+}

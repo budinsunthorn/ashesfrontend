@@ -1,0 +1,17 @@
+query GetNonMjProductRowsByNameSearch($searchQuery: String!, $dispensaryId: String!) {
+  getNonMjProductRowsByNameSearch(searchQuery: $searchQuery, dispensaryId: $dispensaryId) {
+    id
+    name
+    sku
+    upc
+    price
+    productUnitOfMeasure
+    unitWeight
+    itemCategory{
+      name
+      color
+      metrcCategory
+      containMj
+    }
+  }
+}

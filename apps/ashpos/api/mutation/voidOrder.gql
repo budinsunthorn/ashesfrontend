@@ -1,0 +1,6 @@
+mutation voidOrder($input: VoidOrderInput!) {
+  voidOrder(input: $input) {
+    pos
+    metrc
+  }
+}

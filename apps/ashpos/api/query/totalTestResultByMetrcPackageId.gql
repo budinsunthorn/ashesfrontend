@@ -1,0 +1,6 @@
+query TotalTestResultByMetrcPackageId( $dispensaryId: String!, $packageId: Int!) {
+  totalTestResultByMetrcPackageId(dispensaryId: $dispensaryId, packageId: $packageId) {
+    testTypeName
+    testResultLevel
+  }
+}

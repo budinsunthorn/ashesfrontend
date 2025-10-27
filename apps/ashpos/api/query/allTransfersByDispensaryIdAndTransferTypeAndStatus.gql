@@ -1,0 +1,24 @@
+query AllTransfersByDispensaryIdAndTransferTypeAndStatus( $dispensaryId: String!, $transferType: String!, $status: String!) {
+  allTransfersByDispensaryIdAndTransferTypeAndStatus(dispensaryId: $dispensaryId, transferType: $transferType, status: $status) {
+    id   
+    dispensaryId
+    userId
+    user{
+      name
+      userType
+    }
+    transferType
+    isMJ
+    status
+    transferId
+    deliveryId
+    PackageCount
+    ReceivedPackageCount
+    CreatedDateTime
+    ReceivedDateTime
+    ShipperFacilityLicenseNumber
+    ShipperFacilityName
+    createdAt
+    updatedAt
+  }
+}

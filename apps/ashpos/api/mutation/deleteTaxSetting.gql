@@ -1,0 +1,5 @@
+mutation deleteTaxSetting($id: String!, $dispensaryId: String!) {
+  deleteTaxSetting(id: $id, dispensaryId: $dispensaryId) {
+    name
+  }
+}

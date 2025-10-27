@@ -1,0 +1,6 @@
+mutation cancelReconcile($id: String!) {
+  cancelReconcile(id: $id) {
+    id
+    packageLabel
+  }
+}

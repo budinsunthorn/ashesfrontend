@@ -1,0 +1,5 @@
+mutation returnOrder($input: OrderReturnInput!) {
+  returnOrder(input: $input) {
+    id
+  }
+}

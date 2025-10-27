@@ -1,0 +1,34 @@
+query AllOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages( $dispensaryId: String!, $orderType: OrderType!, $status: String!, $synced: MetrcOrderSyncType!, $searchField: String!, $searchParam: String!, $pageNumber: Int!, $onePageRecords: Int!, $sortField: String, $sortDirection: String) {
+  allOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages(dispensaryId: $dispensaryId, orderType: $orderType, status: $status, synced: $synced,  searchField: $searchField, searchParam: $searchParam, pageNumber: $pageNumber, onePageRecords: $onePageRecords, sortField: $sortField, sortDirection: $sortDirection) {
+    orders{
+      id           
+      metrcId
+      dispensaryId 
+      userId       
+      customerId   
+      customer {
+        name
+        isMedical
+      }
+      user {
+        name
+      }
+      description  
+      orderType
+      cost  
+      cashAmount 
+      otherAmount
+      changeDue
+      loyalty
+      discount
+      grandTotal
+      mjType
+      status       
+      orderDate      
+      isReportedToMetrc
+      createdAt    
+      updatedAt    
+    },
+    totalCount
+  }
+}

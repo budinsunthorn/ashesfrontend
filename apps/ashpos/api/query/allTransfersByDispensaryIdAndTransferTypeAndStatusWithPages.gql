@@ -1,0 +1,34 @@
+query AllTransfersByDispensaryIdAndTransferTypeAndStatusWithPages($dispensaryId: String!, $transferType: String!, $status: String!, $pageNumber: Int!, $onePageRecords: Int!, $searchField: String!, $searchParam: String!, $sortField: String, $sortDirection: String, $mjType: String) {
+  allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages(dispensaryId: $dispensaryId, transferType: $transferType, status: $status, pageNumber: $pageNumber, onePageRecords: $onePageRecords, searchField: $searchField, searchParam: $searchParam, sortField: $sortField, sortDirection: $sortDirection, mjType: $mjType) {
+    transfers {
+    id   
+    dispensaryId
+    userId
+    user{
+      name
+      userType
+    }
+    supplier{
+      name
+      phone
+      email
+      businessLicense
+    }
+    transferType
+    isMJ
+    status
+    transferId
+    deliveryId
+    PackageCount
+    ReceivedPackageCount
+    CreatedDateTime
+    ReceivedDateTime
+    ShipperFacilityLicenseNumber
+    ShipperFacilityName
+    createdAt
+    updatedAt
+    assignedPackageCount
+    },
+    totalCount
+  }
+}

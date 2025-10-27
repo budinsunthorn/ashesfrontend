@@ -1,0 +1,5 @@
+mutation deleteOrderItemsByOrderId($orderId: Int!) {
+  deleteOrderItemsByOrderId(orderId: $orderId) {
+    count
+  }
+}

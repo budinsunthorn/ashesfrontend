@@ -1,0 +1,5 @@
+mutation deleteTransfer($id: String!) {
+  deleteTransfer(id: $id) {
+    id
+  }
+}

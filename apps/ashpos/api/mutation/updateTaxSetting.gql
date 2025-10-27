@@ -1,0 +1,16 @@
+mutation updateTaxSetting($input: TaxSettingUpdateInput!) {
+  updateTaxSetting(input: $input) {
+    id
+    name
+    rate
+    applyTo
+    categories{
+      value
+      label
+      color
+    }
+    compoundTaxes
+    isExcludeFromRecreational
+    isExcludeFromTaxExempt
+  }
+}

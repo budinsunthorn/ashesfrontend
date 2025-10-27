@@ -1,0 +1,13 @@
+query AllItemCategoriesByDispensaryId( $dispensaryId: String!) {
+  allItemCategoriesByDispensaryId(dispensaryId: $dispensaryId) {
+        id
+        dispensaryId
+        metrcCategory
+        name
+        color
+        containMj
+        purchaseLimitType
+        createdAt
+        updatedAt   
+  }
+}

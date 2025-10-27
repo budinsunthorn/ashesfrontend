@@ -1,0 +1,6 @@
+mutation completeOrder($input: OrderCompleteInput!) {
+  completeOrder(input: $input) {
+    pos
+    metrc
+  }
+}

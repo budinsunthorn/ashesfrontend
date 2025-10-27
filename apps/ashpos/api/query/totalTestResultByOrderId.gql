@@ -1,0 +1,9 @@
+query TotalTestResultByOrderId( $dispensaryId: String!, $orderId: Int!) {
+  totalTestResultByOrderId(dispensaryId: $dispensaryId, orderId: $orderId) {
+    packageId
+    labTest {
+      testTypeName
+      testResultLevel
+    }
+  }
+}

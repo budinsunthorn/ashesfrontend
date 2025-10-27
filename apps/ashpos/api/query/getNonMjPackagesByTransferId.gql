@@ -1,0 +1,23 @@
+query GetNonMjPackagesByTransferId($transferId: String!) {
+  getNonMjPackagesByTransferId(transferId: $transferId) {
+    assignPackage {
+      productId
+      originalQty
+      posQty
+      cost
+    }
+    product {
+      name
+      itemCategory {
+        name
+        color
+      }
+    }
+    originalQty
+    Quantity
+    posQty
+    id
+    packageStatus
+    createdAt
+  }
+}

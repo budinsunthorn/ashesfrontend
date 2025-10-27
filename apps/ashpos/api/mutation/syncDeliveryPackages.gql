@@ -1,0 +1,5 @@
+mutation syncDeliveryPackages($input: DispensaryIdInput!) {
+  syncDeliveryPackages(input: $input) {
+    count  
+  }
+}

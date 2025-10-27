@@ -1,0 +1,17 @@
+query AllLoyaltiesByDispensaryId( $dispensaryId: String!) {
+  allLoyaltiesByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    dispensaryId
+    name
+    type
+    applyDurationSet
+    applyTo
+    applyFrom
+    pointWorth
+    isActive
+    isAdminPin
+    color
+    createdAt
+    updatedAt   
+  }
+}

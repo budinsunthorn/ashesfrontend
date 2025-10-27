@@ -1,0 +1,25 @@
+query UsingDrawersByDispensaryId( $dispensaryId: String!) {
+  usingDrawersByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    dispensaryId
+    userId
+    startAmount
+    endAmount
+    totalDeposite
+    note
+    comment
+    status
+    register
+    isUsing
+    endedAt
+    discrepancyReason
+    createdAt
+    updatedAt
+    user {
+      id
+      name
+      email
+      phone
+    }
+  }
+}

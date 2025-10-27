@@ -1,0 +1,104 @@
+query PackagesByConnectedProductId($productId: String!) {
+  packagesByConnectedProductId(productId: $productId) {
+      id
+      dispensaryId
+      packageId
+      assignPackage {
+        product {
+          id
+          name
+          price
+          itemCategory {
+            name
+          }
+          supplier {
+            id
+            name
+          }
+        }
+        cost
+        originalQty
+        posQty
+      }
+      delivery {
+        deliveryId
+        transfer {
+          id
+          transferId
+          transferType
+          ReceivedDateTime
+          PackageCount
+        }
+      }
+      TestResult {
+        packageId
+        testComment
+        testPassed
+        testPerformedDate
+        testResultLevel
+        testTypeName
+        sourcePackageLabel
+        labTestResultId
+        labTestResultDocumentFileId
+        labFacilityLicenseNumber
+        createdAt
+        updatedAt
+      }
+      packageStatus
+      packageLabel
+      cost
+      originalQty
+      Quantity
+      isConnectedWithProduct
+      PackageType
+      SourceHarvestCount
+      SourcePackageCount
+      SourceProcessingJobCount
+      SourceHarvestNames
+      SourcePackageLabels
+      LocationId
+      LocationName
+      LocationTypeName
+      UnitOfMeasureName
+      UnitOfMeasureAbbreviation
+      ItemFromFacilityLicenseNumber
+      ItemFromFacilityName
+      Note
+      PackagedDate
+      InitialLabTestingState
+      LabTestingState
+      LabTestingStateDate
+      LabTestingPerformedDate
+      LabTestResultExpirationDateTime
+      LabTestingRecordedDate
+      IsProductionBatch
+      ProductionBatchNumber
+      SourceProductionBatchNumbers
+      SourcePackageIsTradeSample
+      ReceivedDateTime
+      ReceivedFromManifestNumber
+      ReceivedFromFacilityLicenseNumber
+      ReceivedFromFacilityName
+      IsOnHold
+      PackageForProductDestruction
+      LastModified
+      itemId
+      itemName
+      itemProductCategoryName
+      itemProductCategoryType
+      itemQuantityType
+      itemDefaultLabTestingState
+      itemUnitOfMeasureName
+      itemUnitWeight
+      itemUnitWeightUnitOfMeasureName
+      itemPublicIngredients
+      itemStrainId
+      itemStrainName
+      itemDescription
+      itemIsUsed
+      itemProcessingJobCategoryName
+      itemProductBrandName
+      createdAt
+      updatedAt
+    }
+}

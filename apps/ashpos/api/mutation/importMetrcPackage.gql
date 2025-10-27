@@ -1,0 +1,5 @@
+mutation importMetrcPackage($input: DispensaryAndUserIdInput!) {
+  importMetrcPackage(input: $input) {
+    count  
+  }
+}

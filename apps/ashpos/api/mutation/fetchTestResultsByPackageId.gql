@@ -1,0 +1,5 @@
+mutation fetchTestResultsByPackageId($input: fetchTestResultsByPackageIdInput!) {
+  fetchTestResultsByPackageId(input: $input) {
+    count
+  }
+}

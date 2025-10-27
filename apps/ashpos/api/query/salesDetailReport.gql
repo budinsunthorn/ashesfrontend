@@ -1,0 +1,34 @@
+query salesDetailReport($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    salesDetailReport(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        grossSales {
+            mj
+            nMj
+            total
+        }  
+        discounts {
+            mj
+            nMj
+            total
+        }  
+        returns {
+            mj
+            nMj
+            total
+        }  
+        netSales {
+            mj
+            nMj
+            total
+        }  
+        cost {
+            mj
+            nMj
+            total
+        }  
+        grossProfit {
+            mj
+            nMj
+            total
+        }  
+    }
+}

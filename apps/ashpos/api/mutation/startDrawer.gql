@@ -1,0 +1,6 @@
+mutation startDrawer($input: DrawerStartInput!) {
+  startDrawer(input: $input) {
+    id
+    register
+  }
+}
