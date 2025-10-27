@@ -1,0 +1,62 @@
+{
+  "name": "ashrepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@graphql-tools/webpack-loader": "^7.0.0",
+    "@next/font": "^14.2.6",
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/file-saver": "^2.0.7",
+    "@types/jwt-decode": "^3.1.0",
+    "prettier": "^3.3.3",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@9.6.7",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@hapi/jwt": "^3.2.0",
+    "chart.js": "^4.5.0",
+    "clsx": "^2.1.1",
+    "date-fns-tz": "^3.2.0",
+    "decimal.js": "^10.5.0",
+    "dotenv": "^16.4.1",
+    "dynamsoft-camera-enhancer": "^3.3.10",
+    "dynamsoft-capture-vision-bundle": "^2.6.1000",
+    "dynamsoft-core": "^3.4.31",
+    "dynamsoft-javascript-barcode": "^9.6.42",
+    "dynamsoft-license": "^3.4.31",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^11.15.0",
+    "graphql": "^16.11.0",
+    "jotai": "^2.10.0",
+    "jwt-check-expiration": "^1.0.5",
+    "jwt-decode": "^4.0.0",
+    "moment": "^2.30.1",
+    "pdf417": "^0.1.5",
+    "pm2": "^5.3.1",
+    "react-barcode": "^1.5.3",
+    "react-chartjs-2": "^5.3.0",
+    "react-color": "^2.19.3",
+    "react-fast-marquee": "^1.6.5",
+    "react-loading-skeleton": "^3.5.0",
+    "react-notifications-component": "^4.0.1",
+    "react-to-print": "^3.0.2",
+    "react-webcam": "^7.2.0",
+    "swiper": "^11.1.12",
+    "tailwind-merge": "^2.5.5",
+    "use-debounce": "^10.0.3"
+  }
+}
