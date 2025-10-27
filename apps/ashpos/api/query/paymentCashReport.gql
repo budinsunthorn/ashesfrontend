@@ -1,0 +1,7 @@
+query PaymentCashReport($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    paymentCashReport(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        cash             
+        changeDue           
+        returns
+    }
+}

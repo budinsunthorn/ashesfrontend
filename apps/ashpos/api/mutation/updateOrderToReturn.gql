@@ -1,0 +1,24 @@
+mutation updateOrderToReturn($input: UpdateOrderToReturnInput!) {
+  updateOrderToReturn(input: $input) {
+      id           
+      dispensaryId 
+      userId       
+      customerId   
+      description  
+      orderType
+      cost  
+      cashAmount 
+      changeDue
+      loyalty
+      discount
+      mjType
+      status       
+      orderDate
+      isReportedToMetrc
+      metrcId
+      voidReason
+      voidedAt
+      createdAt    
+      updatedAt    
+  }
+}

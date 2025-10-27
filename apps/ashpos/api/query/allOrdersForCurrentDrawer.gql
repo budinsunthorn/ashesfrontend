@@ -1,0 +1,24 @@
+query AllOrdersForCurrentDrawer( $dispensaryId: String!, $userId: String!) {
+  allOrdersForCurrentDrawer(dispensaryId: $dispensaryId, userId: $userId) {
+      id           
+      dispensaryId 
+      userId       
+      customerId   
+      customer {
+        name
+        isMedical
+      }
+      description  
+      orderType
+      cost  
+      cashAmount 
+      otherAmount
+      changeDue
+      loyalty
+      discount
+      status       
+      orderDate      
+      createdAt    
+      updatedAt    
+  }
+}

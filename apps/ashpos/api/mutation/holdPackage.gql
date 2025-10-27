@@ -1,0 +1,5 @@
+mutation holdPackage($input: HoldPackageInput!) {
+  holdPackage(input: $input) {
+    id
+  }
+}

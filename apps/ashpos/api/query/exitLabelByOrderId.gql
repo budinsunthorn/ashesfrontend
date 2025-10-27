@@ -1,0 +1,20 @@
+query ExitLabelByOrderId( $orderId: Int!) {
+  exitLabelByOrderId(orderId: $orderId) {
+    OrderItem {
+      package {
+        packageId
+        itemName
+        itemUnitWeight
+        itemUnitWeightUnitOfMeasureName
+        ItemFromFacilityName
+        UnitOfMeasureName
+        ItemFromFacilityLicenseNumber
+        LabTestingStateDate
+      }
+      quantity
+    }
+    customer {
+      medicalLicense
+    }
+  }
+}

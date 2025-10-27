@@ -1,0 +1,6 @@
+mutation createDiscount($input: DiscountCreateInput!) {
+  createDiscount(input: $input) {
+    id
+    name
+  }
+}

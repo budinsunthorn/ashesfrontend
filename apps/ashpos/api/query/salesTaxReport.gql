@@ -1,0 +1,7 @@
+query salesTaxReport($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    salesTaxReport(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        taxAmount 
+        taxName        
+        taxPercent    
+    }
+}

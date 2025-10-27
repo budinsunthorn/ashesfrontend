@@ -1,0 +1,12 @@
+query ExitLabelByPackageLabel( $packageLabel: String!) {
+  exitLabelByPackageLabel(packageLabel: $packageLabel) {
+    packageId
+    itemName
+    itemUnitWeight
+    itemUnitWeightUnitOfMeasureName
+    ItemFromFacilityName
+    UnitOfMeasureName
+    ItemFromFacilityLicenseNumber
+    LabTestingStateDate
+  }
+}

@@ -1,0 +1,23 @@
+query AllDispensaries {
+  allDispensaries {
+    id
+    name
+    dispensaryType
+    organizationId
+    cannabisLicense
+    cannabisLicenseExpireDate
+    businessLicense
+    phone
+    email
+    locationAddress
+    locationCity
+    locationState
+    locationZipCode
+    isActive
+    isCustomerAgeVerify
+    customerAgeLimit
+    storeTimeZone
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,113 @@
+/* flatpickr-dark.css */
+
+.flatpickr-calendar {
+  @apply bg-white dark:bg-[#1b2e4b] text-black dark:text-white border-[1px] dark:!border-[rgb(54,58,67)];
+}
+
+.flatpickr-day.today {
+  @apply bg-blue-500 text-white dark:bg-blue-700;
+}
+
+.flatpickr-weekday {
+  @apply text-gray-700 dark:text-gray-400;
+}
+
+.flatpickr-day {
+  @apply text-black dark:text-white ; /* Light text for days */
+}
+
+.flatpickr-day.selected {
+  background-color: #3b82f6; /* Blue background for selected day */
+  color: #ffffff; /* White text for selected day */
+}
+
+.flatpickr-day:hover {
+  @apply bg-gray-200 dark:bg-gray-500 dark:border-gray-700 /* Darker background on hover */
+}
+
+.flatpickr-weekday {
+  color: #d1d5db; /* Light color for weekdays */
+}
+
+.flatpickr-current-month {
+  @apply text-black dark:text-white; /* Light color for current month */
+}
+
+.prevMonthDay, .nextMonthDay {
+  @apply dark:!text-dark;
+}
+
+/* Light mode styles */
+.dark .flatpickr-next-month svg,
+.dark  .flatpickr-prev-month svg {
+  fill:#b8b9bb; /* Adjust the color code to your preference */
+  stroke: #b8b9bb; /* White color for dark mode */
+}
+
+/* Light mode styles on hover */
+.dark .flatpickr-next-month svg:hover,
+.dark  .flatpickr-prev-month svg:hover {
+  fill:#ffffff; /* White color for dark mode */
+  stroke: #ffffff; /* White color for dark mode */
+}
+
+/* Dropdown styles */
+.flatpickr-monthDropdown-months {
+  @apply bg-white dark:bg-[#1b2e4b] border border-gray-300 dark:border-gray-600 rounded-md shadow-sm mt-1;
+}
+
+/* Individual month styles */
+.flatpickr-monthDropdown-month {
+  @apply bg-gray-100 dark:!bg-[#1b2e4b]  text-black dark:!text-white cursor-pointer;
+}
+
+/* Add hover effects if needed */
+.flatpickr-prev-month:hover, .flatpickr-next-month:hover {
+  @apply text-gray-700 dark:text-dark;
+}
+/* Highlight selected month */
+.flatpickr-monthDropdown-month.selected {
+  @apply bg-blue-500 text-white ;
+}
+
+/* year up/down icon */
+.numInputWrapper .arrowDown:after {
+  @apply border-t-black dark:!border-t-white;
+}
+.numInputWrapper .arrowUp:after {
+  @apply text-black dark:!border-b-white;
+}
+
+/* Time picker styles */
+.flatpickr-time {
+  @apply bg-white dark:bg-[#1b2e4b] border-t border-gray-300 dark:border-gray-600;
+}
+
+.flatpickr-time input {
+  @apply bg-white dark:bg-[#1b2e4b] text-black dark:text-white border-none;
+}
+
+.flatpickr-time .flatpickr-time-separator {
+  @apply text-black dark:text-white;
+}
+
+.flatpickr-time .numInputWrapper {
+  @apply bg-white dark:bg-[#1b2e4b];
+}
+
+.flatpickr-time .numInputWrapper input {
+  @apply bg-white dark:bg-[#1b2e4b] text-black dark:text-white;
+}
+
+.flatpickr-time .numInputWrapper .arrowUp,
+.flatpickr-time .numInputWrapper .arrowDown {
+  @apply border-gray-300 dark:border-gray-600;
+}
+
+.flatpickr-time .numInputWrapper .arrowUp:after {
+  @apply border-b-black dark:border-b-white;
+}
+
+.flatpickr-time .numInputWrapper .arrowDown:after {
+  @apply border-t-black dark:border-t-white;
+}

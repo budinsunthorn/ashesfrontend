@@ -1,0 +1,17 @@
+query Loyalty($id: String!) {
+    loyalty(id: $id) {
+        id
+        dispensaryId
+        name
+        type
+        applyDurationSet
+        applyTo
+        applyFrom
+        pointWorth
+        isActive
+        isAdminPin
+        color
+        createdAt
+        updatedAt   
+    }
+}

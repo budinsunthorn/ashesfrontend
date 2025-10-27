@@ -1,0 +1,7 @@
+mutation metrcConnectUpdate($input: MetrcConnectionInput!) {
+  metrcConnectionUpdate(input: $input) {
+    name
+    metrcApiKey
+    metrcConnectionStatus
+  }
+}

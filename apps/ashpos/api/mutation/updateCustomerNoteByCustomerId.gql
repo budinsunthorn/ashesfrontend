@@ -1,0 +1,7 @@
+mutation updateCustomerNoteByCustomerId($input: CustomerNoteUpdateInput!) {
+  updateCustomerNoteByCustomerId(input: $input) {
+    id
+    name
+    note
+  }
+}

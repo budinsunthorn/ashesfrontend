@@ -1,0 +1,8 @@
+query AllCustomersByDispensaryIdAndNameAndLicenseSearch( $dispensaryId: String!, $searchQuery: String!) {
+  allCustomersByDispensaryIdAndNameAndLicenseSearch(dispensaryId: $dispensaryId, searchQuery: $searchQuery) {
+    id
+    name
+    medicalLicense
+    loyaltyPoints
+  }
+}

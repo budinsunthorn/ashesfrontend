@@ -1,0 +1,5 @@
+mutation bulkCancelOrderByDrawerId($drawerId: String!) {
+  bulkCancelOrderByDrawerId(drawerId: $drawerId) {
+    count
+  }
+}

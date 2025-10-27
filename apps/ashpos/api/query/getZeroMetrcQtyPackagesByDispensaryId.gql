@@ -1,0 +1,25 @@
+query GetZeroMetrcQtyPackagesByDispensaryId($dispensaryId: String!, $pageNumber: Int!, $onePageRecords: Int!, $searchField: String!, $searchParam: String!, $sortField: String, $sortDirection: String) {
+  getZeroMetrcQtyPackagesByDispensaryId(dispensaryId: $dispensaryId, pageNumber: $pageNumber, onePageRecords: $onePageRecords, searchField: $searchField, searchParam: $searchParam, sortField: $sortField, sortDirection: $sortDirection) {
+    packages{
+      packageId
+      packageLabel
+      assignPackage {
+        productId
+        product {
+          name
+          productUnitOfMeasure
+        }
+        originalQty
+        posQty
+        cost
+      }
+      originalQty
+      Quantity
+      posQty
+      id
+      packageStatus
+      createdAt
+    },
+    totalCount
+  }
+}

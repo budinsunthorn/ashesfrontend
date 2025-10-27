@@ -1,0 +1,5 @@
+mutation createOrderItemForReturn($input: OrderItemCreateForReturnInput!) {
+  createOrderItemForReturn(input: $input) {
+    id
+  }
+}

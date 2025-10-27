@@ -1,0 +1,5 @@
+mutation activePackage($input: ActivePackageInput!) {
+  activePackage(input: $input) {
+    id
+  }
+}

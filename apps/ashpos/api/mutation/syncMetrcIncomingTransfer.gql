@@ -1,0 +1,5 @@
+mutation syncMetrcIncomingTransfer($input: DispensaryAndUserIdInput!) {
+  syncMetrcIncomingTransfer(input: $input) {
+    count  
+  }
+}

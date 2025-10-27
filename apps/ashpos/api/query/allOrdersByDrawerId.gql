@@ -1,0 +1,36 @@
+query AllOrdersByDrawerId( $drawerId: String!) {
+  allOrdersByDrawerId(drawerId: $drawerId) {
+      id           
+      dispensaryId 
+      userId       
+      customerId   
+      customer {
+        name
+        isMedical
+      }
+      DiscountHistory {
+          discountMethod
+          discountName
+          value
+      }
+      LoyaltyHistory {
+          txType
+          loyaltyName
+          loyaltyType
+          loyaltyWorth
+          value
+      }
+      description  
+      orderType
+      cost  
+      cashAmount 
+      otherAmount
+      changeDue
+      loyalty
+      discount
+      status       
+      orderDate      
+      createdAt    
+      updatedAt    
+  }
+}

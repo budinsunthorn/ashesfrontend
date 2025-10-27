@@ -1,0 +1,9 @@
+mutation createSyncHistory($input: SyncHistoryInput!) {
+  createSyncHistory(input: $input) {
+    id
+    dispensaryId
+    userId
+    syncType
+    createdAt
+  }
+}

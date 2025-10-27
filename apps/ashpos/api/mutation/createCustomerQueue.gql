@@ -1,0 +1,5 @@
+mutation createCustomerQueue($input: CustomerQueueCreateInput!) {
+  createCustomerQueue(input: $input) {
+    id
+  }
+}

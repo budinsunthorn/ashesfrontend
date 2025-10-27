@@ -1,0 +1,11 @@
+mutation updateTaxHistoryForOrder($orderId: Int!) {
+  updateTaxHistoryForOrder(orderId: $orderId) {
+    id
+    cashAmount
+    changeDue
+    otherAmount
+    loyalty
+    discount
+    tax
+  }
+}

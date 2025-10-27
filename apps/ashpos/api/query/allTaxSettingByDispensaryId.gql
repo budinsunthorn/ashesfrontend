@@ -1,0 +1,19 @@
+query AllTaxSettingByDispensaryId( $dispensaryId: String!) {
+  allTaxSettingByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    dispensaryId
+    name
+    rate
+    categories{
+      value
+      label
+      color
+    }
+    applyTo
+    compoundTaxes
+    isExcludeFromRecreational
+    isExcludeFromTaxExempt
+    createdAt
+    updatedAt
+  }
+}

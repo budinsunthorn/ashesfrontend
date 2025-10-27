@@ -1,0 +1,5 @@
+query CheckIsCustomerInQueue( $customerId: String!) {
+  checkIsCustomerInQueue(customerId: $customerId) {
+    count
+  }
+}

@@ -1,0 +1,16 @@
+query getLastSyncHistoryByDispensaryId( $dispensaryId: String!, $syncType: SyncType!) {
+  getLastSyncHistoryByDispensaryId(dispensaryId: $dispensaryId, syncType: $syncType) {
+    id
+    dispensaryId
+    userId
+    syncType
+    user {
+      email
+      name
+    }
+    dispensary {
+      email
+    }
+    createdAt
+  }
+}

@@ -1,0 +1,13 @@
+query AllCustomerQueueByDispensaryId( $dispensaryId: String!) {
+  allCustomerQueueByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    customerId
+    dispensaryId
+    userId
+    customer {
+      name
+    }
+    createdAt
+    updatedAt  
+  }
+}

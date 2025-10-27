@@ -1,0 +1,5 @@
+mutation deleteDiscount($id: String!) {
+  deleteDiscount(id: $id) {
+    name
+  }
+}

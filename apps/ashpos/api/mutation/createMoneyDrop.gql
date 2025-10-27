@@ -1,0 +1,11 @@
+mutation createMoneyDrop($input: MoneyDropCreateInput!) {
+  createMoneyDrop(input: $input) {
+    id
+    drawerId
+    dropType
+    amount
+    reason
+    createdAt
+    updatedAt
+  }
+}

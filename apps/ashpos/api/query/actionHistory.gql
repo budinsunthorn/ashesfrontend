@@ -1,0 +1,23 @@
+query ActionHistory($dispensaryId: String!, $searchField: String!, $searchParam: String!, $pageNumber: Int!, $onePageRecords: Int!, $sortDirection: String, $fromDate: String!, $toDate: String!) {
+  actionHistory(dispensaryId: $dispensaryId, searchField: $searchField, searchParam: $searchParam, pageNumber: $pageNumber, onePageRecords: $onePageRecords, sortDirection: $sortDirection, fromDate: $fromDate, toDate: $toDate) {
+    actionHistory{
+      id
+      dispensaryId
+      userId
+      userName
+      actionName
+      packageLabel
+      orderId
+      productId
+      customerId
+      targetRecordId
+      f1
+      f2
+      f3
+      f4
+      createdAt
+      updatedAt
+    }
+    totalCount
+  }
+}

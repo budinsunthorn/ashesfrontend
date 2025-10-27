@@ -1,0 +1,5 @@
+mutation cancelLoyaltyForOrder($orderId: Int!) {
+  cancelLoyaltyForOrder(orderId: $orderId) {
+    count
+  }
+}

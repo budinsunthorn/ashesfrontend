@@ -1,0 +1,18 @@
+query Discount($id: String!) {
+    discount(id: $id) {
+        id
+        dispensaryId
+        applyTarget
+        name
+        type
+        applyDurationSet
+        applyTo
+        applyFrom
+        discountPercent
+        isActive
+        isAdminPin
+        color
+        createdAt
+        updatedAt   
+    }
+}

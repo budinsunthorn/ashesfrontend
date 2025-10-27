@@ -1,0 +1,8 @@
+query MetrcInfoByDispensaryId($dispensaryId: String!) {
+  metrcInfoByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    metrcApiKey
+    metrcConnectionStatus
+    cannabisLicense
+  }
+}

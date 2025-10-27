@@ -1,0 +1,17 @@
+query CurrentDrawerByUserId( $userId: String!) {
+  currentDrawerByUserId(userId: $userId) {
+    id          
+    dispensaryId
+    userId
+    startAmount  
+    endAmount    
+    totalDeposite    
+    note         
+    comment      
+    status       
+    register     
+    isUsing
+    createdAt    
+    updatedAt      
+  }
+}

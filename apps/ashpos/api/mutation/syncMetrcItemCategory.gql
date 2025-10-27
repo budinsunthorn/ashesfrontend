@@ -1,0 +1,5 @@
+mutation syncMetrcItemCategory($input: DispensaryIdInput!) {
+  syncMetrcItemCategory(input: $input) {
+    count  
+  }
+}

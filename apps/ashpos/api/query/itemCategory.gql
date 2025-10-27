@@ -1,0 +1,13 @@
+query ItemCategory($id: String!) {
+    itemCategory(id: $id) {
+        id
+        dispensaryId
+        metrcCategory
+        name
+        color
+        containMj
+        purchaseLimitType
+        createdAt
+        updatedAt   
+    }
+}

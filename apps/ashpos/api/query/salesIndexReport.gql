@@ -1,0 +1,10 @@
+query SalesIndexReport($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    salesIndexReport(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        storeName             
+        cannabisLicense           
+        dateCreated
+        dateFrom            
+        dateTo          
+        totalOrders          
+    }
+}

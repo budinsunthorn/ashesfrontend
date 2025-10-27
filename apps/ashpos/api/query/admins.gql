@@ -1,0 +1,16 @@
+query Admins{
+  admins {
+    id
+    email
+    name
+    phone
+    dispensaryId
+    isActive
+    isDispensaryAdmin
+    isEmailVerified
+    isOrganizationAdmin
+    userType
+    createdAt
+    updatedAt
+  }
+}

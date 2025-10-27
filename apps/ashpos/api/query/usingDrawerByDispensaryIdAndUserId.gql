@@ -1,0 +1,9 @@
+query UsingDrawerByDispensaryIdAndUserId( $dispensaryId: String!,  $userId: String!) {
+  usingDrawerByDispensaryIdAndUserId(dispensaryId: $dispensaryId, userId: $userId) {
+    id
+    register
+    startedAt
+    cashBalance
+    numberOfOrders
+  }
+}

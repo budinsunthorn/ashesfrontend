@@ -1,0 +1,77 @@
+query OrderForReturn($id: Int!) {
+    orderForReturn(id: $id) {
+      id           
+      dispensaryId 
+      userId       
+      customerId   
+      description  
+      orderType
+      cost  
+      cashAmount 
+      changeDue
+      loyalty
+      discount
+      mjType
+      status       
+      orderDate
+      isReportedToMetrc
+      metrcId
+      originalOrder
+      voidReason
+      voidedAt
+      createdAt    
+      updatedAt    
+      OrderItem {
+        id
+        mjType
+        product {
+          name
+          price
+          productUnitOfMeasure
+          itemCategory{
+            name
+            color
+            metrcCategory
+            containMj
+          }
+        }
+        productId
+        packageLabel
+        quantity
+        price
+        amount
+        discountedAmount
+        loyaltyAmount
+      }
+      customer {
+        id
+        name
+        MFType
+        birthday
+        email
+        phone
+        isActive
+        isMedical
+        driverLicense
+        driverLicenseExpirationDate
+        medicalLicense
+        medicalLicenseExpirationDate
+        status
+        isTaxExempt
+        createdAt
+        updatedAt
+      }
+      dispensary {
+        id
+        name
+      }
+      user {
+        id
+        name
+      }
+      drawer {
+        id
+        register
+      }
+    }
+}

@@ -1,0 +1,16 @@
+query AllUsersByDispensaryId( $dispensaryId: String!) {
+  allUsersByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    email
+    name
+    phone
+    dispensaryId
+    isActive
+    isDispensaryAdmin
+    isEmailVerified
+    isOrganizationAdmin
+    userType
+    createdAt
+    updatedAt
+  }
+}

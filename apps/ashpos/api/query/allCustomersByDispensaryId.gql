@@ -1,0 +1,23 @@
+query AllCustomersByDispensaryId( $dispensaryId: String!) {
+  allCustomersByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    name
+    MFType
+    birthday
+    email
+    phone
+    dispensaryId
+    isActive
+    driverLicense
+    driverLicenseExpirationDate
+    isMedical
+    medicalLicense
+    medicalLicenseExpirationDate
+    status
+    isTaxExempt
+    loyaltyPoints
+    note
+    createdAt
+    updatedAt
+  }
+}

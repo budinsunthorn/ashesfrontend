@@ -1,0 +1,5 @@
+mutation finishPackage($input: FinishPackageInput!) {
+  finishPackage(input: $input) {
+    id
+  }
+}

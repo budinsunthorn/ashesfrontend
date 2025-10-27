@@ -1,0 +1,22 @@
+query DrawerHistory($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    drawerHistory(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        id            
+        dispensaryId  
+        userId        
+        user {
+            name
+        }
+        startAmount   
+        endAmount     
+        totalDeposite     
+        note          
+        comment       
+        status        
+        register      
+        isUsing       
+        endedAt    
+        discrepancyReason 
+        createdAt     
+        updatedAt  
+    }
+}

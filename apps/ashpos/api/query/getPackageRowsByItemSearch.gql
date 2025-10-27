@@ -1,0 +1,9 @@
+query GetPackageRowsByItemSearch($searchQuery: String!, $dispensaryId: String!) {
+  getPackageRowsByItemSearch(searchQuery: $searchQuery, dispensaryId: $dispensaryId) {
+    id
+    itemName
+    itemProductCategoryName
+    Quantity
+    UnitOfMeasureAbbreviation
+  }
+}

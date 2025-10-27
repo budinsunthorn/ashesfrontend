@@ -1,0 +1,5 @@
+mutation deleteLoyalty($id: String!) {
+  deleteLoyalty(id: $id) {
+    name
+  }
+}

@@ -1,0 +1,47 @@
+query GetEditOrderByDrawerId( $drawerId: String!) {
+  getEditOrderByDrawerId(drawerId: $drawerId) {
+      id           
+      dispensaryId 
+      userId       
+      customerId   
+      description  
+      orderType
+      cost  
+      cashAmount 
+      otherAmount
+      changeDue
+      loyalty
+      discount
+      mjType
+      status       
+      orderDate
+      isReportedToMetrc
+      metrcId
+      originalOrder
+      voidReason
+      voidedAt
+      createdAt    
+      updatedAt    
+      OrderItem {
+        id
+        packageLabel
+        product {
+          name
+          price
+          productUnitOfMeasure
+          itemCategory{
+            name
+            color
+            metrcCategory
+            containMj
+          }
+        }
+        productId
+        quantity
+        isRestockForReturn
+        isReturned
+        discountedAmount
+        loyaltyAmount
+      }
+  }
+}

@@ -1,0 +1,5 @@
+mutation importSuppliers($input: OrganizationIdInput!) {
+  importSuppliers(input: $input) {
+    count  
+  }
+}

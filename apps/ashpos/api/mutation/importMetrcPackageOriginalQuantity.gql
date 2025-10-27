@@ -1,0 +1,5 @@
+mutation importMetrcPackageOriginalQuantity($input: DispensaryIdInput!) {
+  importMetrcPackageOriginalQuantity(input: $input) {
+    count  
+  }
+}

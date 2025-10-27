@@ -1,0 +1,12 @@
+mutation setLoyaltyForOrder($input: LoyaltySetInput!) {
+  setLoyaltyForOrder(input: $input) {
+    id
+    txType
+    dispensaryId
+    orderId
+    loyaltyName
+    loyaltyType
+    loyaltyWorth
+    value
+  }
+}

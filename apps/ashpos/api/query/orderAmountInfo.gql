@@ -1,0 +1,12 @@
+query OrderAmountInfo($id: Int!) {
+    orderAmountInfo(id: $id) {
+      subTotal
+      tax
+      discount
+      netTotal
+      total
+      cash
+      other
+      changeDue
+    }
+}

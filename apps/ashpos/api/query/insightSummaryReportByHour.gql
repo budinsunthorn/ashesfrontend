@@ -1,0 +1,12 @@
+query InsightSummaryReportByHour($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    insightSummaryReportByHour(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        hour
+        hourLabel
+        totalAmount
+        totalDiscountedAmount
+        totalLoyaltyAmount
+        totalCostAmount
+        netSales
+        grossMargin
+    }
+}

@@ -1,0 +1,21 @@
+query AllDispensariesByOrganizationId($organizationId: String!) {
+  allDispensariesByOrganizationId(organizationId: $organizationId) {
+    id
+    name
+    dispensaryType
+    organizationId
+    cannabisLicense
+    cannabisLicenseExpireDate
+    businessLicense
+    phone
+    email
+    locationAddress
+    locationCity
+    locationState
+    locationZipCode
+    storeTimeZone
+    isActive
+    createdAt
+    updatedAt
+  }
+}

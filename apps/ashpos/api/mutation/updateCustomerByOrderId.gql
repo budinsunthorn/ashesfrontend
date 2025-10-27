@@ -1,0 +1,16 @@
+mutation updateCustomerByOrderId($input: UpdateCustomerByOrderIdInput!) {
+  updateCustomerByOrderId(input: $input) {
+    customerId
+    customer{
+      name
+      email
+      birthday
+      phone
+      isActive
+      isMedical
+      medicalLicense
+      medicalLicenseExpirationDate
+      loyaltyPoints
+    }
+  }
+}

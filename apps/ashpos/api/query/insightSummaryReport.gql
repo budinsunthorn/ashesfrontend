@@ -1,0 +1,10 @@
+query InsightSummaryReport($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    insightSummaryReport(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        netSales
+        aov
+        orderCount
+        customerCount
+        marginPercent
+        winBackOrderPercent
+    }
+}

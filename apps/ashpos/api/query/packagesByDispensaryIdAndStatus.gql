@@ -1,0 +1,44 @@
+query PackagesByDispensaryIdAndStatus($dispensaryId: String!, $status: PackageStatus!) {
+  packagesByDispensaryIdAndStatus(dispensaryId: $dispensaryId, status: $status) {
+    packageStatus
+    ExpirationDate
+    FinishedDate
+    IsFinished
+    IsOnHold
+    ItemFromFacilityLicenseNumber
+    ItemFromFacilityName
+    LabTestResultExpirationDateTime
+    packageLabel
+    LastModified
+    Note
+    PackageType
+    PackagedDate
+    PatientLicenseNumber
+    ProductionBatchNumber
+    Quantity
+    ReceivedDateTime
+    ReceivedFromFacilityLicenseNumber
+    ReceivedFromFacilityName
+    ReceivedFromManifestNumber
+    RemediationDate
+    UnitOfMeasureAbbreviation
+    UnitOfMeasureName
+    createdAt
+    dispensaryId
+    id
+    itemId
+    itemName
+    itemProductCategoryName
+    itemProductCategoryType
+    itemStrainName
+    itemUnitOfMeasureName
+    itemUnitQuantity
+    itemUnitQuantityUnitOfMeasureName
+    itemUnitVolume
+    itemUnitVolumeUnitOfMeasureName
+    itemUnitWeight
+    itemUnitWeightUnitOfMeasureName
+    packageId
+    updatedAt
+  }
+}
