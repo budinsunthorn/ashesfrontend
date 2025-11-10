@@ -26,6 +26,7 @@ export default function PrintSetting() {
     const [productNameEnabled, setProductNameEnabled] = useState<boolean>(true);
     const [strainNameEnabled, setStrainNameEnabled] = useState<boolean>(true);
     const [storeNameEnabled, setStoreNameEnabled] = useState<boolean>(false);
+
     // Dimension states
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -94,12 +95,23 @@ export default function PrintSetting() {
     const [selectedFont, setSelectedFont] = useState('Roboto');
 
     // Add font options
-    const fontOptions = [
-        { value: 'Roboto', label: 'Roboto' },
-        { value: 'Arial', label: 'Arial' },
-        { value: 'Times New Roman', label: 'Times New Roman' },
-        { value: 'Helvetica', label: 'Helvetica' },
-    ];
+    const fontOptions = [  
+        // { value: 'Arial', label: 'Arial' },                // Sans-serif  
+        // { value: 'Helvetica', label: 'Helvetica' },        // Sans-serif  
+        // { value: 'Times New Roman', label: 'Times New Roman' }, // Serif  
+        // { value: 'Georgia', label: 'Georgia' },            // Serif  
+        // { value: 'Courier New', label: 'Courier New' },    // Monospace  
+        { value: 'nunito', label: 'Nunito' },              // Custom Font  
+        { value: 'roboto', label: 'Roboto' },              // Custom Font  
+        { value: 'bitter', label: 'Bitter' },              // Custom Font  
+        { value: 'montserrat', label: 'Montserrat' },      // Custom Font  
+        { value: 'sans', label: 'Open Sans' },        // Custom Font  
+        // { value: 'Poppins', label: 'Poppins' },            // Custom Font  
+        // { value: 'Kameron', label: 'Kameron' },            // Custom Font  
+        // { value: 'Varela Round', label: 'Varela Round' },  // Custom Font  
+        // { value: 'Lato', label: 'Lato' },                  // Custom Font  
+        // { value: 'Ultra', label: 'Ultra' },                // Custom Font  
+    ];  
 
     // Query
     const printSettingRowData = usePrintSettingByDispensaryIdQuery({ dispensaryId: dispensaryId });
@@ -133,6 +145,7 @@ export default function PrintSetting() {
 
             // Set font and text states
             setFontSize(exitLabelPrintSettingData?.fontSize || 0);
+            setSelectedFont(exitLabelPrintSettingData?.fontFamily || 'Roboto');
             setTopText(exitLabelPrintSettingData?.topText || '');
             setBottomText(exitLabelPrintSettingData?.bottomText || '');
         }
@@ -157,6 +170,7 @@ export default function PrintSetting() {
 
             // Set font and text states
             setReceiptFontSize(receiptPrintSettingData?.fontSize || 0);
+            setReceiptSelectedFont(receiptPrintSettingData?.fontFamily || 'Roboto');
             setReceiptTopText(receiptPrintSettingData?.topText || '');
             setReceiptBottomText(receiptPrintSettingData?.bottomText || '');
 
@@ -190,6 +204,7 @@ export default function PrintSetting() {
 
             // Set font and text states
             setDrawerFontSize(drawerPrintSettingData?.fontSize || 0);
+            setDrawerSelectedFont(drawerPrintSettingData?.fontFamily || 'roboto')
             setDrawerTopText(drawerPrintSettingData?.topText || '');
             setDrawerBottomText(drawerPrintSettingData?.bottomText || '');
         }
@@ -214,6 +229,7 @@ export default function PrintSetting() {
 
             // Set font and text states
             setMoneyDropFontSize(moneyDropPrintSettingData?.fontSize || 0);
+            setMoneyDropSelectedFont(moneyDropPrintSettingData?.fontFamily || 'roboto')
             setMoneyDropTopText(moneyDropPrintSettingData?.topText || '');
             setMoneyDropBottomText(moneyDropPrintSettingData?.bottomText || '');
         }
@@ -228,6 +244,7 @@ export default function PrintSetting() {
                     dimensionWidth: width,
                     dispensaryId: dispensaryId,
                     fontSize: fontSize,
+                    fontFamily: selectedFont,
                     isEnabled: disableExitLabels,
                     marginBottom: bottomMargin,
                     marginLeft: leftMargin,
@@ -264,6 +281,7 @@ export default function PrintSetting() {
                     dimensionWidth: receiptWidth,
                     dispensaryId: dispensaryId,
                     fontSize: receiptFontSize,
+                    fontFamily: receiptSelectedFont,
                     isEnabled: disableReceipt,
                     marginBottom: receiptBottomMargin,
                     marginLeft: receiptLeftMargin,
@@ -309,6 +327,7 @@ export default function PrintSetting() {
                     dimensionWidth: drawerWidth,
                     dispensaryId: dispensaryId,
                     fontSize: drawerFontSize,
+                    fontFamily: drawerSelectedFont,
                     isEnabled: disableDrawerPrint,
                     marginBottom: drawerBottomMargin,
                     marginLeft: drawerLeftMargin,
@@ -346,6 +365,7 @@ export default function PrintSetting() {
                     dimensionWidth: moneyDropWidth,
                     dispensaryId: dispensaryId,
                     fontSize: moneyDropFontSize,
+                    fontFamily: moneyDropSelectedFont,
                     isEnabled: disableMoneyDropPrint,
                     marginBottom: moneyDropBottomMargin,
                     marginLeft: moneyDropLeftMargin,
@@ -544,7 +564,7 @@ export default function PrintSetting() {
                             </div>
 
                             {/* Font Family */}
-                            {/* <div className="mb-6">
+                            <div className="mb-6">
                                 <div className="flex items-center justify-between mb-2">
                                     <label className="font-medium">Font Family</label>
                                 </div>
@@ -559,7 +579,7 @@ export default function PrintSetting() {
                                         </option>
                                     ))}
                                 </select>
-                            </div> */}
+                            </div>
 
                             {/* Top Text */}
                             <div className="mb-6">
@@ -666,17 +686,17 @@ export default function PrintSetting() {
                                 </div>
 
                                 <div
-                                    className="bg-white dark:bg-black p-4 rounded overflow-hidden"
+                                    className={`bg-white dark:bg-black p-4 rounded overflow-hidden font-${selectedFont}`}
                                     style={{
                                         width: width ? `${width}in` : '200px',
                                         height: height ? `${height}in` : '100%',
                                         fontSize: `${fontSize}pt`,
                                         margin: `${topMargin}in ${rightMargin}in ${bottomMargin}in ${leftMargin}in`,
-                                        fontFamily: 'Open Sans, Roboto, Arial, sans-serif'
+                                        // fontFamily: `${selectedFont}, Roboto`,
                                     }}
                                     ref={packageLabelContentRef}
                                 >
-                                    <p className="font-bold">This is test Product Name 300mg</p>
+                                    <p className="font-bold" style={{fontFamily: 'serif'}}>This is test Product Name 300mg</p>
                                     <p>Strain: Blue Dream</p>
                                     <p>Net Weight: 0.125 Ounce</p>
                                     <p>Batch: 12345</p>
@@ -794,7 +814,7 @@ export default function PrintSetting() {
                             </div>
 
                             {/* Font Family */}
-                            {/* <div className="mb-6">
+                            <div className="mb-6">
                                 <div className="flex items-center justify-between mb-2">
                                     <label className="font-medium">Font Family</label>
                                 </div>
@@ -809,7 +829,7 @@ export default function PrintSetting() {
                                         </option>
                                     ))}
                                 </select>
-                            </div> */}
+                            </div>
 
                             {/* Top Text */}
                             <div className="mb-6">
@@ -931,7 +951,7 @@ export default function PrintSetting() {
                                         height: receiptHeight ? `${receiptHeight}in` : '100%',
                                         margin: `${receiptTopMargin}in ${receiptRightMargin}in ${receiptBottomMargin}in ${receiptLeftMargin}in`,
                                         fontSize: `${receiptFontSize}pt`,
-                                        fontFamily: 'Roboto',
+                                        fontFamily: `${receiptSelectedFont}, Roboto, Arial, sans-serif`,
                                     }}
                                     ref={receiptContentRef}
                                 >
@@ -1125,7 +1145,7 @@ export default function PrintSetting() {
                             </div>
 
                             {/* Font Family */}
-                            {/* <div className="mb-6">
+                            <div className="mb-6">
                                 <div className="flex items-center justify-between mb-2">
                                     <label className="font-medium">Font Family</label>
                                 </div>
@@ -1140,7 +1160,7 @@ export default function PrintSetting() {
                                         </option>
                                     ))}
                                 </select>
-                            </div> */}
+                            </div>
 
                             {/* Top Text */}
                             <div className="mb-6">
@@ -1234,7 +1254,7 @@ export default function PrintSetting() {
                                         height: drawerHeight ? `${drawerHeight}in` : '100%',
                                         margin: `${drawerTopMargin}in ${drawerRightMargin}in ${drawerBottomMargin}in ${drawerLeftMargin}in`,
                                         fontSize: `${drawerFontSize}pt`,
-                                        fontFamily: 'Open Sans, Roboto, Arial, sans-serif'
+                                        fontFamily: `${drawerSelectedFont}, Roboto, Arial, sans-serif`
                                     }}
                                     ref={drawerContentRef}
                                 >
@@ -1409,6 +1429,24 @@ export default function PrintSetting() {
                                 </div>
                             </div>
 
+                            {/* Font Family */}
+                            <div className="mb-6">
+                                <div className="flex items-center justify-between mb-2">
+                                    <label className="font-medium">Font Family</label>
+                                </div>
+                                <select 
+                                    value={drawerSelectedFont} 
+                                    onChange={(e) => setDrawerSelectedFont(e.target.value)}
+                                    className="w-full form-select"
+                                >
+                                    {fontOptions.map((font) => (
+                                        <option key={font.value} value={font.value}>
+                                            {font.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
                             {/* Top Text */}
                             <div className="mb-6">
                                 <div className="flex items-center justify-between mb-2">
@@ -1501,7 +1539,7 @@ export default function PrintSetting() {
                                         height: moneyDropHeight ? `${moneyDropHeight}in` : '100%',
                                         margin: `${moneyDropTopMargin}in ${moneyDropRightMargin}in ${moneyDropBottomMargin}in ${moneyDropLeftMargin}in`,
                                         fontSize: `${moneyDropFontSize}pt`,
-                                        fontFamily: 'Open Sans, Roboto, Arial, sans-serif'
+                                        fontFamily: `${moneyDropSelectedFont}, Roboto, Arial, sans-serif`
                                     }}
                                     ref={moneyDropContentRef}
                                 >

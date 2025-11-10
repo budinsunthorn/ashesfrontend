@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import Dropdown from '@/components/dropdown';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation';
 
 // Import Custom Component
 import warnAlert from '../notification/warnAlert';
@@ -39,7 +39,7 @@ import {
     useGetLastSyncHistoryByDispensaryIdQuery,
     useCreateSyncHistoryMutation,
     useSyncDeliveryPackagesMutation,
-    useFetchTestResultsByPackageIdMutation
+    useFetchTestResultsByPackageIdMutation,
 } from '@/src/__generated__/operations';
 
 import { PackageStatus } from '@/src/__generated__/operations';
@@ -98,7 +98,7 @@ const PackageTable = () => {
     const panelType = useSelector((state: IRootState) => state.themeConfig.panelType);
     const menu = useSelector((state: IRootState) => state.themeConfig.menu);
     const darkMode = useSelector((state: IRootState) => state.themeConfig.isDarkMode);
-    const sidebar = useSelector((state: IRootState) => state.themeConfig.sidebar)
+    const sidebar = useSelector((state: IRootState) => state.themeConfig.sidebar);
 
     // show/hide
     const [page, setPage] = useState(1);
@@ -125,8 +125,8 @@ const PackageTable = () => {
     const packageDataById = packageRowDataById.data?.package;
     const packageData = { package: packageDataById };
     const [tableClassname, setTableClassName] = useState('w-full');
-    const [searchPackageStatus, setSearchPackageStatus] = useState("all")
-    const [assignedStatus, setAssignedStatus] = useState('')
+    const [searchPackageStatus, setSearchPackageStatus] = useState('all');
+    const [assignedStatus, setAssignedStatus] = useState('');
 
     // for the pagination
     const [searchSelectValue, setSearchSelectValue] = useState('assignPackage.product.name');
@@ -144,7 +144,7 @@ const PackageTable = () => {
         sortField: sortStatus.columnAccessor,
         sortDirection: sortStatus.direction,
         packageStatus: searchPackageStatus,
-        assignedStatus: assignedStatus
+        assignedStatus: assignedStatus,
     });
 
     const query = `
@@ -241,17 +241,17 @@ const PackageTable = () => {
             allPakcageByPackagesByDispensaryIdWithPages.refetch();
             packageRowDataById.refetch();
         }
-    }, [syncStatus])
+    }, [syncStatus]);
 
     useEffect(() => {
         setSearchPage(page);
     }, [page]);
 
     const updateSearchParams = (key: string, value: string) => {
-        const params = new URLSearchParams(searchParams.toString())
-        params.set(key, value)
-        router.push(`?${params.toString()}`) // or use replace() to avoid history stacking
-    }
+        const params = new URLSearchParams(searchParams.toString());
+        params.set(key, value);
+        router.push(`?${params.toString()}`); // or use replace() to avoid history stacking
+    };
 
     const handleRowClick = (record: any, index: any) => {
         if (record == null) {
@@ -260,16 +260,14 @@ const PackageTable = () => {
         setPackageId(record.id);
         setSelectedRow(index);
         updateSearchParams('packageId', record.id);
-
-    }
+    };
 
     const handleSearch = () => {
         setSearchField(searchSelectValue);
         setSearchParam(searchValue.trim());
-        setSearchPackageStatus(searchPackageStatus)
+        setSearchPackageStatus(searchPackageStatus);
         setSearchPage(1);
     };
-
 
     const handleFetchTestResult = async () => {
         // console.log("packageId", packageId)
@@ -281,7 +279,7 @@ const PackageTable = () => {
             {
                 input: {
                     dispensaryId: dispensaryId,
-                    packageId: packageDataById?.packageId || 0
+                    packageId: packageDataById?.packageId || 0,
                 },
             },
 
@@ -289,17 +287,17 @@ const PackageTable = () => {
                 onError(error) {
                     // console.log(error);
                     warnAlert('Fetching Test Data failed');
-                    setSpinnerStatus({})
+                    setSpinnerStatus({});
                 },
                 onSuccess(data) {
                     successAlert('Fetching Test Data Successfully');
                     // allPakcageByPackagesByDispensaryIdWithPages.refetch();
                     packageRowDataById.refetch();
-                    setSpinnerStatus({})
+                    setSpinnerStatus({});
                 },
             }
         );
-    }
+    };
     // const syncPackageData = async () => {
     //     setSpinnerStatus({
     //         isLoading: true,
@@ -393,8 +391,9 @@ const PackageTable = () => {
         { accessor: 'packageLabel', title: 'Package ID' },
         { accessor: 'assignPackage.product.name', title: 'Product' },
         { accessor: 'packageStatus', title: 'Package Status' },
-        { accessor: 'assignPackage.cost', title: 'Cost' },
-        { accessor: 'assignPackage.posQty', title: 'Current Qty' },
+        { accessor: 'assignPackage.cost', title: 'Cost', isSum: true },
+        { accessor: 'assignPackage.posQty', title: 'Current Qty', isSum: true },
+        { accessor: 'assignPackage.posQty*assignPackage.cost', title: 'Total Cost', isSum: true },
         { accessor: 'Quantity', title: 'Metrc Qty' },
         { accessor: 'originalQty', title: 'Original Qty' },
         { accessor: 'itemName', title: 'Metrc Name' },
@@ -563,9 +562,9 @@ const PackageTable = () => {
         if (searchParams.get('packageId')) {
             setPackageId(searchParams.get('packageId') as string);
 
-            setIsRightBarShow(true)
+            setIsRightBarShow(true);
         }
-    }, [searchParams])
+    }, [searchParams]);
 
     // useEffect(() => {
     //     allPakcageByPackagesByDispensaryIdWithPages.refetch()
@@ -612,20 +611,42 @@ const PackageTable = () => {
             // Add your logic here based on rightBarStatus
             if (isRightBarShow === true) {
                 setTableClassName(
-                    `fixed top-0  ${menu == 'horizontal' ? 'left-0 w-[calc(100vw-500px)]' : menu == 'vertical' ? sidebar == true ? 'left-[0px] w-[calc(100vw-515px)]' : 'left-[280px] w-[calc(100vw-780px)]' : 'left-[90px] w-[calc(100vw-590px)]'
+                    `fixed top-0  ${
+                        menu == 'horizontal'
+                            ? 'left-0 w-[calc(100vw-500px)]'
+                            : menu == 'vertical'
+                            ? sidebar == true
+                                ? 'left-[0px] w-[calc(100vw-515px)]'
+                                : 'left-[280px] w-[calc(100vw-780px)]'
+                            : 'left-[90px] w-[calc(100vw-590px)]'
                     } -translate-x-[20px] h-[100vh] z-[100] bounceInUp1 duration-500`
                 );
             } else {
                 setTableClassName(
-                    `fixed top-0 ${menu == 'horizontal' ? 'left-0 w-[calc(100vw)]' : menu == 'vertical' ? sidebar == true ? 'left-[0px] w-[calc(100vw-15px)]' : 'left-[280px] w-[calc(100vw-280px)]' : 'left-[90px] w-[calc(100vw-90px)]'
+                    `fixed top-0 ${
+                        menu == 'horizontal'
+                            ? 'left-0 w-[calc(100vw)]'
+                            : menu == 'vertical'
+                            ? sidebar == true
+                                ? 'left-[0px] w-[calc(100vw-15px)]'
+                                : 'left-[280px] w-[calc(100vw-280px)]'
+                            : 'left-[90px] w-[calc(100vw-90px)]'
                     } -translate-x-[20px] h-[100vh] z-[100] bounceInUp1 duration-500`
                 );
             }
         } else {
             if (isRightBarShow === true) {
-                setTableClassName(`${menu == 'horizontal' ? 'w-[calc(100vw-550px)]' : menu == 'vertical' ? sidebar == true ? 'w-[calc(100vw-528px)]' : 'w-[calc(100vw-790px)]' : 'w-[calc(100vw-630px)]'} duration-500 bounceInDown1`);
+                setTableClassName(
+                    `${
+                        menu == 'horizontal' ? 'w-[calc(100vw-550px)]' : menu == 'vertical' ? (sidebar == true ? 'w-[calc(100vw-528px)]' : 'w-[calc(100vw-790px)]') : 'w-[calc(100vw-630px)]'
+                    } duration-500 bounceInDown1`
+                );
             } else {
-                setTableClassName(`${menu == 'horizontal' ? 'w-[calc(100vw-50px)]' : menu == 'vertical' ? sidebar == true ? 'w-[calc(100vw-50px)]' : 'w-[calc(100vw-310px)]' : 'w-[calc(100vw-120px)]'} duration-500 bounceInDown1`);
+                setTableClassName(
+                    `${
+                        menu == 'horizontal' ? 'w-[calc(100vw-50px)]' : menu == 'vertical' ? (sidebar == true ? 'w-[calc(100vw-50px)]' : 'w-[calc(100vw-310px)]') : 'w-[calc(100vw-120px)]'
+                    } duration-500 bounceInDown1`
+                );
             }
         }
     }, [isAtTop, isRightBarShow, sidebar, menu]);
@@ -741,7 +762,7 @@ const PackageTable = () => {
     const handleOnAdjustPackage = () => {
         allPakcageByPackagesByDispensaryIdWithPages.refetch();
         packageRowDataById.refetch();
-    }
+    };
 
     // const handleRefetchPakcageQuery = () => {
     //     allPakcageByPackagesByDispensaryIdWithPages.refetch();
@@ -751,7 +772,7 @@ const PackageTable = () => {
     const handleRealtimeSearch = useDebouncedCallback((param) => {
         setSearchParam(param.trim());
         setSearchField(searchSelectValue);
-        setSearchPackageStatus(searchPackageStatus)
+        setSearchPackageStatus(searchPackageStatus);
         setSearchPage(1);
     }, 500);
 
@@ -768,7 +789,7 @@ const PackageTable = () => {
                     </Tippy> */}
                     <select
                         onChange={(e) => {
-                            setSearchPage(1)
+                            setSearchPage(1);
                             setSearchPackageStatus(e.target.value);
                         }}
                         id="currentDispensary"
@@ -792,7 +813,7 @@ const PackageTable = () => {
                     </select>
                     <select
                         onChange={(e) => {
-                            setSearchPage(1)
+                            setSearchPage(1);
                             setAssignedStatus(e.target.value);
                         }}
                         id="assignedStatus"
@@ -860,7 +881,11 @@ const PackageTable = () => {
                                 </Dropdown>
                             </div>
                         </Tippy>
-                        <TableExport cols={cols} hideCols={hideCols} filename='package' query={query}
+                        <TableExport
+                            cols={cols}
+                            hideCols={hideCols}
+                            filename="package"
+                            query={query}
                             variables={{
                                 dispensaryId: dispensaryId,
                                 pageNumber: searchPage,
@@ -889,10 +914,16 @@ const PackageTable = () => {
                             <option value="packageId">Metrc Id</option>
                             {/* <option value='packageId'>packageId</option> */}
                         </select>
-                        <input type="text" className="form-input !rounded-none w-44" placeholder="Search..." value={searchValue} onChange={(e) => {
-                            setSearchValue(e.target.value)
-                            handleRealtimeSearch(e.target.value)
-                        }} />
+                        <input
+                            type="text"
+                            className="form-input !rounded-none w-44"
+                            placeholder="Search..."
+                            value={searchValue}
+                            onChange={(e) => {
+                                setSearchValue(e.target.value);
+                                handleRealtimeSearch(e.target.value);
+                            }}
+                        />
                         <button
                             onClick={handleSearch}
                             className="bg-[#eee] flex justify-center items-center ltr:rounded-r-md rtl:rounded-l-md px-3 py-3  font-semibold border ltr:border-l-0 rtl:border-r-0 border-white-light dark:border-[#17263c] dark:bg-[#1b2e4b]"
@@ -983,12 +1014,8 @@ const PackageTable = () => {
                                     }
                                     const { assignPackage } = row;
 
-                                    return (
-                                        <div>
-                                            {'$' + truncateToTwoDecimals(assignPackage?.cost)}
-                                        </div>
-                                    );
-                                }
+                                    return <div>{'$' + truncateToTwoDecimals(assignPackage?.cost)}</div>;
+                                },
                             },
                             {
                                 accessor: 'assignPackage.posQty',
@@ -1001,12 +1028,22 @@ const PackageTable = () => {
                                     }
                                     const { assignPackage } = row;
 
-                                    return (
-                                        <div>
-                                            {truncateToTwoDecimals(assignPackage?.posQty)}
-                                        </div>
-                                    );
-                                }
+                                    return <div>{truncateToTwoDecimals(assignPackage?.posQty)}</div>;
+                                },
+                            },
+                            {
+                                accessor: 'total cost',
+                                title: 'Total Cost',
+                                sortable: true,
+                                hidden: hideCols.includes('assignPackage.posQty*assignPackage.cost'),
+                                render: (row) => {
+                                    if (!row) {
+                                        return null; // Handle the null case as needed
+                                    }
+                                    const { assignPackage } = row;
+
+                                    return <div>{'$' + truncateToTwoDecimals((assignPackage?.posQty || 0) * (assignPackage?.cost || 0))}</div>;
+                                },
                             },
                             {
                                 accessor: 'Quantity',
@@ -1476,7 +1513,7 @@ const PackageTable = () => {
                             // setSideBarStatus({ show: true, data: { packageId: record.id, deliverId: record.deliveryId } });
                             // setTransferId(record.id || '')
                             // setDeliverId(record.deliveryId || 0)
-                            handleRowClick(record, index)
+                            handleRowClick(record, index);
                         }}
                     />
                 </div>
@@ -1492,16 +1529,28 @@ const PackageTable = () => {
                                     <FaArrowRightFromBracket className="m-auto text-2xl" />
                                 </button>
                             </div>
-                            {(packageRowDataById.isLoading || packageRowDataById.isFetching) ?
+                            {packageRowDataById.isLoading || packageRowDataById.isFetching ? (
                                 <LoadingSkeleton />
-                                : <div className="flex flex-col items-center px-3">
-                                    <div className='w-full flex justify-between items-center'>
+                            ) : (
+                                <div className="flex flex-col items-center px-3">
+                                    <div className="w-full flex justify-between items-center">
                                         <div className="w-full text-xl font-semibold text-dark dark:text-white-dark py-2 text-left">Package Details</div>
                                     </div>
                                     {/* <Suspense fallback={<RightSideBarSkeletonLoading/>}> */}
-                                    <PackageCard packageLabel={packageId} packageData={packageDataById} isLoading={packageRowDataById.isLoading || packageRowDataById.isFetching} handleActivePackage={handleActivePackage} handleHoldPackage={handleHoldPackage} handleFinishPakcage={handleFinishPakcage} onAdjustPackage={handleOnAdjustPackage} handleFetchTestResult={handleFetchTestResult} handleRefetchPackage={handleOnAdjustPackage} />
+                                    <PackageCard
+                                        packageLabel={packageId}
+                                        packageData={packageDataById}
+                                        isLoading={packageRowDataById.isLoading || packageRowDataById.isFetching}
+                                        handleActivePackage={handleActivePackage}
+                                        handleHoldPackage={handleHoldPackage}
+                                        handleFinishPakcage={handleFinishPakcage}
+                                        onAdjustPackage={handleOnAdjustPackage}
+                                        handleFetchTestResult={handleFetchTestResult}
+                                        handleRefetchPackage={handleOnAdjustPackage}
+                                    />
                                     {/* </Suspense> */}
-                                </div>}
+                                </div>
+                            )}
                         </PerfectScrollbar>
                     </div>
                 </div>

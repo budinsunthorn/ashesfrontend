@@ -1,19 +1,20 @@
-query PrintSettingByDispensaryId( $dispensaryId: String!) {
-  printSettingByDispensaryId(dispensaryId: $dispensaryId) {
-    id
-    dispensaryId
-    printType
-    isEnabled
-    dimensionWidth
-    dimensionHeight
-    marginTop
-    marginBottom
-    marginLeft
-    marginRight
-    fontSize
-    topText
-    bottomText
-    createdAt
-    updatedAt
-  }
+query PrintSettingByDispensaryId($dispensaryId: String!) {
+    printSettingByDispensaryId(dispensaryId: $dispensaryId) {
+        id
+        dispensaryId
+        printType
+        isEnabled
+        dimensionWidth
+        dimensionHeight
+        marginTop
+        marginBottom
+        marginLeft
+        marginRight
+        fontSize
+        fontFamily
+        topText
+        bottomText
+        createdAt
+        updatedAt
+    }
 }

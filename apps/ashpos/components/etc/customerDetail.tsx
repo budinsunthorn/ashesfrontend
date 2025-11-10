@@ -6,11 +6,12 @@ import { IRootState } from '@/store';
 
 import { FaSuitcaseMedical } from 'react-icons/fa6';
 import { MdHistory, MdOutlineLoyalty } from 'react-icons/md';
-import { AiFillProject } from "react-icons/ai";
+import { AiFillProject } from 'react-icons/ai';
 import { IoLayersSharp } from 'react-icons/io5';
 import SkeletonLoader from './skeletonLoader';
 import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { truncateToTwoDecimals } from '@/lib/utils';
+import CopyButton from './copyButton';
 
 export default function CustomerProfile({ customerData }: any) {
     const router = useRouter();
@@ -35,35 +36,31 @@ export default function CustomerProfile({ customerData }: any) {
 
     useEffect(() => {
         // console.log(currentPage)
-        const newOrders: any = []; // Temporary array to hold new orders  
+        const newOrders: any = []; // Temporary array to hold new orders
 
         for (let i = (currentPage - 1) * 5; i < currentPage * 5; i++) {
             if (customerData && customerData.Order && customerData.Order[i]) {
-                newOrders.push(customerData.Order[i]); // Add the current order to the temporary array  
+                newOrders.push(customerData.Order[i]); // Add the current order to the temporary array
             }
         }
 
-        // Update the state with the new orders  
+        // Update the state with the new orders
         setOrderHistory(newOrders);
-
-
-    }, [currentPage, customerData])
+    }, [currentPage, customerData]);
 
     const handleGotoLink = async (page: string, key: string, value: string) => {
         // Create a URLSearchParams object to properly format the query parameters
         const searchParams = new URLSearchParams();
         searchParams.append(key, value);
         // console.log('searchParams', searchParams.toString());
-        
+
         // Construct the full URL dynamically
         const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://ashespos.ai';
         const fullUrl = `${baseUrl}/org/${organizationId}/${storeLinkName}/${page}?${searchParams.toString()}`;
-        
+
         // Check if we're in an Electron environment
-        const isElectron = typeof window !== 'undefined' && 
-            (window as any).process && 
-            (window as any).process.type;
-        
+        const isElectron = typeof window !== 'undefined' && (window as any).process && (window as any).process.type;
+
         if (isElectron) {
             // In Electron, use the shell module to open external links
             // This will open in the default browser
@@ -82,14 +79,17 @@ export default function CustomerProfile({ customerData }: any) {
             return { earned: 0, spent: 0 };
         }
 
-        return order.LoyaltyHistory.reduce((acc: { earned: number, spent: number }, loyalty: any) => {
-            if (loyalty.txType.toLowerCase() === 'earn') {
-                acc.earned += Number(loyalty.value) || 0;
-            } else if (loyalty.txType.toLowerCase() === 'spend') {
-                acc.spent += Number(loyalty.value) || 0;
-            }
-            return acc;
-        }, { earned: 0, spent: 0 });
+        return order.LoyaltyHistory.reduce(
+            (acc: { earned: number; spent: number }, loyalty: any) => {
+                if (loyalty.txType.toLowerCase() === 'earn') {
+                    acc.earned += Number(loyalty.value) || 0;
+                } else if (loyalty.txType.toLowerCase() === 'spend') {
+                    acc.spent += Number(loyalty.value) || 0;
+                }
+                return acc;
+            },
+            { earned: 0, spent: 0 }
+        );
     };
 
     const calculateTotalLoyaltyStats = () => {
@@ -97,20 +97,21 @@ export default function CustomerProfile({ customerData }: any) {
             return { totalEarned: 0, totalSpent: 0 };
         }
 
-        return customerData.Order.reduce((acc: { totalEarned: number, totalSpent: number }, order: any) => {
-            const orderStats = aggregateLoyaltyHistory(order);
-            acc.totalEarned += orderStats.earned;
-            acc.totalSpent += orderStats.spent;
-            return acc;
-        }, { totalEarned: 0, totalSpent: 0 });
+        return customerData.Order.reduce(
+            (acc: { totalEarned: number; totalSpent: number }, order: any) => {
+                const orderStats = aggregateLoyaltyHistory(order);
+                acc.totalEarned += orderStats.earned;
+                acc.totalSpent += orderStats.spent;
+                return acc;
+            },
+            { totalEarned: 0, totalSpent: 0 }
+        );
     };
-
 
     const loyaltyTotals = calculateTotalLoyaltyStats();
 
     console.log('orderHistory', orderHistory);
-    console.log("customerData", customerData)
-
+    console.log('customerData', customerData);
 
     const renderPagination = (currentPage: number, totalItems: number, itemsPerPage: number = 5) => {
         const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
@@ -126,21 +127,51 @@ export default function CustomerProfile({ customerData }: any) {
 
         return (
             <div className="flex justify-center gap-1 mt-4">
-                <button className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer" disabled={currentPage === 1} onClick={() => setCurrentPage(1)}>
+                <button
+                    className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(1)}
+                >
                     &laquo;
                 </button>
-                <button className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer" disabled={currentPage === 1} onClick={() => setCurrentPage(prev => { return prev == 1 ? 1 : prev - 1 })}>
+                <button
+                    className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer"
+                    disabled={currentPage === 1}
+                    onClick={() =>
+                        setCurrentPage((prev) => {
+                            return prev == 1 ? 1 : prev - 1;
+                        })
+                    }
+                >
                     &lsaquo;
                 </button>
                 {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
-                    <button key={page} className={`px-3 py-1 border rounded hover:bg-gray-100  dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer ${page === currentPage ? 'bg-gray-200 dark:bg-[#304772]' : ''}`} onClick={() => setCurrentPage(page)}>
+                    <button
+                        key={page}
+                        className={`px-3 py-1 border rounded hover:bg-gray-100  dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer ${
+                            page === currentPage ? 'bg-gray-200 dark:bg-[#304772]' : ''
+                        }`}
+                        onClick={() => setCurrentPage(page)}
+                    >
                         {page}
                     </button>
                 ))}
-                <button className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer" disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => { return prev == totalPages ? prev : prev + 1 })}>
+                <button
+                    className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer"
+                    disabled={currentPage === totalPages}
+                    onClick={() =>
+                        setCurrentPage((prev) => {
+                            return prev == totalPages ? prev : prev + 1;
+                        })
+                    }
+                >
                     &rsaquo;
                 </button>
-                <button className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer" disabled={currentPage === totalPages} onClick={() => setCurrentPage(totalPages)}>
+                <button
+                    className="px-3 py-1 border rounded hover:bg-gray-100 dark:hover:bg-[#1c2942] dark:border-[#17263c] cursor-pointer"
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(totalPages)}
+                >
                     &raquo;
                 </button>
             </div>
@@ -169,7 +200,7 @@ export default function CustomerProfile({ customerData }: any) {
 
                         <div className="flex">
                             <span className="w-64 text-dark dark:text-white-dark">Birthday:</span>
-                            <span className="text-dark dark:text-white-dark">{customerData?.birthday.toString().split("T")[0]}</span>
+                            <span className="text-dark dark:text-white-dark">{customerData?.birthday.toString().split('T')[0]}</span>
                         </div>
 
                         <div className="flex">
@@ -193,7 +224,7 @@ export default function CustomerProfile({ customerData }: any) {
                 <div className="p-6 panel rounded-lg shadow">
                     <div className="flex justify-between items-center mb-6 border-b dark:border-[#17263c] pb-2">
                         <div className="flex items-center gap-2">
-                            <MdOutlineLoyalty className='text-dark dark:text-white-dark' />
+                            <MdOutlineLoyalty className="text-dark dark:text-white-dark" />
                             <h2 className="text-xl font-semibold text-dark dark:text-white-dark">Loyalty Details</h2>
                         </div>
                         <button className="text-dark dark:text-white-dark hover:text-dark">
@@ -223,7 +254,7 @@ export default function CustomerProfile({ customerData }: any) {
                 {/* Medical Information Section */}
                 <div className="p-6 panel rounded-lg shadow">
                     <div className="flex items-center gap-2 mb-6 border-b dark:border-[#17263c] pb-2">
-                        <FaSuitcaseMedical className='text-dark dark:text-white-dark' />
+                        <FaSuitcaseMedical className="text-dark dark:text-white-dark" />
                         <h2 className="text-xl font-semibold text-dark dark:text-white-dark">Medical Information</h2>
                     </div>
 
@@ -237,11 +268,7 @@ export default function CustomerProfile({ customerData }: any) {
                                         <path d="M20 6L9 17l-5-5" />
                                     </svg>
                                 )}
-                                <button className="text-gray-400 hover:text-dark dark:text-white-dark">
-                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                    </svg>
-                                </button>
+                                <CopyButton text={customerData?.medicalLicense || ''} />
                             </span>
                         </div>
 
@@ -303,8 +330,8 @@ export default function CustomerProfile({ customerData }: any) {
                     {/* Order History Section */}
                     <div className="panel rounded-lg shadow p-6">
                         <div className="flex items-center justify-between gap-2 mb-6 border-b dark:border-[#17263c] pb-2">
-                            <div className='flex items-center justify-start'>
-                                <MdHistory className='text-lg text-dark dark:text-white-dark mr-2' />
+                            <div className="flex items-center justify-start">
+                                <MdHistory className="text-lg text-dark dark:text-white-dark mr-2" />
                                 <h2 className="text-xl font-semibold text-dark dark:text-white-dark">Order History</h2>
                             </div>
                             <div className="flex justify-end mt-2">
@@ -321,11 +348,10 @@ export default function CustomerProfile({ customerData }: any) {
                                                 '#' + order?.id,
                                                 truncateToTwoDecimals(earned),
                                                 truncateToTwoDecimals(spent),
-                                                '$' + truncateToTwoDecimals(order.cashAmount + order.otherAmount)
+                                                '$' + truncateToTwoDecimals(order.cashAmount + order.otherAmount),
                                             ];
                                         });
-                                        let csvContent = headers.join(',') + '\n' +
-                                            rows.map((row:any) => row.map((val: any) => `"${val}"`).join(',')).join('\n');
+                                        let csvContent = headers.join(',') + '\n' + rows.map((row: any) => row.map((val: any) => `"${val}"`).join(',')).join('\n');
 
                                         // Download CSV
                                         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -348,10 +374,18 @@ export default function CustomerProfile({ customerData }: any) {
                             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        <th scope="col" className="px-6 py-3">Date</th>
-                                        <th scope="col" className="px-6 py-3">Order</th>
-                                        <th scope="col" className="px-6 py-3">Loyalty Earned/Spent</th>
-                                        <th scope="col" className="px-6 py-3">Amount</th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Date
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Order
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Loyalty Earned/Spent
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Amount
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -359,10 +393,7 @@ export default function CustomerProfile({ customerData }: any) {
                                         <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <td className="px-6 py-4">{order?.orderDate}</td>
                                             <td className="px-6 py-4">
-                                                <a
-                                                    className="text-blue-600 hover:text-blue-800 cursor-pointer"
-                                                    onClick={() => handleGotoLink("orders/orders", "id", order.id)}
-                                                >
+                                                <a className="text-blue-600 hover:text-blue-800 cursor-pointer" onClick={() => handleGotoLink('orders/orders', 'id', order.id)}>
                                                     #{order.id}
                                                 </a>
                                             </td>
@@ -371,14 +402,11 @@ export default function CustomerProfile({ customerData }: any) {
                                                 {' / '}
                                                 {order?.LoyaltyHistory[0]?.txType === 'spent' ? order?.LoyaltyHistory[0]?.value : 0}
                                             </td>
-                                            <td className="px-6 py-4 text-right">
-                                                ${truncateToTwoDecimals(order.cashAmount + order.otherAmount)}
-                                            </td>
+                                            <td className="px-6 py-4 text-right">${truncateToTwoDecimals(order.cashAmount + order.otherAmount)}</td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-                            
                         </div>
 
                         {renderPagination(currentPage, customerData?.Order?.length)}
