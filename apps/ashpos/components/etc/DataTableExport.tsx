@@ -18,6 +18,8 @@ import { PRINTLIMIT } from '@/utils/variables';
 import { BiLoaderAlt } from 'react-icons/bi';
 
 import Cookies from 'universal-cookie';
+import { truncateToTwoDecimals } from '@/lib/utils';
+import { is } from 'date-fns/locale';
 
 interface ExportTableProps {
     cols: any; // Replace 'any' with the appropriate type
@@ -28,10 +30,12 @@ interface ExportTableProps {
     variables: any;
 }
 
-function returnStringValue(value: any) {
+function formatValue(value: any, isCurrency: boolean = false) {
     if (value === true || value === false) {
         return value == true ? 'True' : 'False';
-    } else return value;
+    }
+    const result = isCurrency ? '$' + truncateToTwoDecimals(value) : value;
+    return String(result);
 }
 
 function TableExport({ cols, hideCols, filename, query, variables }: ExportTableProps) {
@@ -65,7 +69,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token // if needed
+                    Authorization: 'Bearer ' + token, // if needed
                 },
                 body: JSON.stringify({
                     query,
@@ -75,14 +79,14 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
 
             const json = await res.json();
             console.log('json.data', json.data);
-            console.log("filename", filename)
-            if(filename == 'package') {
+            console.log('filename', filename);
+            if (filename == 'package') {
                 return json.data.allPackagesByDispensaryIdWithPages.packages;
-            } else if(filename == 'transfer') {
+            } else if (filename == 'transfer') {
                 console.log('json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages', json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages);
                 return json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages?.transfers;
-            } else if(filename == 'order') {
-                return json.data.allOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages?.orders
+            } else if (filename == 'order') {
+                return json.data.allOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages?.orders;
             }
         } catch (e) {
             console.error('Error in fetch GraphQL: ', e);
@@ -103,9 +107,37 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
             .map((s: any) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
     };
+
+    // Get value for single accessor
+    const getValFromAccessor = (item: any, accessor: string) => {
+        let val = ' ';
+        console.log('getValFromAccessor item ------->', item['dispensaryId']);
+        if (accessor.includes('.')) {
+            const accessorParts = accessor.split('.');
+            if (accessorParts.length === 2) {
+                // Handle single level nesting (e.g., package.name)
+
+                if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]]) {
+                    // console.log("item ------>", item[accessorParts[0]][accessorParts[1]])
+                    val = item[accessorParts[0]][accessorParts[1]];
+                } else val = item[accessor] ? item[accessor] : '';
+            } else if (accessorParts.length === 3) {
+                // Handle double level nesting (e.g., package.product.name)
+                if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]] && item[accessorParts[0]][accessorParts[1]][accessorParts[2]]) {
+                    val = item[accessorParts[0]][accessorParts[1]][accessorParts[2]];
+                } else val = item[accessor] ? item[accessor] : '';
+            } else {
+                val = item[accessor] ? item[accessor] : '';
+            }
+        } else {
+            val = item[accessor] ? item[accessor] : '';
+        }
+        return val;
+    };
+
     const exportTable = async (type: any) => {
         const packageData = await fetchPackages();
-        console.log("packageData ----------->", packageData);
+        console.log('packageData ----------->', packageData);
         let columns: any = cols;
         let records = packageData;
         let newVariable: any;
@@ -113,11 +145,10 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
         if (type === 'csv') {
             let coldelimiter = ';';
             let linedelimiter = '\n';
+            let totalSum: any = [];
             let result = '';
             columns.map((d: any) => {
-                // if (!hideCols.includes(d.accessor)) {
                 result += capitalize(d.title) + coldelimiter;
-                // }
             });
             result += linedelimiter;
             records?.map((item: any, i: any) => {
@@ -127,34 +158,47 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                     if (index > 0) {
                         result += coldelimiter;
                     }
-                    let val = ' ';
-                    if (d.accessor.includes('.')) {
-                        const accessorParts = d.accessor.split('.');
-                        if (accessorParts.length === 2) {
-                            // Handle single level nesting (e.g., package.name)
 
-                            if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]]) {
-                                // console.log("item ------>", item[accessorParts[0]][accessorParts[1]])
-                                val = item[accessorParts[0]][accessorParts[1]];
-                            } else val = item[d.accessor] ? item[d.accessor] : '';
-                        } else if (accessorParts.length === 3) {
-                            // Handle double level nesting (e.g., package.product.name)
-                            if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]] && item[accessorParts[0]][accessorParts[1]][accessorParts[2]]) {
-                                val = item[accessorParts[0]][accessorParts[1]][accessorParts[2]];
-                            } else val = item[d.accessor] ? item[d.accessor] : '';
-                        } else {
-                            val = item[d.accessor] ? item[d.accessor] : '';
-                        }
+                    let val: any = '';
+
+                    // Handle multiple accessors for multiplication, e.g., 'assignPackage.posQty*assignPackage.cost'
+                    if (d.accessor.includes('*')) {
+                        const accessors = d.accessor.split('*');
+                        let mulVal = 1;
+                        accessors.forEach((acc: string) => {
+                            const val = getValFromAccessor(item, acc);
+                            mulVal = mulVal * Number(val);
+                        });
+                        val += mulVal;
                     } else {
-                        val = item[d.accessor] ? item[d.accessor] : '';
+                        val = getValFromAccessor(item, d.accessor);
+                        console.log('val ------->', val);
                     }
-                    if(d.title.includes('Cost')) {
-                        result += '$' + returnStringValue(val);
-                    } else {
-                        result += returnStringValue(val);
+
+                    // Add $ sign for columns having title with 'Cost', return "True"/"False" for boolean values
+                    result += formatValue(val, d.title.includes('Cost'));
+
+                    // calculate total sum for columns with isSum true
+                    if (d?.isSum == true) {
+                        if (totalSum[d.accessor]) {
+                            totalSum[d.accessor] += Number(val);
+                        } else {
+                            totalSum[d.accessor] = Number(val);
+                        }
                     }
                 });
                 result += linedelimiter;
+            });
+
+            console.log('totalSum ------->', totalSum);
+
+            // Add total sum row at the end
+            result += 'Total' + coldelimiter;
+            columns.map((d: any, index: any) => {
+                d?.isSum == true ? (result += formatValue(totalSum[d.accessor], d.title.includes('Cost'))) : (result += '');
+                if (index < columns.length - 1) {
+                    result += coldelimiter;
+                }
             });
 
             if (result == null) return;
@@ -193,47 +237,43 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                 };
             });
 
+            let totalSum: any = [];
+
             // Add data rows with borders
             records.forEach((item: any, i: any) => {
                 const rowData = [i + 1];
                 columns.forEach((d: any) => {
-                    // if (!hideCols.includes(d.accessor)) {
-                    let val = ' ';
                     let result = '';
 
-                    if (d.accessor.includes('.')) {
-                        const accessorParts = d.accessor.split('.');
-                        if (accessorParts.length === 2) {
-                            // Handle single level nesting (e.g., package.name)
-                            // console.log('accessor ------> ', accessorParts);
-                            // console.log('item ------>', item[accessorParts[0]][accessorParts[1]]);
-                            if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]]) {
-                                val = item[accessorParts[0]][accessorParts[1]];
-                            } else val = item[d.accessor] ? item[d.accessor] : '';
-                        } else if (accessorParts.length === 3) {
-                            // Handle double level nesting (e.g., package.product.name)
-                            // console.log('item --------->', item[accessorParts[0]][accessorParts[1]][accessorParts[2]]);
-                            if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]] && item[accessorParts[0]][accessorParts[1]][accessorParts[2]]) {
-                                val = item[accessorParts[0]][accessorParts[1]][accessorParts[2]];
-                            } else val = item[d.accessor] ? item[d.accessor] : '';
+                    let val: any = '';
 
+                    // Handle multiple accessors for multiplication, e.g., 'assignPackage.posQty*assignPackage.cost'
+                    if (d.accessor.includes('*')) {
+                        const accessors = d.accessor.split('*');
+                        let mulVal = 1;
+                        accessors.forEach((acc: string) => {
+                            const val = getValFromAccessor(item, acc);
+                            mulVal = mulVal * Number(val);
+                        });
+                        val += mulVal;
+                    } else val = getValFromAccessor(item, d.accessor);
 
-                        } else {
-                            val = item[d.accessor] ? item[d.accessor] : '';
-                        }
-                    } else {
-                        val = item[d.accessor] ? item[d.accessor] : '';
-                    }
-
-                    if(d.title.includes('Cost')) {
-                        result += '$' + returnStringValue(val);
-                    } else {
-                        result += returnStringValue(val);
-                    }
+                    // Add $ sign for columns having title with 'Cost', return "True"/"False" for boolean values
+                    result += formatValue(val, d.title.includes('Cost'));
 
                     rowData.push(result);
-                    // }
+
+                    // calculate total sum for columns with isSum true
+                    if (d?.isSum == true) {
+                        if (totalSum[d.accessor]) {
+                            totalSum[d.accessor] += Number(val);
+                        } else {
+                            totalSum[d.accessor] = Number(val);
+                        }
+                    }
                 });
+
+                console.log('totalSum ------->', totalSum);
                 const row = worksheet.addRow(rowData);
                 row.eachCell((cell) => {
                     cell.border = {
@@ -244,6 +284,14 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                     };
                 });
             });
+
+            // Add total sum row at the end
+            const totalRowData = ['Total'];
+            columns.forEach((d: any) => {
+                d?.isSum == true ? totalRowData.push(formatValue(totalSum[d.accessor], d.title.includes('Cost'))) : totalRowData.push('');
+            });
+            const totalRow = worksheet.addRow(totalRowData);
+            totalRow.font = { bold: true };
 
             // Set column widths
             worksheet.columns.forEach((column: Partial<Column>) => {
@@ -264,6 +312,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
         } else if (type === 'txt') {
             let coldelimiter = ',';
             let linedelimiter = '\n';
+            let totalSum: any = [];
             let result = '';
             columns.map((d: any) => {
                 // if (!hideCols.includes(d.accessor)) {
@@ -274,36 +323,44 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
             records?.map((item: any, i: any) => {
                 result += i + 1 + coldelimiter;
                 columns.map((d: any, index: any) => {
-                    // if (!hideCols.includes(d.accessor)) {
                     if (index > 0) {
                         result += coldelimiter;
                     }
-                    let val = ' ';
-                    if (d.accessor.split('.').length > 1) {
-                        const accessorParts = d.accessor.split('.');
-                        if (accessorParts.length === 2) {
-                            // Handle single level nesting (e.g., package.name)
-                            if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]]) {
-                                val = item[accessorParts[0]][accessorParts[1]];
-                            } else val = item[d.accessor] ? item[d.accessor] : '';
-                        } else if (accessorParts.length === 3) {
-                            // Handle double level nesting (e.g., package.product.name)
-                            if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]] && item[accessorParts[0]][accessorParts[1]][accessorParts[2]]) {
-                                val = item[accessorParts[0]][accessorParts[1]][accessorParts[2]];
-                            } else val = item[d.accessor] ? item[d.accessor] : '';
+                    let val: any = '';
+
+                    // Handle multiple accessors for multiplication, e.g., 'assignPackage.posQty*assignPackage.cost'
+                    if (d.accessor.includes('*')) {
+                        const accessors = d.accessor.split('*');
+                        let mulVal = 1;
+                        accessors.forEach((acc: string) => {
+                            const val = getValFromAccessor(item, acc);
+                            mulVal = mulVal * Number(val);
+                        });
+                        val += mulVal;
+                    } else val = getValFromAccessor(item, d.accessor);
+
+                    // Add $ sign for columns having title with 'Cost', return "True"/"False" for boolean values
+                    result += formatValue(val, d.title.includes('Cost'));
+
+                    // calculate total sum for columns with isSum true
+                    if (d?.isSum == true) {
+                        if (totalSum[d.accessor]) {
+                            totalSum[d.accessor] += Number(val);
                         } else {
-                            val = item[d.accessor] ? item[d.accessor] : '';
+                            totalSum[d.accessor] = Number(val);
                         }
-                    } else val = item[d.accessor] ? item[d.accessor] : '';
-                    
-                    if(d.title.includes('Cost')) {
-                        result += '$' + returnStringValue(val);
-                    } else {
-                        result += returnStringValue(val);
                     }
-                    // }
                 });
                 result += linedelimiter;
+            });
+
+            // Add total sum row at the end
+            result += 'Total' + coldelimiter;
+            columns.map((d: any, index: any) => {
+                d.isSum == true ? (result += formatValue(totalSum[d.accessor], d.title.includes('Cost'))) : (result += '');
+                if (index < columns.length - 1) {
+                    result += coldelimiter;
+                }
             });
 
             if (result == null) return;

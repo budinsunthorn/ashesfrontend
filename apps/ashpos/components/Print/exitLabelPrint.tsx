@@ -38,7 +38,7 @@ const ExitLabel = React.forwardRef<HTMLDivElement, ExitLabelProps>(({ exitLabelD
             ref={ref} 
             style={{
                 padding: '0px',
-                fontFamily: 'Open Sans, Roboto, Arial, sans-serif',
+                fontFamily: exitLabelPrintSettingData?.fontFamily ? `${exitLabelPrintSettingData?.fontFamily}` : 'Open Sans, Roboto, Arial, sans-serif',
                 fontSize: exitLabelPrintSettingData?.fontSize ? `${exitLabelPrintSettingData.fontSize}pt` : '14pt',
                 width: exitLabelPrintSettingData?.dimensionWidth ? `${exitLabelPrintSettingData.dimensionWidth}in` : 'auto',
                 height: exitLabelPrintSettingData?.dimensionHeight ? `${exitLabelPrintSettingData.dimensionHeight}in` : 'auto',
@@ -128,6 +128,8 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
         }
     }, [exitLabelData, isPrinted]);
 
+    console.log("exitLabelPrintSettingData?.fontFamily", exitLabelPrintSettingData?.fontFamily)
+
     const printFunc = useReactToPrint({
         contentRef: exitLabelRef,
         documentTitle: 'Exit Label',
@@ -141,7 +143,7 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
                 body {
                     margin: 0;
                     padding: 0;
-                    font-family: 'Roboto', Arial, sans-serif !important;
+                    font-family: ${exitLabelPrintSettingData?.fontFamily ? `${exitLabelPrintSettingData?.fontFamily}` : 'roboto' }, Arial, sans-serif !important;
                 }
                 * {
                     box-sizing: border-box;
@@ -170,6 +172,7 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
                             margin: 0;
                             padding: 0;
                             font-size: ${exitLabelPrintSettingData?.fontSize ? `${exitLabelPrintSettingData.fontSize}pt` : '14pt'};
+                            font-family: ${exitLabelPrintSettingData?.fontFamily ? `${exitLabelPrintSettingData?.fontFamily}` : 'roboto' }
                         }
                         .print-content {
                             width: ${exitLabelPrintSettingData?.dimensionWidth ? `${exitLabelPrintSettingData.dimensionWidth}in` : 'auto'};
@@ -196,6 +199,7 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
                 window.electronAPI.printSilently({
                     content: htmlContent,
                     fontSize: exitLabelPrintSettingData?.fontSize ? `${exitLabelPrintSettingData.fontSize}px` : '14px',
+                    fontFamily: exitLabelPrintSettingData?.fontFamily ? `${exitLabelPrintSettingData?.fontFamily}` : 'roboto',
                     dimensionWidth: exitLabelPrintSettingData?.dimensionWidth ? `${exitLabelPrintSettingData.dimensionWidth}in` : undefined,
                     dimensionHeight: exitLabelPrintSettingData?.dimensionHeight ? `${exitLabelPrintSettingData.dimensionHeight}in` : undefined,
                     marginTop: exitLabelPrintSettingData?.marginTop ? `${exitLabelPrintSettingData.marginTop}in` : undefined,

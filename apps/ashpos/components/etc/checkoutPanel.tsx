@@ -8,7 +8,6 @@ import { GiCancel } from 'react-icons/gi';
 import { MdCancel, MdOutlineCancel } from 'react-icons/md';
 import { TbFlagCancel } from 'react-icons/tb';
 
-
 // Define a generic type for the state setter function
 type StateSetter<T> = Dispatch<SetStateAction<T>>;
 
@@ -17,8 +16,8 @@ interface CheckoutPanelProps {
     amount?: number;
     payAmount: number;
     setPayAmount: StateSetter<number>;
-    otherAmount : number;
-    setOtherAmount : StateSetter<number>;
+    otherAmount: number;
+    setOtherAmount: StateSetter<number>;
     isCashed: boolean;
     setIsCashed: StateSetter<boolean>;
     currentSlide: number;
@@ -59,18 +58,17 @@ const NumberButton = ({ text, currentValue, disabled, setValue, isComma, setIsCo
     );
 };
 
-
 function CheckoutPanel({ orderNumber, amount = 0, payAmount, setPayAmount, otherAmount, setOtherAmount, isCashed, setIsCashed, currentSlide }: CheckoutPanelProps) {
     const [isComma, setIsComma] = useState(false);
-    const [inputValue, setInputValue] = useState(0)
+    const [inputValue, setInputValue] = useState(0);
 
     const padWithZeros = (value: any | number, length: number) => {
         return value.toString().padStart(length, '0');
     };
 
     useEffect(() => {
-        setInputValue(0)
-    },[orderNumber])
+        setInputValue(0);
+    }, [orderNumber]);
 
     return (
         <div className="w-full h-full text-dark dark:text-gray-300">
@@ -98,7 +96,7 @@ function CheckoutPanel({ orderNumber, amount = 0, payAmount, setPayAmount, other
                                 }}
                             />
                             <div className="bg-[#eee] flex justify-center items-center text-nowrap ltr:rounded-r-md rtl:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-white-light dark:border-[#17263c] dark:bg-[#1b2e4b]">
-                                of ${(amount - payAmount - otherAmount) > 0 ? truncateToTwoDecimals(amount - payAmount - otherAmount) : '0.00'}
+                                of ${amount - payAmount - otherAmount > 0 ? truncateToTwoDecimals(amount - payAmount - otherAmount) : '0.00'}
                             </div>
                         </div>
                         {/* number panel */}
@@ -136,8 +134,7 @@ function CheckoutPanel({ orderNumber, amount = 0, payAmount, setPayAmount, other
                             className="flex items-center btn btn-outline-warning btn-lg w-36 mb-2"
                             disabled={isCashed || currentSlide === 3}
                             onClick={() => {
-                                setPayAmount(inputValue)
-
+                                setPayAmount(inputValue);
                             }}
                         >
                             <BsCashCoin className="mr-2" />
@@ -176,24 +173,35 @@ function CheckoutPanel({ orderNumber, amount = 0, payAmount, setPayAmount, other
                             <div>- Total with Taxes</div>
                             <div className="font-bold text-xl">${truncateToTwoDecimals(amount)}</div>
                         </div>
-                            <div className="text-xl dark:text-white-dark text-dark ">- Payment</div>
-                            {payAmount != 0 ? <div className="flex justify-between items-center text-lg text-center dark:text-white-dark text-dark py-1 ml-4">
+                        <div className="text-xl dark:text-white-dark text-dark ">- Payment</div>
+                        {payAmount != 0 ? (
+                            <div className="flex justify-between items-center text-lg text-center dark:text-white-dark text-dark py-1 ml-4">
                                 <div>Cash</div>
                                 <div className="relative flex items-center font-bold text-lg">
-                                    <span className="">${truncateToTwoDecimals(payAmount)}</span><GiCancel className='ml-2 absolute -right-6 cursor-pointer' onClick={() => setPayAmount(0)}/>
+                                    <span className="">${truncateToTwoDecimals(payAmount)}</span>
+                                    <button className="ml-2 absolute left-[105%] flex justify-start items-center cursor-pointer badge badge-outline-secondary" onClick={() => setPayAmount(0)}>
+                                        Cancel <GiCancel className="ml-1 text-sm" />
+                                    </button>
                                 </div>
-                            </div> : null
-                            }
-                            {otherAmount != 0 ? <div className="flex justify-between items-center text-lg text-center dark:text-white-dark text-dark py-1 ml-4">
+                            </div>
+                        ) : null}
+                        {otherAmount != 0 ? (
+                            <div className="flex justify-between items-center text-lg text-center dark:text-white-dark text-dark py-1 ml-4">
                                 <div>Other</div>
                                 <div className="relative flex items-center font-bold text-lg">
-                                    <span className="">${truncateToTwoDecimals(otherAmount)}</span><GiCancel className='ml-2 absolute -right-6 cursor-pointer' onClick={() => setOtherAmount(0)}/>
+                                    <span className="">${truncateToTwoDecimals(otherAmount)}</span>
+                                    <button className="ml-2 absolute left-[105%] flex justify-start items-center cursor-pointer badge badge-outline-secondary" onClick={() => setOtherAmount(0)}>
+                                        Cancel <GiCancel className="ml-1 text-sm" />
+                                    </button>
                                 </div>
-                            </div> : null}
-                            <div className="flex justify-between items-center text-xl text-center dark:text-white-dark text-dark py-1">
-                                <div>- Change Due</div>
-                                <div className={`font-bold text-xl   ${(setFourDecimals(payAmount) + setFourDecimals(otherAmount) - setFourDecimals(amount)) < 0 ? "text-red-500" : "text-[#00ab55]"}`}>${truncateToTwoDecimals(setFourDecimals(payAmount) + setFourDecimals(otherAmount) - setFourDecimals(amount))}</div>
                             </div>
+                        ) : null}
+                        <div className="flex justify-between items-center text-xl text-center dark:text-white-dark text-dark py-1">
+                            <div>- Change Due</div>
+                            <div className={`font-bold text-xl   ${setFourDecimals(payAmount) + setFourDecimals(otherAmount) - setFourDecimals(amount) < 0 ? 'text-red-500' : 'text-[#00ab55]'}`}>
+                                ${truncateToTwoDecimals(setFourDecimals(payAmount) + setFourDecimals(otherAmount) - setFourDecimals(amount))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
