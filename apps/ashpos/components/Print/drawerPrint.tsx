@@ -92,10 +92,16 @@ function DrawerPrint({ drawerId, text, className, printButtonRef }: { drawerId: 
                     }}><p>Started At:</p><p>{convertPSTTimestampToTimezone(Number(drawerReportData?.startedAt), storeTimeZone)}</p></div>
                     <div className='flex justify-between items-center w-full' style={{
                         fontSize: `${drawerPrintSettingData?.fontSize}px`
+                    }}><p>Start Note:</p><p>{drawerReportData?.startNote}</p></div>
+                    <div className='flex justify-between items-center w-full' style={{
+                        fontSize: `${drawerPrintSettingData?.fontSize}px`
                     }}><p>Ended By:</p><p>{drawerReportData?.startedBy}</p></div>
                     <div className='flex justify-between items-center w-full' style={{
                         fontSize: `${drawerPrintSettingData?.fontSize}px`
                     }}><p>Ended At:</p><p>{convertPSTTimestampToTimezone(Number(drawerReportData?.endedAt), storeTimeZone)}</p></div>
+                    <div className='flex justify-between items-center w-full' style={{
+                        fontSize: `${drawerPrintSettingData?.fontSize}px`
+                    }}><p>End Note:</p><p>{drawerReportData?.endNote}</p></div>
                 </div>
                 <Divider className='my-3'/>
                 <div className="flex flex-col justify-between items-start mb-3 w-full">
