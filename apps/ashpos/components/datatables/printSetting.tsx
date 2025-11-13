@@ -1269,8 +1269,10 @@ export default function PrintSetting() {
                                         <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>Register Name:</p><p>Register 1</p></div>
                                         <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>Started By:</p><p>Budin</p></div>
                                         <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>Started At:</p><p>05/16/2025 - 10:05 AM</p></div>
+                                        <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>Start Note:</p><p>This is start note</p></div>
                                         <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>Ended By:</p><p>Budin</p></div>
                                         <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>Ended At:</p><p>05/19/2025 - 03:57 AM</p></div>
+                                        <div className='flex justify-between items-center text-[10px] w-full' style={{fontSize: `${drawerFontSize}pt`}}><p>End note:</p><p>This is end note</p></div>
                                     </div>
                                     <Divider className='my-3'/>
                                     <div className="flex flex-col justify-between items-start text-[10px] mb-3 w-full">
