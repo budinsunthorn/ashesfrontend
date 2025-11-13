@@ -1,0 +1,9 @@
+mutation createOrganization($input: OrganizationCreateInput!) {
+  createOrganization(input: $input) {
+    name
+    phone
+    id
+    createdAt
+    updatedAt
+  }
+}

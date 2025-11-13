@@ -1,0 +1,14 @@
+mutation adjustPackage($input: AdjustPackageInput!) {
+  adjustPackage(input: $input) {
+    id
+    dispensaryId
+    packageLabel
+    newQty
+    deltaQty
+    reason
+    notes    
+    syncMetrc
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,28 @@
+query AllPendingAdjustedPackagesByDispensaryId($dispensaryId: String!) {
+  allPendingAdjustedPackagesByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    newQty
+    deltaQty
+    notes
+    packageLabel
+    reason
+    syncMetrc
+    package {
+      id
+      Quantity
+      itemUnitOfMeasureName
+      assignPackage {
+        posQty
+        product {
+          name
+          supplier {
+            name
+          }
+        }
+      }
+    }
+    createdAt
+    updatedAt
+    
+  }
+}

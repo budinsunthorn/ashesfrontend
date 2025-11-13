@@ -1,0 +1,18 @@
+query AllOrdersInfoIncludingAllTypesByDrawerId( $drawerId: String!) {
+  allOrdersInfoIncludingAllTypesByDrawerId(drawerId: $drawerId) {
+      id           
+      dispensaryId 
+      user {
+        name
+      }
+      description  
+      orderType
+      cashAmount 
+      otherAmount
+      changeDue
+      status       
+      orderDate      
+      createdAt    
+      updatedAt    
+  }
+}

@@ -1,0 +1,3 @@
+mutation syncOrder($input: OrderSyncInput!) {
+  syncOrder(input: $input) 
+}

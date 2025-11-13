@@ -1,0 +1,31 @@
+query TransferById( $id: String!) {
+  transferById(id: $id) {
+    id   
+    dispensaryId
+    userId
+    user{
+      name
+      userType
+    }
+    supplier{
+      name
+      phone
+      email
+      businessLicense
+    }
+    transferType
+    isMJ
+    status
+    transferId
+    deliveryId
+    PackageCount
+    ReceivedPackageCount
+    CreatedDateTime
+    ReceivedDateTime
+    ShipperFacilityLicenseNumber
+    ShipperFacilityName
+    assignedPackageCount
+    createdAt
+    updatedAt
+  }
+}

@@ -1,0 +1,13 @@
+mutation reconcilePackageWithMetrcByAdjustId($input: ReconcilePackageWithMetrcByAdjustIdInput!) {
+  reconcilePackageWithMetrcByAdjustId(input: $input) {
+    id
+    dispensaryId
+    newQty
+    deltaQty
+    notes
+    needMetrcSync
+    syncMetrc
+    reason
+    packageLabel  
+  }
+}

@@ -1,0 +1,39 @@
+query Product($id: String!) {
+    product(id: $id) {
+    id
+    dispensaryId
+    dispensary{
+        name
+    }
+    userId
+    user{
+        name
+        email
+        phone
+    }
+    supplierId
+    supplier{
+        name
+        email
+        phone
+    }   
+    itemCategoryId
+    itemCategory{
+        name
+        color
+    }
+    name
+    sku
+    upc
+    price
+    productUnitOfMeasure
+    unitOfUnitWeight
+    unitOfNetWeight
+    unitWeight
+    isApplyUnitWeight
+    netWeight
+    isConnectedWithPackage
+    createdAt  
+    updatedAt
+    }
+}

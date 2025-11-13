@@ -1,0 +1,6 @@
+mutation createLoyalty($input: LoyaltyCreateInput!) {
+  createLoyalty(input: $input) {
+    id
+    name
+  }
+}

@@ -1,0 +1,7 @@
+mutation updateSmsByDispensaryId($input: SmsUpdateInput!) {
+  updateSmsByDispensaryId(input: $input) {
+    id
+    smsOrderStart
+    smsOrderEnd
+  }
+}

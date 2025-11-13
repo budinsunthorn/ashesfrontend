@@ -1,0 +1,5 @@
+query AllStoreLinkNames {
+  allStoreLinkNames {
+    storeLinkName
+  }
+}

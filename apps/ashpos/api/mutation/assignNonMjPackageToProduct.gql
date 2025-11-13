@@ -1,0 +1,15 @@
+mutation assignNonMjPackageToProduct($input: AssignNonMjPackageToProductInput!) {
+  assignNonMjPackageToProduct(input: $input) {
+    id
+    dispensaryId
+    userId
+    productId
+    transferId
+    packageLabel
+    originalQty
+    posQty
+    cost
+    createdAt
+    updatedAt
+  }
+}

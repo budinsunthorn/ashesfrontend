@@ -1,0 +1,5 @@
+mutation deleteItemCategory($id: String!) {
+  deleteItemCategory(id: $id) {
+    name
+  }
+}

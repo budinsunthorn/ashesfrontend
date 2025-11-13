@@ -1,0 +1,55 @@
+query AllPackagesByDispensaryIdWithPages($dispensaryId: String!, $packageStatus: String!, $assignedStatus: String!, $pageNumber: Int!, $onePageRecords: Int!, $searchField: String!, $searchParam: String!, $sortField: String, $sortDirection: String) {
+  allPackagesByDispensaryIdWithPages(dispensaryId: $dispensaryId, packageStatus: $packageStatus, assignedStatus: $assignedStatus, pageNumber: $pageNumber, onePageRecords: $onePageRecords, searchField: $searchField, searchParam: $searchParam, sortField: $sortField, sortDirection: $sortDirection) {
+    packages{
+    packageStatus
+    productId
+    product {
+      name
+      itemCategory {
+        name
+        color
+      }
+    }
+    assignPackage {
+      cost
+      product {
+          name
+      }
+      posQty
+    }
+    originalQty
+    cost
+    FinishedDate
+    IsFinished
+    IsOnHold
+    ItemFromFacilityLicenseNumber
+    ItemFromFacilityName
+    packageLabel
+    LastModified
+    Note
+    PackageType
+    PackagedDate
+    PatientLicenseNumber
+    Quantity
+    ReceivedDateTime
+    ReceivedFromFacilityLicenseNumber
+    ReceivedFromFacilityName
+    ReceivedFromManifestNumber
+    UnitOfMeasureAbbreviation
+    UnitOfMeasureName
+    createdAt
+    dispensaryId
+    id
+    itemId
+    itemName
+    itemUnitOfMeasureName
+    itemUnitQuantity
+    itemUnitQuantityUnitOfMeasureName
+    itemUnitWeight
+    itemUnitWeightUnitOfMeasureName
+    packageId
+    updatedAt
+    },
+    totalCount
+  }
+}

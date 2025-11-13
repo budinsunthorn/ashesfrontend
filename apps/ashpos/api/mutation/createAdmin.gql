@@ -1,0 +1,6 @@
+mutation createAdmin($input: AdminCreateInput!) {
+  createAdmin(input: $input) {
+    id
+    name
+  }
+}

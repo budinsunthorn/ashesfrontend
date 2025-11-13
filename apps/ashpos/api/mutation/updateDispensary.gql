@@ -1,0 +1,17 @@
+mutation updateDispensary($input: DispensaryUpdateInput!) {
+  updateDispensary(input: $input) {
+    id
+    name
+    dispensaryType
+    organizationId
+    cannabisLicense
+    cannabisLicenseExpireDate
+    businessLicense
+    phone
+    email
+    locationAddress
+    locationCity
+    locationState
+    locationZipCode
+  }
+}

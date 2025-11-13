@@ -1,0 +1,5 @@
+mutation deleteCustomerQueue($id: String!) {
+  deleteCustomerQueue(id: $id) {
+    id
+  }
+}

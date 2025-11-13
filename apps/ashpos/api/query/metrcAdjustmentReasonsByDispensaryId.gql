@@ -1,0 +1,9 @@
+query MetrcAdjustmentReasonsByDispensaryId( $dispensaryId: String!) {
+  metrcAdjustmentReasonsByDispensaryId(dispensaryId: $dispensaryId) {
+    Name
+    RequiresImmatureWasteWeight
+    RequiresMatureWasteWeight
+    RequiresNote
+    RequiresWasteWeight
+  }
+}

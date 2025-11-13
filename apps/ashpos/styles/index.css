@@ -1,0 +1,424 @@
+/* Hide the spinner buttons in Chrome, Safari, Edge, and Opera */
+* {
+    @apply !font-roboto
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the spinner buttons in Firefox */
+.no-spinner[type=number] {
+    -moz-appearance: textfield;
+}
+.react-select__input {
+    z-index: 999;
+}
+
+.mantine-lrzwoq {
+    margin-bottom: 10px !important;
+    margin-right: 10px !important;
+}
+
+.input-error {
+    border-color: rgb(233, 154, 154) !important;
+    background-color: rgb(243, 196, 196) !important;
+}
+@keyframes bounceInDown1 {
+    0% {
+        opacity: 0.5;
+        transform: translateY(-200px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-100px);
+      }
+      80% {
+        transform: translateY(-30px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+  }
+  
+  @keyframes bounceInUp1 {
+    0% {
+      opacity: 0.5;
+      transform: translateY(20px);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(15px);
+    }
+    80% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* To use the animations */
+  .bounceInDown1 {
+    animation: bounceInDown1 0.3s forwards;
+  }
+  
+  .bounceInUp1 {
+    animation: bounceInUp1 0.3s forwards;
+  }
+
+/* .fixed-thead {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 10 !important;  
+} */
+
+/* table {
+    table-layout: fixed !important;
+    width: 100% !important; /* Ensure the table takes full width } */
+/* 
+.mantine-1s8spa1, .mantine-11yh8py {
+    width: 300px !important;
+}
+
+.mantine-1d59lv8, .mantine-uvq2da {
+    width: 70px !important;
+} */
+
+tr.active {
+    background-color: rgb(236, 236, 236) !important;
+}
+tr.dark-active {
+    background-color: #1d263b !important;
+}
+.plain-panel {
+    @apply rounded-md !bg-inherit p-5 dark:bg-black;
+}
+.swiper-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+.swiper-slide {
+    flex-shrink: 0;
+    width: calc((100% - 60px) / 2); /* Adjust width based on spaceBetween */
+    box-sizing: border-box;
+  }
+/**
+ * Extracted from: SweetAlert
+ * Modified by: Istiak Tridip
+ */
+
+ /* Optional: Remove the autofill shadow */
+input:-webkit-autofill::first-line {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    /* background-color:#1e1e2f !important; */
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,  
+.dark input:-webkit-autofill:focus,  
+.dark input:-webkit-autofill:active,  
+.dark input:-internal-autofill-selected {  
+    width: 100%;
+    -webkit-box-shadow: 0 0 0 1000px #121e32 inset; /* Dark background */  
+    border-color: #17263c; /* Change border color on autofill */  
+    border-width: 1px;
+    line-height: 1.25rem;
+    border-radius: 0.5rem;
+    outline: 2px solid transparent !important;
+    outline-offset: 2px !important;
+    background-color: #121e32 !important; /* Ensuring background stays dark */  
+    -webkit-text-fill-color: #888ea8 !important; /* Text color */  
+    caret-color: #888ea8 !important; /*Caret color  */
+}  
+
+/* Optional: Change border color on focus */  
+input:-webkit-autofill:focus {  
+    border-color: #4361ee !important;  /* Change border color when focused */  
+}  
+
+  .disabled {
+    position: relative; /* Ensure it has positioning context */
+    z-index: 100; /* Adjust as needed */
+    pointer-events: none;
+    cursor: not-allowed !important;
+    opacity: 0.5; /* Optional: To visually indicate that the element is disabled */
+  }
+  .success-checkmark {
+    width: 80px;
+    height: 115px;
+    margin: 0 auto;
+ }
+ .success-checkmark .check-icon {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        border-radius: 50%;
+        box-sizing: content-box;
+        border: 4px solid #4CAF50;
+ }
+.check-icon::before {
+    top: 3px;
+    left: -2px;
+    width: 30px;
+    transform-origin: 100% 50%;
+    border-radius: 100px 0 0 100px;
+}
+
+.check-icon::after {
+    top: 0;
+    left: 30px;
+    width: 60px;
+    transform-origin: 0 50%;
+    border-radius: 0 100px 100px 0;
+    animation: rotate-circle 4.25s ease-in 0.5s;
+}
+
+.check-icon::before, .check-icon::after {
+    content: '';
+    height: 100px;
+    position: absolute;
+    background: #FFFFFF;
+    transform: rotate(-45deg);
+}
+        
+.check-icon .icon-line {
+            height: 5px;
+            background-color: #4CAF50;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+}
+.check-icon .line-tip {
+    top: 46px;
+    left: 14px;
+    width: 25px;
+    transform: rotate(45deg);
+    animation: icon-line-tip 0.75s 0.7s;
+}
+
+.check-icon .line-long {
+    top: 38px;
+    right: 8px;
+    width: 47px;
+    transform: rotate(-45deg);
+    animation: icon-line-long 0.75s 0.7s;
+}
+        
+        
+.check-icon .icon-circle {
+    top: -4px;
+    left: -4px;
+    z-index: 10;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    box-sizing: content-box;
+    border: 4px solid rgba(76, 175, 80, .5);
+}
+
+.check-icon .icon-fix {
+    top: 8px;
+    width: 5px;
+    left: 26px;
+    z-index: 1;
+    height: 85px;
+    position: absolute;
+    transform: rotate(-45deg);
+    background-color: #FFFFFF;
+}
+
+input:disabled {
+    background-color: #f5f5f5;
+    color : rgb(158, 158, 158)
+}
+
+@keyframes rotate-circle {
+    0% {
+        transform: rotate(-45deg);
+    }
+    5% {
+        transform: rotate(-45deg);
+    }
+    12% {
+        transform: rotate(-405deg);
+    }
+    100% {
+        transform: rotate(-405deg);
+    }
+}
+
+@keyframes icon-line-tip {
+    0% {
+        width: 0;
+        left: 1px;
+        top: 19px;
+    }
+    54% {
+        width: 0;
+        left: 1px;
+        top: 19px;
+    }
+    70% {
+        width: 50px;
+        left: -8px;
+        top: 37px;
+    }
+    84% {
+        width: 17px;
+        left: 21px;
+        top: 48px;
+    }
+    100% {
+        width: 25px;
+        left: 14px;
+        top: 45px;
+    }
+}
+
+@keyframes icon-line-long {
+    0% {
+        width: 0;
+        right: 46px;
+        top: 54px;
+    }
+    65% {
+        width: 0;
+        right: 46px;
+        top: 54px;
+    }
+    84% {
+        width: 55px;
+        right: 0px;
+        top: 35px;
+    }
+    100% {
+        width: 47px;
+        right: 8px;
+        top: 38px;
+    }
+}
+
+
+/* SkeletonLoader.css */
+.skeleton-loader {
+    background-color: #ffffff; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding around the loader */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Space between loaders */
+  }
+  
+  .skeleton-header {
+    margin-bottom: 15px; /* Space below the header */
+  }
+  
+  .skeleton-content {
+    margin-bottom: 15px; /* Space below the content */
+  }
+  
+  .skeleton-footer {
+    display: flex; /* Flexbox for footer alignment */
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Space between avatar and text */
+  }
+
+  .scanner-container {
+    width: 100%;
+    height: 100%;
+    background: white;  
+  }
+
+  .dce-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .switchButton {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  .icon {
+    width: 100%;
+    height: 100%;
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+
+  #overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #overlay polygon {
+    fill: rgba(85,240,40,0.5);
+    stroke: green;
+    stroke-width: 2px;
+  }
+
+/* Add this to your CSS file */  
+.webcam-container {  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  margin: 20px;  
+}  
+
+.webcam {  
+  border: 2px solid #ccc; /* Optional: Add a border for visibility */  
+  background-color: #17263c;
+} 
+
+/* Scrollbar styling for react-select dropdown */
+.react-select__menu-list {
+  scrollbar-width: thin;
+  scrollbar-color: #6f7680 transparent; /* thumb and track for Firefox */
+}
+
+/* For Chrome, Edge, Safari */
+.react-select__menu-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.react-select__menu-list::-webkit-scrollbar-thumb {
+  background-color: #6d7785; /* scrollbar color */
+  border-radius: 4px;
+}
+
+.react-select__menu-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+select.no-appearance {  
+  appearance: none !important;
+}

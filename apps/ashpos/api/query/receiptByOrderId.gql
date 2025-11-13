@@ -1,0 +1,54 @@
+query ReceiptByOrderId( $orderId: Int!) {
+  receiptByOrderId(orderId: $orderId) {
+    order {
+      dispensary {
+        locationCity
+        locationState
+        locationZipCode
+        locationAddress
+        phone
+        cannabisLicense
+      }
+      customer {
+        name
+        medicalLicense
+        loyaltyPoints
+      }
+      OrderItem {
+        package {
+          itemName
+          packageLabel
+        }
+        product {
+          name
+        }
+        quantity
+        price
+        amount
+        discountedAmount
+        loyaltyAmount
+        TaxHistory {
+          taxName
+          taxAmount
+          taxPercent
+          compoundPercent
+        }
+      }
+      cashAmount
+      changeDue
+      discount
+      otherAmount
+      tax
+      loyalty
+      updatedAt
+      id
+      LoyaltyHistory {
+        loyaltyName
+        loyaltyType
+        txType
+        value
+      }
+    }
+    tax
+  }
+}

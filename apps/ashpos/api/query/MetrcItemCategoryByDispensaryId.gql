@@ -1,0 +1,39 @@
+query MetrcItemCategoryByDispensaryId( $dispensaryId: String!) {
+  metrcItemCategoryByDispensaryId(dispensaryId: $dispensaryId) {
+    id                               
+    dispensaryId                     
+    Name                             
+    ProductCategoryType              
+    QuantityType                     
+    RequiresStrain                   
+    RequiresItemBrand                
+    RequiresAdministrationMethod     
+    RequiresUnitCbdPercent           
+    RequiresUnitCbdContent           
+    RequiresUnitCbdContentDose       
+    RequiresUnitThcPercent           
+    RequiresUnitThcContent           
+    RequiresUnitThcContentDose       
+    RequiresUnitVolume               
+    RequiresUnitWeight               
+    RequiresServingSize              
+    RequiresSupplyDurationDays       
+    RequiresNumberOfDoses            
+    RequiresPublicIngredients        
+    RequiresDescription              
+    RequiresAllergens                
+    RequiresProductPhotos            
+    RequiresProductPhotoDescription  
+    RequiresLabelPhotos              
+    RequiresLabelPhotoDescription    
+    RequiresPackagingPhotos          
+    RequiresPackagingPhotoDescription
+    CanContainSeeds                  
+    CanBeRemediated                  
+    CanBeDestroyed                   
+    RequiresProductPDFDocuments      
+    LabTestBatchNames                
+    createdAt                        
+    updatedAt                          
+  }
+}

@@ -1,0 +1,9 @@
+query InsightSummaryReportByDayOfWeek($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    insightSummaryReportByDayOfWeek(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        dayOfWeek
+        netSales
+        aov
+        orderCount
+        marginPercent
+    }
+}

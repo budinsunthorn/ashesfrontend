@@ -1,0 +1,48 @@
+query AllProductsByDispensaryIdWithPages($dispensaryId: String!, $pageNumber: Int!, $onePageRecords: Int!, $searchField: String!, $searchParam: String!, $sortField: String, $sortDirection: String, $categoryType: String!, $howStock: String!) {
+  allProductsByDispensaryIdWithPages(dispensaryId: $dispensaryId, pageNumber: $pageNumber, onePageRecords: $onePageRecords, searchField: $searchField, searchParam: $searchParam, sortField: $sortField, sortDirection: $sortDirection, categoryType: $categoryType, howStock: $howStock) {
+    products {
+      id
+      dispensaryId
+      dispensary{
+          name
+      }
+      userId
+      user{
+          name
+          email
+          phone
+      }
+      supplierId
+      supplier{
+          name
+          email
+          phone
+      }   
+      itemCategoryId
+      itemCategory{
+          name
+          color
+      }
+      AssignPackage{
+        posQty
+        originalQty
+        cost
+      }
+      name
+      sku
+      upc
+      price
+      productUnitOfMeasure
+      unitOfUnitWeight
+      unitOfNetWeight
+      unitWeight
+      isApplyUnitWeight
+      netWeight
+      isConnectedWithPackage
+      posQtySum
+      createdAt  
+      updatedAt
+    },
+    totalCount
+  }
+}

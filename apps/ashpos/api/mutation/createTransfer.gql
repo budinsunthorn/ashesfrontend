@@ -1,0 +1,11 @@
+mutation createTransfer($input: TransferCreateInput!) {
+  createTransfer(input: $input) {
+    id
+    dispensaryId
+    userId
+    transferType
+    isMJ
+    status
+    supplierId
+  }
+}

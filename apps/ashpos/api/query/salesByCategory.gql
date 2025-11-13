@@ -1,0 +1,12 @@
+query SalesByCategory($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    salesByCategory(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+    categoryName
+    categoryColor
+    totalAmount
+    totalDiscountedAmount
+    totalLoyaltyAmount
+    totalCostAmount
+    netSales
+    grossMargin
+    }
+}

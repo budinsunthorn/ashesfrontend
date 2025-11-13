@@ -1,0 +1,5 @@
+mutation updateCustomer($input: CustomerUpdateInput!) {
+  updateCustomer(input: $input) {
+    name
+  }
+}

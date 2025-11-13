@@ -1,0 +1,11 @@
+query MoneyDropHistoryByDrawerId( $drawerId: String!) {
+  moneyDropHistoryByDrawerId(drawerId: $drawerId) {
+    id   
+    drawerId
+    dropType
+    amount
+    reason
+    createdAt
+    updatedAt
+  }
+}

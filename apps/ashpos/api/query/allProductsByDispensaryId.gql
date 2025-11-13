@@ -1,0 +1,39 @@
+query AllProductsByDispensaryId( $dispensaryId: String!) {
+  allProductsByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    dispensaryId
+    dispensary{
+        name
+    }
+    userId
+    user{
+        name
+        email
+        phone
+    }
+    supplierId
+    supplier{
+        name
+        email
+        phone
+    }   
+    itemCategoryId
+    itemCategory{
+        name
+        color
+    }
+    name
+    sku
+    upc
+    price
+    productUnitOfMeasure
+    unitOfUnitWeight
+    unitOfNetWeight
+    isApplyUnitWeight
+    unitWeight
+    netWeight
+    isConnectedWithPackage
+    createdAt  
+    updatedAt
+  }
+}

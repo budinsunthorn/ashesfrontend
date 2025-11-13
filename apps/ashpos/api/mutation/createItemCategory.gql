@@ -1,0 +1,11 @@
+mutation createItemCategory($input: ItemCategoryCreateInput!) {
+  createItemCategory(input: $input) {
+    id
+    dispensaryId
+    metrcCategory
+    name
+    color
+    containMj
+    purchaseLimitType
+  }
+}

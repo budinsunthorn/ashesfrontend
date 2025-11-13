@@ -1,0 +1,11 @@
+query DrawerInfoByDrawerId( $drawerId: String!) {
+  drawerInfoByDrawerId(drawerId: $drawerId) {
+    cashSales
+    expectedCash
+    incomingDrops
+    otherSales
+    changeDue
+    outgoingDrops
+    startingBalance
+  }
+}

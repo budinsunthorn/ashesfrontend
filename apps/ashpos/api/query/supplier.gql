@@ -1,0 +1,19 @@
+query Supplier($id: String!) {
+    supplier(id: $id) {
+        id             
+        name           
+        businessLicense
+        UBI            
+        phone          
+        email          
+        locationAddress
+        locationCity   
+        locationState  
+        locationZipCode
+        organizationId
+        supplierType   
+        isActive       
+        createdAt      
+        updatedAt      
+    }
+}

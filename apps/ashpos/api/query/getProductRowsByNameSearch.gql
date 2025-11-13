@@ -1,0 +1,20 @@
+query GetProductRowsByNameSearch($searchQuery: String!, $dispensaryId: String!) {
+  getProductRowsByNameSearch(searchQuery: $searchQuery, dispensaryId: $dispensaryId) {
+    id
+    name
+    sku
+    upc
+    price
+    productUnitOfMeasure
+    unitOfUnitWeight
+    unitOfNetWeight
+    unitWeight
+    netWeight
+    itemCategory{
+      name
+      color
+      metrcCategory
+      containMj
+    }
+  }
+}

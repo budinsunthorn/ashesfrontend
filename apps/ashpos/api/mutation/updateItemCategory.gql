@@ -1,0 +1,11 @@
+mutation updateItemCategory($input: ItemCategoryUpdateInput!) {
+  updateItemCategory(input: $input) {
+    id
+    dispensaryId
+    metrcCategory
+    name
+    color
+    containMj
+    purchaseLimitType
+  }
+}

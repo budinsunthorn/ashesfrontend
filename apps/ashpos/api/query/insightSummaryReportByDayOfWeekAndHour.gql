@@ -1,0 +1,8 @@
+query InsightSummaryReportByDayOfWeekAndHour($dispensaryId: String!, $dateFrom: String!, $dateTo: String!) {
+    insightSummaryReportByDayOfWeekAndHour(dispensaryId: $dispensaryId, dateFrom: $dateFrom, dateTo: $dateTo) {
+        hour
+        hourLabel
+        dayName
+        orderCount
+    }
+}

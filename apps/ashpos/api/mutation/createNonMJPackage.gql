@@ -1,0 +1,5 @@
+mutation createNonMJPackage($input: NonMJPackageCreateInput!) {
+  createNonMJPackage(input: $input) {
+    id
+  }
+}

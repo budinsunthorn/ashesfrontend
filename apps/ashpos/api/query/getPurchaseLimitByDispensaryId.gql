@@ -1,0 +1,13 @@
+query GetPurchaseLimitByDispensaryId($dispensaryId: String!) {
+  getPurchaseLimitByDispensaryId(dispensaryId: $dispensaryId) {
+    id
+    dispensaryId
+    purchaseLimitMethod
+    purchaseLimitType
+    purchaseLimitAmount
+    limitUnit
+    limitWeight
+    createdAt
+    updatedAt
+  }
+}

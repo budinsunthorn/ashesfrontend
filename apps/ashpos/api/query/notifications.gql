@@ -1,0 +1,6 @@
+query Notifications( $dispensaryId: String!) {
+  notifications(dispensaryId: $dispensaryId) {
+    notifyType
+    count
+  }
+}

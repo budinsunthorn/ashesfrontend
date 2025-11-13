@@ -1,0 +1,38 @@
+query Customer($id: String!) {
+    customer(id: $id) {
+        id
+        name
+        MFType
+        birthday
+        email
+        phone
+        dispensaryId
+        isActive
+        driverLicense
+        driverLicenseExpirationDate
+        isMedical
+        medicalLicense
+        medicalLicenseExpirationDate
+        status
+        isTaxExempt
+        note
+        loyaltyPoints
+        Order{
+            id
+            orderDate
+            cashAmount
+            changeDue
+            otherAmount
+            LoyaltyHistory{
+                orderId
+                txType
+                loyaltyName
+                loyaltyType
+                loyaltyWorth
+                value
+            }
+        }
+        createdAt
+        updatedAt
+    }
+}

@@ -1,0 +1,5 @@
+mutation updateLoyalty($input: LoyaltyUpdateInput!) {
+  updateLoyalty(input: $input) {
+    name
+  }
+}
