@@ -758,7 +758,7 @@ const ProductTable = () => {
                                     //     return null;
                                     // }
                                     
-                                    return <div className="flex justify-end items-center slashed-zero">{posQtySum + " " + productUnitOfMeasure   == 'ea'  && isApplyUnitWeight
+                                    return <div className="flex justify-end items-center slashed-zero">{posQtySum} {" " + productUnitOfMeasure   == 'ea'  && isApplyUnitWeight
 && unitOfUnitWeight != null ? unitOfUnitWeight : productUnitOfMeasure}</div>;
                                 }
                             },
