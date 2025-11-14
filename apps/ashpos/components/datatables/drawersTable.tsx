@@ -704,6 +704,7 @@ const DrawersTable = () => {
                                     <RowItem label='Starting Balance:' value={formatCurrency(drawerReportData?.startingBalance)} />
                                     <RowItem label='Starting Discrepancy:' value={formatCurrency(Number(drawerReportData?.discrepancyReason))} />
                                     <RowItem label='Discrepancy Reason:' value={'_'} />
+                                    <RowItem label='Start Note' value={drawerReportData?.startNote} />
                                     <RowItem label='Returns:' value={formatCurrency(drawerReportData?.returns)} className='mt-5'/>
                                     <RowItem label='Voids:' value={formatCurrency(drawerReportData?.voids)} />
                                     <RowItem label='Incoming Drops:' value={formatCurrency(drawerReportData?.incomingDrops)} />
@@ -714,6 +715,7 @@ const DrawersTable = () => {
                                     <RowItem label='Actual Cash In Drawer:' value={formatCurrency(drawerReportData?.actualCashInDrawer)} className='mt-5' />
                                     <RowItem label='Closing Discrepancy:' value={formatCurrency(Number(drawerReportData?.closingDiscrepancy))} />
                                     <RowItem label='Discrepancy Reason:' value={formatCurrency(Number(drawerReportData?.discrepancyReason))} />
+                                    <RowItem label='End Note' value={drawerReportData?.endNote} />
                                     <RowItem label='Cash Sales:' value={formatCurrency(Number(drawerReportData?.cashPayments))} className='mt-5' />
                                     <RowItem label='Other Sales:' value={formatCurrency(Number(drawerReportData?.otherPayments))} />
                                     <RowItem label='Total Sales:' value={formatCurrency(Number(drawerReportData?.totalPayments))} />

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, forwardRef, useRef, useImperativeHandle } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { quantityAbbreviations, quantityTypes, registerLabel } from '@/utils/variables';
 import { useDrawerReportByDrawerIdQuery, usePrintSettingByDispensaryIdQuery, useReceiptByOrderIdQuery } from '@/src/__generated__/operations';
@@ -10,7 +10,15 @@ import { formatCurrency, truncateToTwoDecimals } from '@/lib/utils';
 import { convertPSTTimestampToTimezone, formatFullDateFns, getCurrentTimeByTimezone } from '@/utils/datetime';
 import { Divider } from '@mantine/core';
 
-function DrawerPrint({ drawerId, text, className, printButtonRef }: { drawerId: string; text: string, className: string, printButtonRef?: React.RefObject<HTMLDivElement> }) {
+interface DrawerPrintProps {
+    drawerId: string;
+    text: string;
+    className?: string;
+    ref?: React.Ref<{ callLocalFunction: () => void }>; // Define the ref type
+}
+
+const DrawerPrint = forwardRef(({ drawerId, text, className }: DrawerPrintProps, ref) => {
+
     const { userData } = userDataSave();
     const dispensaryId = userData.dispensaryId;
     const storeTimeZone = userData.storeTimeZone;
@@ -24,6 +32,20 @@ function DrawerPrint({ drawerId, text, className, printButtonRef }: { drawerId: 
     const printSettingData = printSettingRowData.data?.printSettingByDispensaryId
 
     const drawerPrintSettingData = printSettingData?.find((item) => item?.printType === 'drawer') || null
+
+    // Expose the localFunction to the parent
+    useImperativeHandle(ref, () => ({
+        callLocalFunction: handleTriggerPrint,
+    }));
+
+    const handleTriggerPrint = () => {
+        if (drawerId) {
+            drawerReportByDrawerId.refetch();
+        }
+        setTimeout(() => {
+            handleDrawerReportPrint();
+        }, 1000)
+    }
 
     // console.log('drawerPrintSettingData', drawerPrintSettingData);
 
@@ -56,7 +78,6 @@ function DrawerPrint({ drawerId, text, className, printButtonRef }: { drawerId: 
     return (
         <div>
             <div
-                ref={printButtonRef}
                 className={className}
                 onClick={() => handleDrawerReportPrint()}
             ><FaPrint className="mr-1" />
@@ -157,6 +178,6 @@ function DrawerPrint({ drawerId, text, className, printButtonRef }: { drawerId: 
             </div>
         </div>
     );
-}
+});
 
 export default DrawerPrint;
