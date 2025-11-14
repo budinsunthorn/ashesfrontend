@@ -2111,7 +2111,7 @@ const Cashier = (props: any) => {
                                 <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} />
                             </div>
                             <div className="relative ml-2">
-                                <div className="flex items-center">
+                                <div className="flex">
                                 <input
                                     ref={searchInputRef}
                                     type="text"
@@ -2124,7 +2124,7 @@ const Cashier = (props: any) => {
                                     }}
                                     onFocus={() => setIsShowingIpadProduct(true)}
                                 />
-                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-md dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
                                     <CiBarcode/> 
                                 </button>
                             </div>
@@ -2575,7 +2575,7 @@ const Cashier = (props: any) => {
                                                         <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} />
                                                 </div>
                                                     <div className="relative w-full ml-2">
-                                                    <div className='flex item-center'>
+                                                    <div className='flex'>
                                                     <input
                                                         ref={searchInputRef}
                                                         type="text"

@@ -74,8 +74,10 @@ const StartDrawer = () => {
     const [, setCurrentDrawer] = useAtom(currentDrawerAtom);
     const [orderListUpdate, setOrderListUpdate] = useAtom(orderListUpdated);
 
-    const printButtonRef = useRef<HTMLDivElement>(null);
+    const drawerPrintRef = useRef<{ callLocalFunction: () => void }>(null);
     const moneyDropPrintButtonRef = useRef<HTMLDivElement>(null);
+
+    const [endDrawerPrintFlag, setEndDrawerPrintFlag] = useState(false)
 
     const registerLabel: RegisterLabelType = {
         'register-1': 'Register 1',
@@ -219,6 +221,7 @@ const StartDrawer = () => {
         );
     };
     const handleEndDrawer = async (formData: any) => {
+        setEndDrawerPrintFlag(false)
         await endDrawerMutation.mutate(
             {
                 input: {
@@ -237,22 +240,15 @@ const StartDrawer = () => {
                 },
                 onSuccess(data) {
                     // if (!data) return;
-                    // console.log("data", data)
                     if (data.endDrawer?.register) successAlert(registerLabel[data.endDrawer?.register]  +  ` ended`);
-                    // const refetch = async () => {
-                    //     return await queryClient.refetchQueries(['CurrentDrawerByUserId']);
-                    // };
-                    // refetch();
+                    
+                    if (drawerPrintRef.current) {
+                        drawerPrintRef.current.callLocalFunction();
+                    }
                     currentDrawer.refetch();
-                    printButtonRef.current?.click();
-                    setCurrentRegister({
-                        id: currentDrawer.data?.currentDrawerByUserId?.filter((item) => item?.status == 'PENDING' && item.register != currentRegister?.name)[0]?.id || '',
-                        name: currentDrawer.data?.currentDrawerByUserId?.filter((item) => item?.status == 'PENDING' && item.register != currentRegister?.name)[0]?.register || '',
-                    });
                     // successAlert(currentDispensaryInput.name + ' has been created successfully!');
                 },
                 onSettled() {
-                    // setIsSaveButtonDisabled(false);
                 },
             }
         );
@@ -490,7 +486,7 @@ const StartDrawer = () => {
                     )}
                 </Dropdown>
             </div>
-            <DrawerPrint className='hidden' drawerId={currentRegister?.id || ''} text={''} printButtonRef={printButtonRef} />
+            <DrawerPrint className='hidden' drawerId={currentRegister?.id || ''} text={''} ref={drawerPrintRef} />
             <MoneyDropPrint className='hidden' data={moneyDropData} current_drawer={registerLabel[registerId]} printButtonRef={moneyDropPrintButtonRef}/>
             <Transition appear show={modal1} as={Fragment}>
                 <Dialog as="div" open={modal1} onClose={() => setModal1(true)}>
