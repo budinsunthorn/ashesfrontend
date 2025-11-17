@@ -2110,8 +2110,8 @@ const Cashier = (props: any) => {
                             <div className='flex justify-start items-center w-36'>
                                 <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} />
                             </div>
-                            <div className="relative ml-2">
-                                <div className="flex">
+                            <div className="relative ml-2 w-full">
+                                <div className="flex w-full">
                                 <input
                                     ref={searchInputRef}
                                     type="text"
@@ -2124,7 +2124,7 @@ const Cashier = (props: any) => {
                                     }}
                                     onFocus={() => setIsShowingIpadProduct(true)}
                                 />
-                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-md dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-md bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
                                     <CiBarcode/> 
                                 </button>
                             </div>
@@ -2587,7 +2587,7 @@ const Cashier = (props: any) => {
                                                             handleSearch(e.target.value);
                                                         }}
                                                     />
-                                                    <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                                    <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-sm bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
                                                         <CiBarcode/> 
                                                     </button>
                                                     </div>
