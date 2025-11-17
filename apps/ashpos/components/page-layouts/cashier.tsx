@@ -2124,8 +2124,8 @@ const Cashier = (props: any) => {
                                     }}
                                     onFocus={() => setIsShowingIpadProduct(true)}
                                 />
-                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-md bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
-                                    <CiBarcode/> 
+                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-2 py-1 text-lg bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                    <CiBarcode className='text-2xl'/> 
                                 </button>
                             </div>
                             <button type="button" className="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-primary ltr:right-auto rtl:left-auto">
@@ -2587,8 +2587,8 @@ const Cashier = (props: any) => {
                                                             handleSearch(e.target.value);
                                                         }}
                                                     />
-                                                    <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-3 py-2 text-sm bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
-                                                        <CiBarcode/> 
+                                                    <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-2 py-1 text-lg bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                                        <CiBarcode className="text-2xl"/> 
                                                     </button>
                                                     </div>
                                                     <button type="button" className="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-primary ltr:right-auto rtl:left-auto">
