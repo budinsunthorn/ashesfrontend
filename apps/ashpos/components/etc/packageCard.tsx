@@ -34,6 +34,7 @@ import { GrConnect, GrDocumentTest } from 'react-icons/gr';
 import { FaChevronDown } from 'react-icons/fa6';
 import IconX from '../icon/icon-x';
 import SinglePackageTransfer from './singlePackageTransfer';
+import OrderStatusBadge from './OrderStatusBadge';
 
 export default function PackageCard({ packageLabel, packageData, isLoading, handleActivePackage, handleHoldPackage, handleFinishPakcage, onAdjustPackage, handleFetchTestResult, handleRefetchPackage }: any) {
     const router = useRouter();
@@ -644,7 +645,10 @@ export default function PackageCard({ packageLabel, packageData, isLoading, hand
                             {salesHistory?.map((orderItem: any, index: any) => (
                                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td className="px-6 py-4">{new Date(orderItem.order.orderDate).toLocaleDateString()}</td>
-                                    <td className="px-6 py-4">#{orderItem.orderId}</td>
+                                    <td className="px-6 py-4 flex flex-col justify-center items-start">
+                                        <p>#{orderItem.orderId}</p>
+                                        <OrderStatusBadge status={orderItem?.order?.status} className="!p-[2px]" />
+                                    </td>
                                     <td className="px-6 py-4">{orderItem.quantity}</td>
                                     <td className="px-6 py-4">
                                         ${orderItem.cost} / ${orderItem.price}

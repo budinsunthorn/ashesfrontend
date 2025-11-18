@@ -1,29 +1,31 @@
-query DrawerReportByDrawerId( $drawerId: String!) {
-  drawerReportByDrawerId(drawerId: $drawerId) {
-    storeName
-    registerName 
-    startedBy 
-    startedAt 
-    endedAt 
-    startingBalance 
-    discrepancyReason 
-    cashPayments 
-    returns 
-    voids 
-    incomingDrops 
-    outgoingDrops 
-    closingDrop 
-    leftInDrawer 
-    expectedCash 
-    actualCashInDrawer 
-    closingDiscrepancy 
-    otherPayments 
-    totalPayments 
-    taxTotal
-    taxes {
-      taxName
-      taxAmount
+query DrawerReportByDrawerId($drawerId: String!) {
+    drawerReportByDrawerId(drawerId: $drawerId) {
+        storeName
+        registerName
+        startedBy
+        startedAt
+        startNote
+        endedAt
+        endNote
+        startingBalance
+        discrepancyReason
+        cashPayments
+        returns
+        voids
+        incomingDrops
+        outgoingDrops
+        closingDrop
+        leftInDrawer
+        expectedCash
+        actualCashInDrawer
+        closingDiscrepancy
+        otherPayments
+        totalPayments
+        taxTotal
+        taxes {
+            taxName
+            taxAmount
+        }
+        netSales
     }
-    netSales
-  }
 }

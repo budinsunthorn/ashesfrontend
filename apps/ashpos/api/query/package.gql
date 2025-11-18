@@ -35,6 +35,7 @@ query Package($id: String!) {
         order {
           metrcId
           orderDate
+          status
         }
         quantity
         cost

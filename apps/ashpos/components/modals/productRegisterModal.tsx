@@ -98,8 +98,8 @@ const ProductRegisterModal = (props: any) => {
                     productUnitOfMeasure: currentProduct.productUnitOfMeasure,
                     unitOfNetWeight: currentProduct.unitOfNetWeight ? currentProduct.unitOfNetWeight : null,
                     unitOfUnitWeight: currentProduct.unitOfUnitWeight ? currentProduct.unitOfUnitWeight : null,
-                    unitWeight: +currentProductInput.unitWeight,
-                    netWeight: +currentProductInput.netWeight,
+                    unitWeight: currentProduct.unitWeight,
+                    netWeight: currentProduct.netWeight,
                     isApplyUnitWeight: currentProduct.isApplyUnitWeight
                 },
             },

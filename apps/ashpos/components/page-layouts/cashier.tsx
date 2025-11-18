@@ -150,6 +150,7 @@ import { getCurrentTimeByTimezone } from '@/utils/datetime';
 import { LiaCannabisSolid } from 'react-icons/lia';
 import CategorySelect from '../etc/CategorySelect';
 import Cookies from 'universal-cookie';
+import { CiBarcode } from 'react-icons/ci';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 interface SwiperRef extends SwiperCore {}
@@ -1011,7 +1012,7 @@ const Cashier = (props: any) => {
                         },
                         async onSuccess(data) {
                             if (!data) return;
-                            successAlert('Discount Canceled Successfully!');
+                            successAlert('Discount Cancelled Successfully!');
                             await updateTaxHistoryForOrderMutation.mutate(
                                 {
                                     orderId: orderNumber,
@@ -1055,7 +1056,7 @@ const Cashier = (props: any) => {
                         },
                         async onSuccess(data) {
                             if (!data) return;
-                            successAlert('Loyalty Canceled Successfully!');
+                            successAlert('Loyalty Cancelled Successfully!');
                             await updateTaxHistoryForOrderMutation.mutate(
                                 {
                                     orderId: orderNumber,
@@ -2106,20 +2107,27 @@ const Cashier = (props: any) => {
                                 disabled={false}
                                 showingSearch={false}
                             /> */}
+                            <div className='flex justify-start items-center w-36'>
                                 <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} />
-                            <div className="relative ml-2">
-                            <input
-                                ref={searchInputRef}
-                                type="text"
-                                className="peer form-input w-full bg-gray-100 placeholder:tracking-widest ltr:pl-9 ltr:pr-9 rtl:pl-9 rtl:pr-9 sm:bg-transparent ltr:sm:pr-4 rtl:sm:pl-4"
-                                placeholder="Search Product & Package..."
-                                value={search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                    handleSearch(e.target.value);
-                                }}
-                                onFocus={() => setIsShowingIpadProduct(true)}
-                            />
+                            </div>
+                            <div className="relative ml-2 w-full">
+                                <div className="flex w-full">
+                                <input
+                                    ref={searchInputRef}
+                                    type="text"
+                                    className="peer form-input w-full bg-gray-100 placeholder:tracking-widest ltr:pl-9 ltr:pr-9 rtl:pl-9 rtl:pr-9 sm:bg-transparent ltr:sm:pr-4 rtl:sm:pl-4 rounded-r-none"
+                                    placeholder="Search Product & Package..."
+                                    value={search}
+                                    onChange={(e) => {
+                                        setSearch(e.target.value);
+                                        handleSearch(e.target.value);
+                                    }}
+                                    onFocus={() => setIsShowingIpadProduct(true)}
+                                />
+                                <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-2 py-1 text-lg bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                    <CiBarcode className='text-2xl'/> 
+                                </button>
+                            </div>
                             <button type="button" className="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-primary ltr:right-auto rtl:left-auto">
                                 <IconSearch className="mx-auto" />
                             </button>
@@ -2553,7 +2561,7 @@ const Cashier = (props: any) => {
                                         <div className="w-full justify-between mb-3 flex  items-start border-b border-white-light pb-2 dark:border-[#1b2e4b]">
                                                 {isIpadMode ? null : (
                                             <div className="w-full flex justify-start items-center relative">
-                                                        <div className="flex justify-start items-center w-56">
+                                                <div className="flex justify-start items-center w-36">
                                                     {/* <CustomSelect
                                                         options={customOptions}
                                                         onChange={handleUpdateCategory}
@@ -2564,13 +2572,14 @@ const Cashier = (props: any) => {
                                                         showingSearch={false}
                                                     /> */}
 
-                                                            <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} />
+                                                        <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} />
                                                 </div>
-                                                        <div className="relative w-full ml-2">
+                                                    <div className="relative w-full ml-2">
+                                                    <div className='flex'>
                                                     <input
                                                         ref={searchInputRef}
                                                         type="text"
-                                                        className="peer w-1/2 form-input  bg-gray-100 placeholder:tracking-widest ltr:pl-9 ltr:pr-9 rtl:pl-9 rtl:pr-9 sm:bg-transparent ltr:sm:pr-4 rtl:sm:pl-4"
+                                                        className="peer w-[80%] form-input  bg-gray-100 placeholder:tracking-widest ltr:pl-9 ltr:pr-9 rtl:pl-9 rtl:pr-9 sm:bg-transparent ltr:sm:pr-4 rtl:sm:pl-4 !rounded-r-none"
                                                         placeholder="Search Product & Package..."
                                                         value={search}
                                                         onChange={(e) => {
@@ -2578,6 +2587,10 @@ const Cashier = (props: any) => {
                                                             handleSearch(e.target.value);
                                                         }}
                                                     />
+                                                    <button className='rounded-l-none border-white-light dark:border-[#253b5c] rounded-md px-2 py-1 text-lg bg-white-light dark:bg-[#1b2e4b] dark:text-white-dark' onClick={() => {searchInputRef.current?.focus()}}>
+                                                        <CiBarcode className="text-2xl"/> 
+                                                    </button>
+                                                    </div>
                                                     <button type="button" className="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-primary ltr:right-auto rtl:left-auto">
                                                         <IconSearch className="mx-auto" />
                                                     </button>
