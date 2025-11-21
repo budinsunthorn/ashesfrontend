@@ -195,7 +195,7 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
             
             // Use the existing printSilently function if available
             if (window.electronAPI.printSilently) {
-                console.log("printSilently");
+                console.log("Printing by Eelectron API")
                 window.electronAPI.printSilently({
                     content: htmlContent,
                     fontSize: exitLabelPrintSettingData?.fontSize ? `${exitLabelPrintSettingData.fontSize}px` : '14px',
