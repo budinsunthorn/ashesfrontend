@@ -509,8 +509,8 @@ const DispensaryRegisterModal = (props: any) => {
                                                             </button>
                                                             <button
                                                                 onClick={() => {
-                                                                    console.log("save button", currentDispensary.cannabisLicenseExpireDate, props.modalMode)
-                                                                    console.log("errors", errors)
+                                                                    // console.log("save button", currentDispensary.cannabisLicenseExpireDate, props.modalMode)
+                                                                    // console.log("errors", errors)
                                                                     if (props.modalMode === "new" ? ( Object.keys(touched).length !== 0 && Object.keys(errors).length === 0 && currentDispensary.cannabisLicenseExpireDate) : (Object.keys(errors).length === 0)) {
                                                                         submitForm(values);
                                                                     } else {

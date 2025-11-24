@@ -27,7 +27,7 @@ export default function OrderCard({ orderData, isLoading }: any) {
         return differenceInDays;
     }
 
-    console.log("orderData----------->", orderData)
+    // console.log("orderData----------->", orderData)
 
     const registerLabel: RegisterLabelType = {
         'register-1': 'Register 1',

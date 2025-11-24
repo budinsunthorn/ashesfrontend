@@ -110,8 +110,8 @@ export default function CustomerProfile({ customerData }: any) {
 
     const loyaltyTotals = calculateTotalLoyaltyStats();
 
-    console.log('orderHistory', orderHistory);
-    console.log('customerData', customerData);
+    // console.log('orderHistory', orderHistory);
+    // console.log('customerData', customerData);
 
     const renderPagination = (currentPage: number, totalItems: number, itemsPerPage: number = 5) => {
         const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;

@@ -53,7 +53,7 @@ function MoneyDropPrint({ data, current_drawer, text, className, printButtonRef 
             }
         `,
         onAfterPrint: () => {
-            console.log('Print completed');
+            // console.log('Print completed');
         }
     });
 

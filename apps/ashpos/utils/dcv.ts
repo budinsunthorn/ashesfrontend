@@ -13,7 +13,7 @@ let initiazlied = false;
 
 export async function init(){
   if (initiazlied === false) {
-    console.log("Initializing...");
+    // console.log("Initializing...");
     await LicenseManager.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
     CoreModule.engineResourcePaths.rootDirectory = "https://cdn.jsdelivr.net/npm/";
     await CoreModule.loadWasm(["DDN","DLR","DBR","DCP"]).catch((ex: any) => {

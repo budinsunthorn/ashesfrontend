@@ -138,16 +138,16 @@ const IdScan = () => {
                 },
             ],
             onChange(data: any) {
-                console.log('on change', data);
+                // console.log('on change', data);
             },
             onCameraError(data: any) {
-                console.log('camera error', data);
+                // console.log('camera error', data);
             },
             onReset(data: any) {
-                console.log('on reset', data);
+                // console.log('on reset', data);
             },
             onRetakeHook(data: any) {
-                console.log('retake hook', data);
+                // console.log('retake hook', data);
             },
             //   clickGuidlines() {
             //     console.log("click Guidelines");
@@ -225,11 +225,11 @@ const IdScan = () => {
                     .then((response) => response.json())
                     .then((data) => {
                         idvc.showSpinner(false);
-                        console.log(data);
+                        // console.log(data);
                     })
                     .catch((err) => {
                         idvc.showSpinner(false);
-                        console.log(err);
+                        // console.log(err);
                     });
             },
         });

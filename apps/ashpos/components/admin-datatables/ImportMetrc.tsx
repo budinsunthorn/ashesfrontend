@@ -67,7 +67,7 @@ const ImportMetrc = () => {
     const dispensaryId = userData.dispensaryId;
     const userId = userData.userId;
 
-    console.log("userData", userData);
+    // console.log("userData", userData);
 
     const [currentOrganizationId, setCurrentOrganizationId] = useState<string>('');
     const [currentDispensaryId, setCurrentDispensaryId] = useState<string>('');

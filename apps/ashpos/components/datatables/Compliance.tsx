@@ -30,7 +30,7 @@ export default function Compliance() {
     // Query
     const purchaseLimitRowData = useGetPurchaseLimitByDispensaryIdQuery({dispensaryId : dispensaryId});
     const purchaseLimitData = purchaseLimitRowData.data?.getPurchaseLimitByDispensaryId;
-    console.log("purchaseLimitData", purchaseLimitData);
+    // console.log("purchaseLimitData", purchaseLimitData);
 
 
     // Mutation

@@ -8,11 +8,11 @@ import Decimal from 'decimal.js';
 
 export default function OrderItems({ orderItemData, taxSum }: any) {
     const [loyaltyPoints, setLoyaltyPoints] = useState(0);
-    console.log('orderItemData', orderItemData);
+    // console.log('orderItemData', orderItemData);
 
     const orderAmountInfo = useOrderAmountInfoQuery({id: orderItemData?.id})
     const orderAmountInfoData = orderAmountInfo?.data?.orderAmountInfo
-    console.log('orderAmountInfoData', orderAmountInfoData)
+    // console.log('orderAmountInfoData', orderAmountInfoData)
     // const cashAmount = setFourDecimals(orderItemData?.cashAmount || 0)
     // const otherAmount = setFourDecimals(orderItemData?.otherAmount || 0)
     // const changeDue = setFourDecimals(orderItemData?.changeDue || 0)

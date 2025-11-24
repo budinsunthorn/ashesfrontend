@@ -209,7 +209,7 @@ const ProductTable = () => {
     }, [syncStatus])
     // get the last segment of the URL path
     useEffect(() => {
-        console.log("Last segment of URL path:", lastSegment);
+        // console.log("Last segment of URL path:", lastSegment);
         // Do something with lastSegment
     }, [lastSegment]);
 

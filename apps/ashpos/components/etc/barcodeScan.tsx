@@ -12,7 +12,7 @@ const BarcodeScanner1 = ({setShowIDScan} : BarcodeScannerProps) => {
     const [decodedInfo, setDecodedInfo] = useState<string | null>(null);
 
     const capture = useCallback(async () => {
-        console.log('Capturing image...', webcamRef.current);
+        // console.log('Capturing image...', webcamRef.current);
         if (webcamRef.current) {
             const imageSrc = webcamRef.current.getScreenshot();
             if (imageSrc) {
@@ -30,17 +30,17 @@ const BarcodeScanner1 = ({setShowIDScan} : BarcodeScannerProps) => {
                 // }
             }
         } else {
-            console.log('There is no camera');
+            // console.log('There is no camera');
             setShowIDScan(false)
         }
     }, [webcamRef]);
 
     const handleUserMedia = (stream : any) => {  
-        console.log('Camera is ready', stream);  
+        // console.log('Camera is ready', stream);  
       };  
 
     const handleUserMediaError = (error: any) => {
-        console.error('Camera error:', error);
+        // console.error('Camera error:', error);
     };
 
     return (

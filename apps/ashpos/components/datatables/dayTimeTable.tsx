@@ -78,7 +78,7 @@ const DayTimeTable = () => {
         dateTo: dateParam.dateTo,
     });
     const reportByDayOfWeekAndHourData = reportByDayOfWeekAndHourRowData.data?.insightSummaryReportByDayOfWeekAndHour;
-    console.log("reportByDayOfWeekAndHourData", reportByDayOfWeekAndHourData);
+    // console.log("reportByDayOfWeekAndHourData", reportByDayOfWeekAndHourData);
 
     useEffect(() => {
         if (reportByDayOfWeekAndHourData) {
@@ -145,12 +145,12 @@ const DayTimeTable = () => {
             // Add the SUM row
             // sortedTableData.push({ hour: 'SUM', ...totalDailySums });
 
-            console.log("transformed table data", filteredTableData);
+            // console.log("transformed table data", filteredTableData);
             setDayAndTimeTableData(filteredTableData);
         }
     }, [reportByDayOfWeekAndHourData]);
 
-    console.log("reportByHourData", reportByHourData);
+    // console.log("reportByHourData", reportByHourData);
 
     useEffect(() => {
         if (statusForFilter == 'yesterday') {

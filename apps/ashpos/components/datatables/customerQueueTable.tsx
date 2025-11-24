@@ -166,7 +166,7 @@ const CustomerQueueTable = () => {
         let totalWaitingTime = 0;
 
         // Calculate total waiting time in milliseconds
-        console.log("calculateAverageWaitingTime");
+        // console.log("calculateAverageWaitingTime");
         if(customerQueueData != undefined && customerQueueData?.length > 0) {
 
             customerQueueData?.forEach((customer : any) => {
@@ -243,7 +243,7 @@ const CustomerQueueTable = () => {
     // },[createCustomerManuallyBtn.current])
 
     useEffect(() => {
-        console.log("customerQueueData", customerQueueData);
+        // console.log("customerQueueData", customerQueueData);
         calculateAverageWaitingTime();
         // calculateCheckedInTime();
         const myInterval = setInterval(calculateAverageWaitingTime, 60000);

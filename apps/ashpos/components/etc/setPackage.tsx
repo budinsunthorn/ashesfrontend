@@ -26,7 +26,7 @@ function SetPackage({ deliverId, transferId, mtrTransferId, status, isMj }: any)
     const [packageData, setPackageData] = useState<any>(packageDataByDelivery);
     const createNonMjPackageMutation = useCreateNonMjPackageMutation();
 
-    console.log("packageData", packageData);
+    // console.log("packageData", packageData);
     const refetchOrders = async () => {
         return await queryClient.refetchQueries(['PackagesByDeliveryId']);
     };

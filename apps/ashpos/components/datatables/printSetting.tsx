@@ -122,13 +122,13 @@ export default function PrintSetting() {
     const drawerPrintSettingData = useMemo(() => printSettingData?.find((item) => item?.printType === 'drawer') || null, [printSettingData]);
     const moneyDropPrintSettingData = useMemo(() => printSettingData?.find((item) => item?.printType === 'moneyDrop') || null, [printSettingData]);
 
-    console.log('exitLabelPrintSettingData', exitLabelPrintSettingData);
+    // console.log('exitLabelPrintSettingData', exitLabelPrintSettingData);
     // console.log("deliveryReceiptPrintSettingData", deliveryReceiptPrintSettingData)
     // Mutation
     const createPrintSettingMutation = useCreatePrintSettingMutation();
 
     useEffect(() => {
-        console.log('useEffect --> exitLabelPrintSettingData', exitLabelPrintSettingData);
+        // console.log('useEffect --> exitLabelPrintSettingData', exitLabelPrintSettingData);
         if (exitLabelPrintSettingData) {
             // Set toggle states
             setDisableExitLabels(exitLabelPrintSettingData?.isEnabled || true);
@@ -187,7 +187,7 @@ export default function PrintSetting() {
     }, [receiptPrintSettingData]);
 
     useEffect(() => {
-        console.log('useEffect --> drawerPrintSettingData', drawerPrintSettingData);
+        // console.log('useEffect --> drawerPrintSettingData', drawerPrintSettingData);
         if (drawerPrintSettingData) {
             // Set toggle states
             setDisableDrawerPrint(drawerPrintSettingData?.isEnabled || true);
@@ -212,7 +212,7 @@ export default function PrintSetting() {
 
     // Add new useEffect for Money Drop settings
     useEffect(() => {
-        console.log('useEffect --> moneyDropPrintSettingData', moneyDropPrintSettingData);
+        // console.log('useEffect --> moneyDropPrintSettingData', moneyDropPrintSettingData);
         if (moneyDropPrintSettingData) {
             // Set toggle states
             setDisableMoneyDropPrint(moneyDropPrintSettingData?.isEnabled || true);
