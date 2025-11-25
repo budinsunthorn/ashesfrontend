@@ -31,7 +31,7 @@ const SupplierRegisterModal = (props: any) => {
     const [currentSupplier, setCurrentSupplier] = useState(props.currentSupplier);
     const [isActive, setIsActive] = useState(props.currentSupplier.isActive);
 
-    console.log("currentSupplier", currentSupplier)
+    // console.log("currentSupplier", currentSupplier)
     useEffect(() => {
         setCurrentSupplier(props.currentSupplier);
         setIsActive(props.currentSupplier.isActive);

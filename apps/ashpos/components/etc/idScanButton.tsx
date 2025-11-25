@@ -21,7 +21,7 @@ export default function IDScannerButton() {
   const [info,setInfo] = useState<HolderInfo|undefined>();
   
   const startScanning = () => {
-    console.log("SStart scanning");
+    // console.log("SStart scanning");
     setScanning(true);
   }
   

@@ -216,4 +216,4 @@ export const registerLabel: { [key: string]: string } = {
 };
 
 // Example usage
-console.log(quantityAbbreviations["Gallons"]); // Output: "gal"
+// console.log(quantityAbbreviations["Gallons"]); // Output: "gal"

@@ -71,7 +71,7 @@ const DrawerPrint = forwardRef(({ drawerId, text, className }: DrawerPrintProps,
             }
         `,
         onAfterPrint: () => {
-            console.log('Print completed');
+            // console.log('Print completed');
         }
     });
 

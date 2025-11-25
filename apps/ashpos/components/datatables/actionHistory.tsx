@@ -187,8 +187,8 @@ function ActionHistory() {
     const hasMorePages = searchPage < totalPages;
     const currentPageItems = actionHistoryData?.filter((item) => item !== null).length || 0;
 
-    console.log('actionHistoryData', actionHistoryData);
-    console.log('hasMorePages', hasMorePages, 'currentPageItems', currentPageItems);
+    // console.log('actionHistoryData', actionHistoryData);
+    // console.log('hasMorePages', hasMorePages, 'currentPageItems', currentPageItems);
 
     const handleRealtimeSearch = useDebouncedCallback((param) => {
         setSearchParam(param.trim());

@@ -161,7 +161,7 @@ const CustomersTable = () => {
     }
 
     const handleCustomerNote = async () => {
-        console.log("handleCustomer")
+        // console.log("handleCustomer")
         await customerNoteMutation.mutate(
             {
                 input : {
@@ -279,8 +279,8 @@ const CustomersTable = () => {
     const darkMode = useSelector((state: IRootState) => state.themeConfig.isDarkMode);
     const sidebar = useSelector((state: IRootState) => state.themeConfig.sidebar);
 
-    console.log("menu ----------->", menu)
-    console.log("sidebar ----------->", sidebar)
+    // console.log("menu ----------->", menu)
+    // console.log("sidebar ----------->", sidebar)
 
 
     // show/hide

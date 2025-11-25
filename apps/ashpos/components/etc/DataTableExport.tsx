@@ -45,7 +45,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
     const token = cookies.get('token');
 
     const fetchPackages = async () => {
-        console.log('fetchPackage ---------->');
+        // console.log('fetchPackage ---------->');
         setSpinnerStatus({
             isLoading: true,
             text: 'Exporting Table Data...',
@@ -78,12 +78,12 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
             });
 
             const json = await res.json();
-            console.log('json.data', json.data);
-            console.log('filename', filename);
+            // console.log('json.data', json.data);
+            // console.log('filename', filename);
             if (filename == 'package') {
                 return json.data.allPackagesByDispensaryIdWithPages.packages;
             } else if (filename == 'transfer') {
-                console.log('json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages', json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages);
+                // console.log('json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages', json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages);
                 return json.data.allTransfersByDispensaryIdAndTransferTypeAndStatusWithPages?.transfers;
             } else if (filename == 'order') {
                 return json.data.allOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages?.orders;
@@ -111,7 +111,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
     // Get value for single accessor
     const getValFromAccessor = (item: any, accessor: string) => {
         let val = ' ';
-        console.log('getValFromAccessor item ------->', item['dispensaryId']);
+        // console.log('getValFromAccessor item ------->', item['dispensaryId']);
         if (accessor.includes('.')) {
             const accessorParts = accessor.split('.');
             if (accessorParts.length === 2) {
@@ -137,7 +137,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
 
     const exportTable = async (type: any) => {
         const packageData = await fetchPackages();
-        console.log('packageData ----------->', packageData);
+        // console.log('packageData ----------->', packageData);
         let columns: any = cols;
         let records = packageData;
         let newVariable: any;
@@ -172,7 +172,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                         val += mulVal;
                     } else {
                         val = getValFromAccessor(item, d.accessor);
-                        console.log('val ------->', val);
+                        // console.log('val ------->', val);
                     }
 
                     // Add $ sign for columns having title with 'Cost', return "True"/"False" for boolean values
@@ -190,7 +190,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                 result += linedelimiter;
             });
 
-            console.log('totalSum ------->', totalSum);
+            // console.log('totalSum ------->', totalSum);
 
             // Add total sum row at the end
             result += 'Total' + coldelimiter;
@@ -273,7 +273,7 @@ function TableExport({ cols, hideCols, filename, query, variables }: ExportTable
                     }
                 });
 
-                console.log('totalSum ------->', totalSum);
+                // console.log('totalSum ------->', totalSum);
                 const row = worksheet.addRow(rowData);
                 row.eachCell((cell) => {
                     cell.border = {

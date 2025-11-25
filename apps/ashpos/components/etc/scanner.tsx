@@ -23,7 +23,7 @@ export interface ScannerProps {
 }
 
 const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
-  console.log("Scanner Component");
+  // console.log("Scanner Component");
   const [quadResultItem,setQuadResultItem] = useState<DetectedQuadResultItem|undefined>();
   let container: MutableRefObject<HTMLDivElement | null> = useRef(null);
   let router: MutableRefObject<CaptureVisionRouter | null> = useRef(null);
@@ -66,14 +66,14 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
       stopScanning();
       router.current?.dispose();
       dce.current?.dispose();
-      console.log('Scanner Component Unmount');
+      // console.log('Scanner Component Unmount');
     }
   }, []);
 
   const updateViewBox = async () => {
     let res = dce.current?.getResolution();
     let box = "0 0 "+res?.width+" "+res?.height;
-    console.log(box);
+    // console.log(box);
     setViewBox(box);
   }
 
@@ -99,7 +99,7 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
     if (isSteady.current) {
       return;
     }
-    console.log("capture and detect");
+    // console.log("capture and detect");
     let results:DetectedQuadResultItem[] = [];
     detecting.current = true;
     try {
@@ -108,7 +108,7 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
       if (capturedResult.detectedQuadResultItems) {
         // results = results.concat(capturedResult.detectedQuadResultItems);
       }
-      console.log(results);
+      // console.log(results);
       if (results.length>0) {
         setQuadResultItem(results[0]);
         checkIfSteady(results,image);
@@ -126,7 +126,7 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
       let result = results[0];
       if (previousResults.current.length >= 3) {
         if (steady() == true) {
-          console.log("steady");
+          // console.log("steady");
           isSteady.current = true;
           let newSettings = await router.current.getSimplifiedSettings("NormalizeDocument_Default");
           newSettings.roiMeasuredInPercentage = false;
@@ -142,12 +142,12 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
             }
           }
         }else{
-          console.log("shift and add result");
+          // console.log("shift and add result");
           previousResults.current.shift();
           previousResults.current.push(result);
         }
       }else{
-        console.log("add result");
+        // console.log("add result");
         previousResults.current.push(result);
       }
     }
@@ -157,7 +157,7 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
     let parser = await CodeParser.createInstance();
     await router.current?.resetSettings();
     let result = await router.current?.capture(blob,"ReadBarcodes_Balance");
-    console.log(result);
+    // console.log(result);
     if (result && result.barcodeResultItems) {
       for (let index = 0; index < result.barcodeResultItems.length; index++) {
         const item = result.barcodeResultItems[index];
@@ -165,7 +165,7 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
           continue;
         }
         let parsedItem = await parser.parse(item.text);
-        console.log(parsedItem);
+        // console.log(parsedItem);
         if (parsedItem.codeType === "AAMVA_DL_ID") {
           let number = parsedItem.getFieldValue("licenseNumber");
           let firstName = parsedItem.getFieldValue("firstName");
@@ -188,7 +188,7 @@ const Scanner: React.FC<ScannerProps> = (props:ScannerProps) => {
     result = await router.current?.capture(blob,"ReadPassportAndId");
     if (result && result.textLineResultItems) {
       let parsedItem = await parser.parse(result.textLineResultItems[0].text);
-      console.log(parsedItem);
+      // console.log(parsedItem);
       if (parsedItem.codeType.indexOf("MRTD") != -1) {
         let number = parsedItem.getFieldValue("documentNumber");
         if (!number) {

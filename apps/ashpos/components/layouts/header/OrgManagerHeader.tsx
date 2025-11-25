@@ -119,7 +119,7 @@ const OrgManagerHeader = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             // Your code here - this runs every 10 minutes
-            console.log('10 minutes passed! Performing scheduled task...');
+            // console.log('10 minutes passed! Performing scheduled task...');
             notificationsRowData.refetch();
         }, 600000); // 600,000 ms = 10 minutes
 
@@ -127,7 +127,7 @@ const OrgManagerHeader = () => {
         return () => clearInterval(interval);
     }, []);
 
-    console.log('notificationsData', notificationsData);
+    // console.log('notificationsData', notificationsData);
 
     // Mutation
     const syncMetrcIncomingTransferMutation = useSyncMetrcIncomingTransferMutation();

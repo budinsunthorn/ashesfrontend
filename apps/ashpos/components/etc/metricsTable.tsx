@@ -34,7 +34,7 @@ export default function MetricsTable({ tableData, columns }: TableProps) {
     return String(value);
   };
 
-  console.log("tableData", tableData)
+  // console.log("tableData", tableData)
 
   const getColumnMax = (accessor: string): number => {
     return Math.max(...tableData.filter((row): row is SalesCategoryData => row !== null).map(row => {

@@ -50,8 +50,8 @@ const ProductRegisterModal = (props: any) => {
     const [customOptions, setCustomOptions] = useState<any>([])
     const [currentCategory, setCurrentCategory] = useState(props.currentProduct?.itemCategory?.name)
     // const [applyUnitWeight, setApplyUnitWeight] = useState(false)
-    console.log("currentProduct", currentProduct);
-    console.log("currentCategory", currentCategory);
+    // console.log("currentProduct", currentProduct);
+    // console.log("currentCategory", currentCategory);
 
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const ProductRegisterModal = (props: any) => {
             setIsSaveButtonDisabled(false);
             return;
         }
-        console.log("currentProduct.unitOfUnitWegith", currentProduct.unitOfUnitWegith)
+        // console.log("currentProduct.unitOfUnitWegith", currentProduct.unitOfUnitWegith)
         if((currentProduct.unitWeight > 0 && (currentProduct.unitOfUnitWeight == '' || currentProduct.unitOfUnitWeight == undefined || currentProduct.unitOfUnitWeight == null)) || (currentProduct.netWeight > 0 && (currentProduct.unitOfNetWeight == '' || currentProduct.unitOfNetWeight == undefined || currentProduct.unitOfNetWeight == null))) {
             warnAlert('Select the unit');
             setIsSaveButtonDisabled(false)
@@ -197,12 +197,12 @@ const ProductRegisterModal = (props: any) => {
     },[itemCategories])
 
     const handleUpdateCurrentProduct = (id: any) => {
-        console.log("handleUpdateCurrentProduct", id)
+        // console.log("handleUpdateCurrentProduct", id)
         setCurrentProduct({ ...currentProduct, itemCategoryId: id });
 
         const matched = customOptions.find((item: any) => item.value === id);
         const name = matched?.label || '';
-        console.log("matched", matched)
+        // console.log("matched", matched)
         setCurrentCategory(name);
     }
 
