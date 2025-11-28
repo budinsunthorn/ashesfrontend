@@ -322,7 +322,7 @@ const Cashier = (props: any) => {
 
     const [orderItemInventoryData, setOrderItemInventoryData] = useState<OrderItemInventory>({});
 
-    console.log('orderItemInventoryData', orderItemInventoryData);
+    // console.log('orderItemInventoryData', orderItemInventoryData);
 
     // Atom
     const [activeSidebarItem, setActiveSideBarItem] = useAtom(ActiveSidebarItemAtom);
@@ -385,7 +385,7 @@ const Cashier = (props: any) => {
     const OrderLimitPurchaseData = orderQueryResult.data?.orderWithTaxSum?.purchaseLimit;
     const tax = orderQueryResult.data?.orderWithTaxSum?.tax || 0;
     const orderItemsList = orderData?.OrderItem;
-    console.log('orderItemsList', orderItemsList);
+    // console.log('orderItemsList', orderItemsList);
     const originalOrderData = useOrderForReturnQuery({ id: originalOrderId });
     const originalOrderItems = originalOrderData.data?.orderForReturn?.OrderItem;
     const dispensaryDataById = useDispensaryQuery({ id: dispensaryId });
@@ -511,7 +511,7 @@ const Cashier = (props: any) => {
     const userOrderData = userOrderRowData.data?.allOrderNumbersByDispensaryIdAndCustomerIdWithPages?.orderHistory;
     const userOrderDataTotal = userOrderRowData.data?.allOrderNumbersByDispensaryIdAndCustomerIdWithPages?.totalCount || 0;
     // Flatten the infinite query data
-    console.log("infiniteInventoryData", infiniteInventoryData)
+    // console.log("infiniteInventoryData", infiniteInventoryData)
     const inventoryData = infiniteInventoryData?.pages?.flatMap((page: any) => page || []) ?? [];
 
     const [currentUser, setCurrentUser] = useState<RowDataType>({
@@ -555,7 +555,7 @@ const Cashier = (props: any) => {
                 if (target.isIntersecting && hasNextPage && !isFetchingNextPage && !isInventoryLoading) {
                     clearTimeout(timeoutId);
                     timeoutId = setTimeout(() => {
-                        console.log('Desktop: Fetching next page...');
+                        // console.log('Desktop: Fetching next page...');
                         fetchNextPage();
                     }, 100);
                 }
@@ -570,16 +570,16 @@ const Cashier = (props: any) => {
         const ipadObserver = new IntersectionObserver(
             (entries) => {
                 const target = entries[0];
-                console.log('iPad observer triggered:', {
-                    isIntersecting: target.isIntersecting,
-                    hasNextPage,
-                    isFetchingNextPage,
-                    isInventoryLoading
-                });
+                // console.log('iPad observer triggered:', {
+                //     isIntersecting: target.isIntersecting,
+                //     hasNextPage,
+                //     isFetchingNextPage,
+                //     isInventoryLoading
+                // });
                 if (target.isIntersecting && hasNextPage && !isFetchingNextPage && !isInventoryLoading) {
                     clearTimeout(timeoutId);
                     timeoutId = setTimeout(() => {
-                        console.log('iPad: Fetching next page...');
+                        // console.log('iPad: Fetching next page...');
                         fetchNextPage();
                     }, 100);
                 }
@@ -597,10 +597,10 @@ const Cashier = (props: any) => {
 
         // Observe iPad ref
         if (loadMoreRefIpad.current) {
-            console.log('iPad ref found, observing...');
+            // console.log('iPad ref found, observing...');
             ipadObserver.observe(loadMoreRefIpad.current);
         } else {
-            console.log('iPad ref not found');
+            // console.log('iPad ref not found');
         }
 
         return () => {
@@ -613,18 +613,18 @@ const Cashier = (props: any) => {
     // Re-observe iPad ref when iPad content is actually rendered
     useEffect(() => {
         if (isIpadMode && isShowingIpadProduct && loadMoreRefIpad.current) {
-            console.log('iPad content rendered, setting up observer...');
+            // console.log('iPad content rendered, setting up observer...');
             const ipadObserver = new IntersectionObserver(
                 (entries) => {
                     const target = entries[0];
-                    console.log('iPad observer triggered:', {
-                        isIntersecting: target.isIntersecting,
-                        hasNextPage,
-                        isFetchingNextPage,
-                        isInventoryLoading
-                    });
+                    // console.log('iPad observer triggered:', {
+                    //     isIntersecting: target.isIntersecting,
+                    //     hasNextPage,
+                    //     isFetchingNextPage,
+                    //     isInventoryLoading
+                    // });
                     if (target.isIntersecting && hasNextPage && !isFetchingNextPage && !isInventoryLoading) {
-                        console.log('iPad: Fetching next page...');
+                        // console.log('iPad: Fetching next page...');
                         fetchNextPage();
                     }
                 },
@@ -653,12 +653,12 @@ const Cashier = (props: any) => {
                 const scrollHeight = scrollContainer.scrollHeight;
                 const clientHeight = scrollContainer.clientHeight;
                 
-                console.log('iPad scroll:', { scrollTop, scrollHeight, clientHeight });
+                // console.log('iPad scroll:', { scrollTop, scrollHeight, clientHeight });
                 
                 // Check if scrolled to bottom (with some margin)
                 if (scrollTop + clientHeight >= scrollHeight - 100) {
                     if (hasNextPage && !isFetchingNextPage && !isInventoryLoading) {
-                        console.log('iPad scroll: Fetching next page...');
+                        // console.log('iPad scroll: Fetching next page...');
                         fetchNextPage();
                     }
                 }
@@ -789,14 +789,14 @@ const Cashier = (props: any) => {
         }  
     }, [ordersData]);
 
-    console.log('editOrdersData', editOrdersData);
+    // console.log('editOrdersData', editOrdersData);
     useEffect(() => {
         setOrderItemInventoryData({});
         editOrdersData?.forEach((order: any) => {  
             if (order?.status !== 'EDIT') return;  
 
             setOrderItemInventoryData((prevData: OrderItemInventoryData) => {  
-                console.log('Order ------------->', order);
+                // console.log('Order ------------->', order);
                 const orderId = order?.id.toString();  
                 const orderItemList = order?.OrderItem;  
 
@@ -1660,7 +1660,7 @@ const Cashier = (props: any) => {
         );
     };
     const validCreateOrderItem = (packageLabel: string, originalQty: number, orderItemNum: number) => {
-        console.log('orderItemNum', orderItemNum);
+        // console.log('orderItemNum', orderItemNum);
         if (orderNumber === 0) {
             setIsNewOrderItemButtonDisabled(false);
             warnAlert('Choose an order number');
@@ -2780,7 +2780,7 @@ const Cashier = (props: any) => {
                                                                                 type="button"
                                                                                 className="btn btn-outline-primary btn-small p-1"
                                                                                 onClick={() => {
-                                                                                            console.log('----->', item, item?.product?.unitWeight);
+                                                                                            // console.log('----->', item, item?.product?.unitWeight);
 
                                                                                             if (
                                                                                                 !validCreateOrderItem(

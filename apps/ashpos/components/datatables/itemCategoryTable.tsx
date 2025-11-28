@@ -185,7 +185,7 @@ const ItemCategoryTable = () => {
             updatedAt: '',
         });
     };
-    console.log("recordsData", recordsData)
+    // console.log("recordsData", recordsData)
     const cols = [
         { accessor: 'name', title: 'Name' },
         { accessor: 'metrcCategory', title: 'Metrc Category' },

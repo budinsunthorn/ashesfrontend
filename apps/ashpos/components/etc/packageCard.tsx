@@ -48,7 +48,7 @@ export default function PackageCard({ packageLabel, packageData, isLoading, hand
     const [modalOpen, setModalOpen] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
 
-    console.log('packageData', packageData);
+    // console.log('packageData', packageData);
 
     // useEffect(() => {
     //     if (isUpdate) {
@@ -92,7 +92,7 @@ export default function PackageCard({ packageLabel, packageData, isLoading, hand
     const adjustPackageMutation = useAdjustPackageMutation();
 
     // Function to calculate the number of days between two dates
-    console.log('---------------packageData---------------- ', packageData);
+    // console.log('---------------packageData---------------- ', packageData);
 
     useEffect(() => {
         let totalTerpenes = '';
@@ -646,7 +646,8 @@ export default function PackageCard({ packageLabel, packageData, isLoading, hand
                                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td className="px-6 py-4">{new Date(orderItem.order.orderDate).toLocaleDateString()}</td>
                                     <td className="px-6 py-4 flex flex-col justify-center items-start">
-                                        <p>#{orderItem.orderId}</p>
+                                        {/* <p>#{orderItem.orderId}</p> */}
+                                        <LinkItem page='orders/orders' label='' paramKey='id' param={orderItem.orderId} value={`#${orderItem.orderId}`} handleGotoLink={handleGotoLink}/>
                                         <OrderStatusBadge status={orderItem?.order?.status} className="!p-[2px]" />
                                     </td>
                                     <td className="px-6 py-4">{orderItem.quantity}</td>
@@ -945,13 +946,10 @@ function LinkItem({
 }) {
     return (
         <div className="flex justify-start">
-            <span className="text-sm !font-varela_Round font-semibold text-dark dark:text-white-dark w-1/2">{label}</span>
-            <div className="flex justify-start items-center">
-                <CopyButton text={value?.toString()} className="pr-1" />
-                <a className="text-sm text-left text-dark dark:text-white-dark font-bold cursor-pointer underline" onClick={() => handleGotoLink(page, paramKey, param)}>
-                    {value == null ? '' : value}
-                </a>
-            </div>
+            {label != '' && <span className="text-sm !font-varela_Round font-semibold text-dark dark:text-white-dark w-1/2">{label}</span>}
+            <a className="text-sm text-left text-dark dark:text-white-dark font-bold cursor-pointer underline w-1/2" onClick={() => handleGotoLink(page, paramKey, param)}>
+                {value == null ? '' : value}
+            </a>
         </div>
     );
 }

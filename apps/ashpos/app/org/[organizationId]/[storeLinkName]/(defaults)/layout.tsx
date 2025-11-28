@@ -9,7 +9,7 @@ import OrgManagerLayout from '@/components/layouts/orgManagerLayout';
 
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {
     const { userData, setUserData } = userDataSave();
-    console.log("userData ---------->", userData);
+    // console.log("userData ---------->", userData);
     if (userData.logined === true) {
         if (userData.userType === 'SUPER_ADMIN_MANAGER_USER') {
             return (

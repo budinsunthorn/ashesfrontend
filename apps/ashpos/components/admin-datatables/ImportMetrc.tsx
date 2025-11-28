@@ -67,7 +67,7 @@ const ImportMetrc = () => {
     const dispensaryId = userData.dispensaryId;
     const userId = userData.userId;
 
-    console.log("userData", userData);
+    // console.log("userData", userData);
 
     const [currentOrganizationId, setCurrentOrganizationId] = useState<string>('');
     const [currentDispensaryId, setCurrentDispensaryId] = useState<string>('');
@@ -465,8 +465,8 @@ const ImportMetrc = () => {
             </div>
             <div className='flex flex-col justify-start items-center mx-auto mt-5'>
                 <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportCategory()}>Import Category, Adjustment Reasons</button>
-                <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportTransfer()}>Import Transfer</button>
                 <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportPackage()}>Import Package</button>
+                <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportTransfer()}>Import Transfer</button>
                 <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportSupplier()}>Import Supplier</button>
                 <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportPackageOriginalQuantity()}>Import Package Original Quantity</button>
                 {/* <button className='mt-4 btn btn-outline-primary' onClick={() => handleImportDelivery()}>Import Delivery</button> */}

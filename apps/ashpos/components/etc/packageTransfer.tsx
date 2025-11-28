@@ -125,7 +125,7 @@ export default function PackageTransfer({ packageData, setIsUpdate, transferId, 
 
     const [currentProduct, setCurrentProduct] = useState<any>({});
 
-    console.log('currentProduct', currentProduct);
+    // console.log('currentProduct', currentProduct);
 
     // Mutation
     const assignPackage = useAssignPackageToProductMutation();
@@ -149,7 +149,7 @@ export default function PackageTransfer({ packageData, setIsUpdate, transferId, 
     // },[productById])
 
     useEffect(() => {
-        console.log('packageData?.assignPackage?.product?.name', packageData?.assignPackage?.product?.name);
+        // console.log('packageData?.assignPackage?.product?.name', packageData?.assignPackage?.product?.name);
         // setProductId(packageData?.assignPackage?.productId);
         setCost(isMj ? packageData?.package?.assignPackage?.cost : packageData?.assignPackage?.cost);
         setQuantity(isMj ? packageData?.package?.originalQty : packageData?.originalQty);
@@ -248,7 +248,7 @@ export default function PackageTransfer({ packageData, setIsUpdate, transferId, 
         });
     };
     const handleNonMjAssignPackage = async () => {
-        console.log('cost, quantity >>>>>>>>', cost, quantity);
+        // console.log('cost, quantity >>>>>>>>', cost, quantity);
         if (currentProduct.id == null || cost == 0 || cost == undefined || quantity == 0 || quantity == undefined) {
                 setIsShowError(true);
                 return;
@@ -326,7 +326,7 @@ export default function PackageTransfer({ packageData, setIsUpdate, transferId, 
             }
         });
     };
-    console.log('searchValue', searchValue);
+    // console.log('searchValue', searchValue);
 
     return (
         <div

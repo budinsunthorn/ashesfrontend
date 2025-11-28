@@ -107,7 +107,7 @@ export async function middleware(req: NextRequest) {
                 // console.log('result', result);
 
                 if(result.store && result.org) {
-                    console.log("🔴Path linkName vary with token's linkName")
+                    // console.log("🔴Path linkName vary with token's linkName")
                     return NextResponse.rewrite(new URL(`/org/${organizationId}/${storeLinkName}/signin`, req.url));
                 } else if (result.org) {
                     return NextResponse.rewrite(new URL(`/org/${organizationId}/org-access`, req.url));

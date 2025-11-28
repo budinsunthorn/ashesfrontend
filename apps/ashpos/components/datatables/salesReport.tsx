@@ -31,7 +31,7 @@ function SalesReport() {
     const [startDay, setStartDay] = useState<Date>(yesterday);
     const [endDay, setEndDay] = useState<Date>(yesterday);
 
-    console.log("startDay", startDay)
+    // console.log("startDay", startDay)
     // const [salesIndexData, setSalesIndexData] = useState<any>()
     const [dateParam, setDateParam] = useState({
         dateFrom: formatDate(startDay),
@@ -41,15 +41,15 @@ function SalesReport() {
     const [totalTaxAmount, setTotalTaxAmount] = useState(0)
     const salesIndexRowData = useSalesIndexReportQuery({ dispensaryId: dispensaryId, dateFrom: dateParam.dateFrom, dateTo: dateParam.dateTo });
     const salesIndexData = salesIndexRowData.data?.salesIndexReport;
-    console.log("salesIndexData", salesIndexData)
+    // console.log("salesIndexData", salesIndexData)
 
     const salesDetailReportData = useSalesDetailReportQuery({ dispensaryId: dispensaryId, dateFrom: dateParam.dateFrom, dateTo: dateParam.dateTo })
     const salesDetailData = salesDetailReportData.data?.salesDetailReport;
-    console.log("salseDetailData", salesDetailData)
+    // console.log("salseDetailData", salesDetailData)
 
     const salesTaxReport = useSalesTaxReportQuery({ dispensaryId: dispensaryId, dateFrom: dateParam.dateFrom, dateTo: dateParam.dateTo })
     const salesTaxReportData = salesTaxReport.data?.salesTaxReport
-    console.log("salesTaxReportData", salesTaxReportData)
+    // console.log("salesTaxReportData", salesTaxReportData)
 
     const reportData: any = {
         "grossProfit": {

@@ -49,6 +49,7 @@ import TableLoading from '../etc/tableLoading';
 import LoadingSkeleton from '../etc/loadingSkeleton';
 import { useDebouncedCallback } from 'use-debounce';
 import {syncStatusAtom} from "@/store/syncStatusAtom";
+import CategorySelect from '../etc/CategorySelect';
 
 type RowDataType = generatedTypes.Product;
 type RowData = RowDataType[];
@@ -69,7 +70,7 @@ const ProductTable = () => {
     const [isShowFinishedPackage, setIsShowFinishedPackage] = useState(false);
     const [productId, setProductId] = useState('');
     const dispensaryId = userData.dispensaryId;
-    const [categoryTypeId, setCategoryTypeId] = useState("")
+    const [categoryTypeId, setCategoryTypeId] = useState('all')
     const [howStock, setHowStock] = useState("all")
 
     const [customOptions, setCustomOptions] = useState<any>([])
@@ -208,7 +209,7 @@ const ProductTable = () => {
     }, [syncStatus])
     // get the last segment of the URL path
     useEffect(() => {
-        console.log("Last segment of URL path:", lastSegment);
+        // console.log("Last segment of URL path:", lastSegment);
         // Do something with lastSegment
     }, [lastSegment]);
 
@@ -436,7 +437,7 @@ const ProductTable = () => {
         }
     };
 
-    const handleUpdateCustomer = (id: any) => {
+    const handleUpdateCategory = (id: any) => {
         setCategoryTypeId(id);
         
         const matched = customOptions.find((item: any) => item.value === id);
@@ -544,15 +545,17 @@ const ProductTable = () => {
                      <option value={item?.id}>{item?.name}</option> 
                     )}
                 </select> */}
-                <CustomSelect
+                {/* <CustomSelect
                     options={customOptions}
-                    onChange={handleUpdateCustomer}
+                    onChange={handleUpdateCategory}
                     currentOption={currentCategory}
                     setModalShow={setModalShow}
                     showingText='All Categories'
                     disabled={false}
                     showingSearch={false}
-                />
+                /> */}
+
+                <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryTypeId} />
                 </div>
                 <div className={`absolute lg:flex items-center gap-2 lg:ltr:ml-auto rtl:mr-auto transition-all duration-500 ${isRightBarShow? "!right-[502px]" :"right-8"}`}>
                     <div>

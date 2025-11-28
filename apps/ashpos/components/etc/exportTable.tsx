@@ -146,15 +146,15 @@ function ExportTable({ cols, recordsData, hideCols, filename }: ExportTableProps
                             const accessorParts = d.accessor.split('.');
                             if (accessorParts.length === 2) {
                                 // Handle single level nesting (e.g., package.name)
-                                console.log("accessor ------> ", accessorParts)
-                                console.log("item ------>", item[accessorParts[0]][accessorParts[1]])
+                                // console.log("accessor ------> ", accessorParts)
+                                // console.log("item ------>", item[accessorParts[0]][accessorParts[1]])
                                 if (item[accessorParts[0]] && item[accessorParts[0]][accessorParts[1]]) {
                                     val = item[accessorParts[0]][accessorParts[1]];
                                 }
                                 else val = item[d.accessor] ? item[d.accessor] : '';
                             } else if (accessorParts.length === 3) {
                                 // Handle double level nesting (e.g., package.product.name)
-                                console.log("item --------->", item[accessorParts[0]][accessorParts[1]][accessorParts[2]])
+                                // console.log("item --------->", item[accessorParts[0]][accessorParts[1]][accessorParts[2]])
                                 if (item[accessorParts[0]] && 
                                     item[accessorParts[0]][accessorParts[1]] && 
                                     item[accessorParts[0]][accessorParts[1]][accessorParts[2]]) {

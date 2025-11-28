@@ -146,7 +146,7 @@ const OrderTable = () => {
     });
     const orderData = orderDataWithPage.data?.allOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages?.orders;
     const totalCount = orderDataWithPage.data?.allOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPages?.totalCount;
-    console.log("orderData", orderData)
+    // console.log("orderData", orderData)
 
     // const orderPrintDataWithPage = useAllOrdersByDispensaryIdAndStatusAndOrderTypeAndSearchParamWithPagesQuery({
     //     dispensaryId: dispensaryId,
@@ -208,7 +208,7 @@ const OrderTable = () => {
     const orderDetailTaxSum = orderDetailRowData.data?.orderWithTaxSum?.tax;
 
     // mutation
-    console.log('orderDetailData', orderDetailData);
+    // console.log('orderDetailData', orderDetailData);
     const OrderVoidMutation = useVoidOrderMutation();
     const UnSyncOrderMutation = useUnSyncOrderMutation();
     const SyncOrderMutation = useSyncOrderMutation();
@@ -370,7 +370,7 @@ const OrderTable = () => {
                     setTimeout(() => {
                     
                     if (data.voidOrder?.metrc == 'success') {
-                        console.log("data.completeOrder?.metrc", data.voidOrder?.metrc);
+                        // console.log("data.completeOrder?.metrc", data.voidOrder?.metrc);
                         Store.addNotification({
                             title: "Success",
                             message: `#${orderId} Metrc Unsynced!`,

@@ -49,7 +49,7 @@ export default function ProductCard({ packageData }: any) {
         return '';
     };
 
-    console.log("productData", packageData)
+    // console.log("productData", packageData)
     return (
         <div className="bg-white dark:bg-[#0f1727] shadow-lg rounded-lg w-full mx-auto my-2 border-[1px] border-gray-200 dark:border-[#1a1e3b]">
             <div className="flex justify-between items-center mt-2 text-dark dark:text-white-dark px-2">

@@ -87,7 +87,7 @@ function ReceiptPrint({ isCompleteOrder, orderId, text, className, printButtonRe
             }
         `,
         onAfterPrint: () => {
-            console.log('Print completed');
+            // console.log('Print completed');
             onAfterPrint();
         }
     });
@@ -134,14 +134,14 @@ function ReceiptPrint({ isCompleteOrder, orderId, text, className, printButtonRe
                     marginLeft: receiptPrintSettingData?.marginLeft ? `${receiptPrintSettingData.marginLeft}in` : undefined,
                 }).then((result: any) => {
                     if (result.success) {
-                        console.log('Silent print completed successfully');
+                        // console.log('Silent print completed successfully');
                         onAfterPrint();
                     } else {
-                        console.error('Silent print failed:', result.error);
+                        // console.error('Silent print failed:', result.error);
                         warnAlert(`Print failed: ${result.error}`);
                     }
                 }).catch((error: any) => {
-                    console.error('Silent print error:', error);
+                    // console.error('Silent print error:', error);
                     warnAlert('Print failed. Please try again.');
                 });
             } else {
@@ -150,7 +150,7 @@ function ReceiptPrint({ isCompleteOrder, orderId, text, className, printButtonRe
             }
         } else {
             // Fallback: normal browser print
-            console.log("fallback printFunc");
+            // console.log("fallback printFunc");
             handlePackageReceipPrint();
         }
     };
@@ -158,7 +158,7 @@ function ReceiptPrint({ isCompleteOrder, orderId, text, className, printButtonRe
     useEffect(() => {
         if(isCompleteOrder){
             receiptRowData.refetch()
-            console.log("isCompletOrder >>>>>>", isCompleteOrder)
+            // console.log("isCompletOrder >>>>>>", isCompleteOrder)
         }
     }, [isCompleteOrder])
 

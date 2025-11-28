@@ -71,12 +71,12 @@ ipcMain.handle('load-url', (event, url) => {
 // Handle print requests
 ipcMain.handle('print-silently', async (event, data) => {
     // Implement silent printing logic here
-    console.log('Print silently:', data);
+    // console.log('Print silently:', data);
     return { success: true };
 });
 
 ipcMain.handle('print-receipt', async (event, htmlContent) => {
     // Implement receipt printing logic here
-    console.log('Print receipt:', htmlContent);
+    // console.log('Print receipt:', htmlContent);
     return { success: true };
 });

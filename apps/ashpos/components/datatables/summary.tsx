@@ -102,17 +102,17 @@ export default function Summary() {
 
     const dayOfWeekRowData = useInsightSummaryReportByDayOfWeekQuery({ dispensaryId: dispensaryId, dateFrom: dateParam.dateFrom, dateTo: dateParam.dateTo });
     const dayOfWeekData = dayOfWeekRowData.data?.insightSummaryReportByDayOfWeek;
-    console.log('dayOfWeekData', dayOfWeekData);
+    // console.log('dayOfWeekData', dayOfWeekData);
 
     const insightSummaryRowData = useInsightSummaryReportQuery({ dispensaryId: dispensaryId, dateFrom: dateParam.dateFrom, dateTo: dateParam.dateTo });
     const insightSummaryData = insightSummaryRowData.data?.insightSummaryReport;
-    console.log('insghtSummary', insightSummaryData);
+    // console.log('insghtSummary', insightSummaryData);
     const salesByCategoryRowData = useSalesByCategoryQuery({ dispensaryId: dispensaryId, dateFrom: dateParam.dateFrom, dateTo: dateParam.dateTo });
     const salesByCategoryData = salesByCategoryRowData.data?.salesByCategory;
-    console.log('salesByCategoryData', salesByCategoryData);
+    // console.log('salesByCategoryData', salesByCategoryData);
 
     useEffect(() => {
-        console.log('storeFilter', storeFilter);
+        // console.log('storeFilter', storeFilter);
         insightSummaryRowData.refetch();
         salesByCategoryRowData.refetch();
     }, [storeFilter]);

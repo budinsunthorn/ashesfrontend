@@ -72,7 +72,7 @@ const DrawersTable = () => {
     const storeTimeZone = userData.storeTimeZone;
     
 
-    console.log("storeTimeZone", storeTimeZone);
+    // console.log("storeTimeZone", storeTimeZone);
 
     // Theme style
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl';
@@ -129,7 +129,7 @@ const DrawersTable = () => {
 
     const drawerPrintSettingData = printSettingData?.find((item) => item?.printType === 'drawer') || null
 
-    console.log("drawerHistoryData", drawerHistoryData)
+    // console.log("drawerHistoryData", drawerHistoryData)
 
     const [search, setSearch] = useState('');
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
@@ -349,7 +349,7 @@ const DrawersTable = () => {
             }
         `,
         onAfterPrint: () => {
-            console.log('Print completed');
+            // console.log('Print completed');
         }
     });
 

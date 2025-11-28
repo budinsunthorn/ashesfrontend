@@ -88,7 +88,7 @@ function SingleExitLabelPrint({
             }
         `,
         onAfterPrint: () => {
-            console.log('Print completed');
+            // console.log('Print completed');
             onAfterPrint();
         },
     });
@@ -104,7 +104,7 @@ function SingleExitLabelPrint({
                     try {
                         window.close();
                     } catch (error) {
-                        console.log('Could not close window automatically');
+                        // console.log('Could not close window automatically');
                     }
                 }, 1000);
             }, 100);

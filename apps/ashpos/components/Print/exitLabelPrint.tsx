@@ -123,12 +123,12 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
 
     useEffect(() => {
         if (!isPrinted && exitLabelData) {
-            console.log("========= Retrigger Print =========");
+            // console.log("========= Retrigger Print =========");
             handlePrint();
         }
     }, [exitLabelData, isPrinted]);
 
-    console.log("exitLabelPrintSettingData?.fontFamily", exitLabelPrintSettingData?.fontFamily)
+    // console.log("exitLabelPrintSettingData?.fontFamily", exitLabelPrintSettingData?.fontFamily)
 
     const printFunc = useReactToPrint({
         contentRef: exitLabelRef,
@@ -152,14 +152,14 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
             }
         `,
         onAfterPrint: () => {
-            console.log('Print completed');
+            // console.log('Print completed');
             isPrinted.current = true;
             onAfterPrint();
         }
     });
 
     const handlePrint = () => {
-        console.log("exit label handlePrint");
+        // console.log("exit label handlePrint");
         if (window.electronAPI) {
             // Extract HTML for silent printing
             const htmlContent = `
@@ -195,7 +195,7 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
             
             // Use the existing printSilently function if available
             if (window.electronAPI.printSilently) {
-                console.log("printSilently");
+                // console.log("Printing by Eelectron API")
                 window.electronAPI.printSilently({
                     content: htmlContent,
                     fontSize: exitLabelPrintSettingData?.fontSize ? `${exitLabelPrintSettingData.fontSize}px` : '14px',
@@ -208,20 +208,20 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
                     marginLeft: exitLabelPrintSettingData?.marginLeft ? `${exitLabelPrintSettingData.marginLeft}in` : undefined,
                 }).then((result: any) => {
                     if (result.success) {
-                        console.log('Silent print completed successfully');
+                        // console.log('Silent print completed successfully');
                         isPrinted.current = true;
                         onAfterPrint();
                     } else {
-                        console.error('Silent print failed:', result.error);
+                        // console.error('Silent print failed:', result.error);
                         warnAlert(`Print failed: ${result.error}`);
                     }
                 }).catch((error: any) => {
-                    console.error('Silent print error:', error);
+                    // console.error('Silent print error:', error);
                     warnAlert('Print failed. Please try again.');
                 });
             } else {
                 // Fallback for older Electron API
-                console.log("printReceipt with fallback Electron API");
+                // console.log("printReceipt with fallback Electron API");
                 window.electronAPI?.printReceipt?.(htmlContent);
                 isPrinted.current = true;
                 onAfterPrint();
@@ -229,7 +229,7 @@ export default function ExitLabelPrint({orderId, text, className, printButtonRef
         } else {
             // Fallback: normal browser print
             // console.log("fallback printFunc");
-            console.log("Normal print");
+            // console.log("Normal print");
             printFunc();
         }
     };
