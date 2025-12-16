@@ -9,6 +9,7 @@ export const packageStatusArray = {
     VOID: 'Void',
     VOIDED: 'Voided',
     FINISHED: 'Finished',
+    TRANSFERRED: 'Transferred',
   }
 
 export const customerStatusArray = {
