@@ -48,7 +48,7 @@ export default function PackageCard({ packageLabel, packageData, isLoading, hand
     const [modalOpen, setModalOpen] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
 
-    // console.log('packageData', packageData);
+    console.log('packageData', packageData);
 
     // useEffect(() => {
     //     if (isUpdate) {
