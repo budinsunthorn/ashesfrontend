@@ -1224,7 +1224,7 @@ function ActionHistory() {
                                                                 </span>
                                                             );
                                                         case 'assignNonMjPackageToProduct':
-                                                            <span className="flex justify-start items-center">
+                                                            return <span className="flex justify-start items-center">
                                                                 <UserBadge userName={userName} /> assigned {f1} items of Non-MJ package
                                                                 <span
                                                                     className="cursor-pointer badge badge-outline-warning mx-1 flex justify-start items-center"
@@ -1250,7 +1250,7 @@ function ActionHistory() {
                                                                 </span>
                                                             </span>;
                                                         case 'createNonMJPackage':
-                                                            <span className="flex justify-start items-center">
+                                                            return <span className="flex justify-start items-center">
                                                                 <UserBadge userName={userName} /> created a non-mj package{' '}
                                                                 <span
                                                                     className="cursor-pointer badge badge-outline-warning mx-1 flex justify-start items-center"
@@ -1264,6 +1264,53 @@ function ActionHistory() {
                                                                     {packageLabel}
                                                                 </span>
                                                             </span>;
+                                                        case 'reconcilePackageWithMetrcByAdjustId':
+                                                            return <span className="flex justify-start items-center">
+                                                                <UserBadge userName={userName} /> reconciled a package 
+                                                                <span
+                                                                    className="cursor-pointer badge badge-outline-warning mx-1 flex justify-start items-center"
+                                                                    onClick={() => {
+                                                                        setPackageLabel(packageLabel || '');
+                                                                        setRightSideBarType('package');
+                                                                        setIsShowingRightSideBar(true);
+                                                                    }}
+                                                                >
+                                                                    <TbPackages className="mx-[1px]" />
+                                                                    {packageLabel}
+                                                                </span>
+                                                                <span>with Metrc ( Metrc Qty was</span> 
+                                                                {f3 && Number(f3) > 0 ? <span className="badge badge-outline-success">increased</span> : <span className="badge badge-outline-error">decreased</span>} by {f3})
+                                                            </span>;
+
+                                                        case 'updateProduct':
+                                                            return <span className="flex justify-start items-center">
+                                                                <UserBadge userName={userName} /> updated product
+                                                                <span
+                                                                    className="cursor-pointer badge badge-outline-info mx-1"
+                                                                    onClick={() => {
+                                                                        setProductId(productId || '');
+                                                                        setRightSideBarType('product');
+                                                                        setIsShowingRightSideBar(true);
+                                                                    }}
+                                                                >
+                                                                    {f1}
+                                                                </span>
+                                                            </span>
+                                                        case 'cancelReconcile':
+                                                            return <span className="flex justify-start items-center">
+                                                                <UserBadge userName={userName} /> cancelled reconcile for package 
+                                                                <span
+                                                                    className="cursor-pointer badge badge-outline-warning mx-1 flex justify-start items-center"
+                                                                    onClick={() => {
+                                                                        setPackageLabel(f1 || '');
+                                                                        setRightSideBarType('package');
+                                                                        setIsShowingRightSideBar(true);
+                                                                    }}
+                                                                >
+                                                                    <TbPackages className="mx-[1px]" />
+                                                                    {f1}
+                                                                </span>
+                                                            </span>      
                                                         default:
                                                             return (
                                                                 <span className="flex justify-start items-center">
