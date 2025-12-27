@@ -71,6 +71,7 @@ import { syncStatusAtom } from '@/store/syncStatusAtom';
 import { PRINTLIMIT } from '@/utils/variables';
 import TableExport from '../etc/DataTableExport';
 import { truncateToTwoDecimals } from '@/lib/utils';
+import { LiaCannabisSolid } from 'react-icons/lia';
 
 type RowDataType = generatedTypes.Package;
 type RowData = (RowDataType | null)[];
@@ -969,7 +970,16 @@ const PackageTable = () => {
                                 title: 'Package ID',
                                 sortable: true,
                                 textAlignment: 'center',
-                                render: (record) => <div className="flex items-center px-2">{record?.packageLabel?.slice(-10).toUpperCase()}</div>,
+                                render: (row) => {
+                                    if (!row) {
+                                        return null; // Handle the null case as needed
+                                    }
+
+                                    const { packageLabel, packageId } = row;
+                                    return <div className="flex items-center px-2">
+                                        {packageId && packageId > 0 && <LiaCannabisSolid className="text-theme_green text-sm ml-[1px]" />}
+                                        {packageLabel?.slice(-10).toUpperCase()}</div>;
+                                },
                             },
                             {
                                 accessor: 'assignPackage.product.name',
