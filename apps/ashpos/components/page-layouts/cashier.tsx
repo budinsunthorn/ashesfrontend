@@ -79,6 +79,7 @@ import {
     ProductUnitOfMeasure,
     useGetEditOrderByDrawerIdQuery,
     useAllItemCategoriesByDispensaryIdQuery,
+    useAppPrintSettingQuery,
 } from '@/src/__generated__/operations';
 
 import { LoyaltyType } from '@/src/__generated__/operations';
@@ -391,6 +392,11 @@ const Cashier = (props: any) => {
     const dispensaryDataById = useDispensaryQuery({ id: dispensaryId });
     const dispensaryData = dispensaryDataById.data?.dispensary;
     const allCustomersByDispensaryId = useAllCustomersByDispensaryIdAndNameAndLicenseSearchQuery({ dispensaryId: dispensaryId, searchQuery: customerSearchQuery });
+    
+    const appPrintSetting = useAppPrintSettingQuery();
+    const appPrintSettingData = appPrintSetting.data?.appPrintSetting;
+    console.log("appPrintSettingData", appPrintSettingData);
+    
     // Infinite query for inventory data
     const {
         data: infiniteInventoryData,
@@ -1498,7 +1504,16 @@ const Cashier = (props: any) => {
                           });
                         }
                     }, 1000);
-                    exitLabelPrintButtonRef.current?.click();
+                    
+                    // Auto-print exit labels if enabled
+                    if(appPrintSettingData?.autoPrintExitLabelsOnComplete) {
+                        exitLabelPrintButtonRef.current?.click();
+                    } else if(appPrintSettingData?.autoPrintReceiptOnComplete) { 
+                        // Auto-print receipt only if enabled and exit labels are not enabled
+                        if(receiptPrintButtonRef.current && (receiptPrintButtonRef.current as any).print) {
+                            (receiptPrintButtonRef.current as any).print();
+                        }
+                    }
                     allOrdersByDrawerId.refetch();
                     orderQueryResult.refetch();
                     // Refetch inventory data
@@ -2020,7 +2035,9 @@ const Cashier = (props: any) => {
     };
 
     const handleAfterExitLabelPrint = () => {
+
         successAlert('Exit label printed successfully');
+        if(!appPrintSettingData?.autoPrintReceiptOnComplete) return;
         // Add a small delay to ensure the exit label print dialog is closed
         setTimeout(() => {
             if (receiptPrintButtonRef.current && (receiptPrintButtonRef.current as any).print) {

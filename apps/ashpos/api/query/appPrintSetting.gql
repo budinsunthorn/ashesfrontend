@@ -1,0 +1,6 @@
+query AppPrintSetting{
+  appPrintSetting {
+      autoPrintReceiptOnComplete
+      autoPrintExitLabelsOnComplete
+  }
+}
