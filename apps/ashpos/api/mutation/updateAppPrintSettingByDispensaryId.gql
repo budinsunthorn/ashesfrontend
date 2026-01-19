@@ -1,0 +1,7 @@
+mutation UpdateAppPrintSettingByDispensaryId($input: updateAppPrintSettingInput!) {
+  updateAppPrintSettingByDispensaryId(input: $input) {
+    dispensaryId
+    autoPrintReceiptOnComplete
+    autoPrintExitLabelsOnComplete  
+  }
+}

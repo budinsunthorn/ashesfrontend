@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { PrintType, useAppPrintSettingQuery, useCreatePrintSettingMutation, usePrintSettingByDispensaryIdQuery, useUpdateAppPrintSettingMutation } from '@/src/__generated__/operations';
+import { PrintType, useAppPrintSettingByDispensaryIdQuery, useCreatePrintSettingMutation, usePrintSettingByDispensaryIdQuery, useUpdateAppPrintSettingByDispensaryIdMutation } from '@/src/__generated__/operations';
 import { userDataSave } from '@/store/userData';
 import warnAlert from '../notification/warnAlert';
 import successAlert from '../notification/successAlert';
@@ -121,7 +121,7 @@ export default function PrintSetting() {
     // Query
     const printSettingRowData = usePrintSettingByDispensaryIdQuery({ dispensaryId: dispensaryId });
     const printSettingData = printSettingRowData.data?.printSettingByDispensaryId;
-    const appPrintSetting = useAppPrintSettingQuery();
+    const appPrintSetting = useAppPrintSettingByDispensaryIdQuery({dispensaryId: dispensaryId});
     console.log("appPrintSetting", appPrintSetting);
 
     const exitLabelPrintSettingData = useMemo(() => printSettingData?.find((item) => item?.printType === 'exitLabel') || null, [printSettingData]);
@@ -133,7 +133,7 @@ export default function PrintSetting() {
         // Initialize Windows app print settings once from server data
         if (appPrintInitialized) return;
 
-        const appPrintSettingData = appPrintSetting.data?.appPrintSetting;
+        const appPrintSettingData = appPrintSetting.data?.appPrintSettingByDispensaryId;
         if (!appPrintSettingData) return;
 
         console.log("useEffect - setEnableAutoPrintSetting");
@@ -147,7 +147,7 @@ export default function PrintSetting() {
 
     // Mutation
     const createPrintSettingMutation = useCreatePrintSettingMutation();
-    const updateAppPrintSettingMutation = useUpdateAppPrintSettingMutation()
+    const updateAppPrintSettingMutation = useUpdateAppPrintSettingByDispensaryIdMutation()
 
     useEffect(() => {
         // console.log('useEffect --> exitLabelPrintSettingData', exitLabelPrintSettingData);
@@ -511,6 +511,7 @@ export default function PrintSetting() {
         await updateAppPrintSettingMutation.mutate(
             {
                 input: {
+                    dispensaryId: dispensaryId,
                     autoPrintReceiptOnComplete: enableAutoPrintReceipt,
                     autoPrintExitLabelsOnComplete: enableAutoPrintExitLabels
                 },
