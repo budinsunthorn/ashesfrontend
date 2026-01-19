@@ -35,6 +35,7 @@ query PackageByLabel($label: String!) {
         order {
           metrcId
           orderDate
+          status
         }
         quantity
         cost

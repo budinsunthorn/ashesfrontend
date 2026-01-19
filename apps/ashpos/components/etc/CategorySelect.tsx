@@ -10,9 +10,10 @@ type StateSetter<T> = Dispatch<SetStateAction<T>>;
 interface ProsType {
     onChange: (id: string | undefined) => void;
     currentCategoryId: string;
+    className?: string;
 }
 
-function CategorySelect({ onChange, currentCategoryId }: ProsType) {
+function CategorySelect({ onChange, currentCategoryId, className }: ProsType) {
     const { userData } = userDataSave();
     const dispensaryId = userData.dispensaryId;
     const [currentCategory, setCurrentCategory] = useState({
@@ -49,7 +50,7 @@ function CategorySelect({ onChange, currentCategoryId }: ProsType) {
     };
 
     return (
-        <div className="relative w-56 flex flex-col justify-start items-start">
+        <div className={` ${className} relative w-56 flex flex-col justify-start items-start`}>
             <div className={`w-full p-2 border dark:border-[#17263c] px-4 py-2 rounded-lg overflow-hidden cursor-pointer ${showCategoryList ? 'border-primary' : ''}`} onClick={() => setShowCategoryList(!showCategoryList)}>
                 {currentCategoryId == 'all' ? <span className='italic text-[15px]'>--All Categories--</span> : <ProductCategory name={currentCategory.name} color={currentCategory.color}/>}
             </div>

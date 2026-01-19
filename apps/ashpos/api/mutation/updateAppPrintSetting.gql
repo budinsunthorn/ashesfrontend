@@ -1,0 +1,6 @@
+mutation updateAppPrintSetting($input: updateAppPrintSettingInput!) {
+  updateAppPrintSetting(input: $input) {
+    autoPrintReceiptOnComplete
+    autoPrintExitLabelsOnComplete  
+  }
+}

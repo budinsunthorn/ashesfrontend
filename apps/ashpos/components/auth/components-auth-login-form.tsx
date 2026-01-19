@@ -55,7 +55,7 @@ const ComponentsAuthLoginForm = () => {
             return;
         } else {
             const loginData: any = jwt.decode(result.token);
-            if (!loginData.isActive) {
+            if (!loginData?.isActive) {
                 warnAlert('You are not active now');
                 return;
             } else {

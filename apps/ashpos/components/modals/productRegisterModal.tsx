@@ -16,22 +16,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import { userDataSave } from '@/store/userData';
 import SearchableSelect from '../etc/searchableSelect';
 import CustomSelect from '../etc/customeSelect';
+import CategorySelect from '../etc/CategorySelect';
 
 const ProductRegisterModal = (props: any) => {
     const queryClient = useQueryClient();
-
     const { userData } = userDataSave();
     const organizationId = userData.organizationId;
-    const allSuppliersByOrganizationId = useAllSuppliersByOrganizationIdQuery({ organizationId: organizationId });
-    const supplierData = allSuppliersByOrganizationId.data?.allSuppliersByOrganizationId;
     let supplierOptions: any = [];
     const unitOfMeasureList: UnitOfMeasure[] = ['ea', 'g', 'mg', 'oz'];  
     const [unitOfMeasure, setUnitOfMeasure] = useState<ProductUnitOfMeasure>('ea')
-
-    // Data fetch
-        const allItemCategoriesByDispensaryId = useAllItemCategoriesByDispensaryIdQuery({ dispensaryId: props.dispensaryId });
-        const itemCategories = allItemCategoriesByDispensaryId.data?.allItemCategoriesByDispensaryId;
-
+    
+    const allSuppliersByOrganizationId = useAllSuppliersByOrganizationIdQuery({ organizationId: organizationId });
+    const supplierData = allSuppliersByOrganizationId.data?.allSuppliersByOrganizationId;
 
     if (supplierData && Array.isArray(supplierData)) {
         supplierData.map((category: any) => {
@@ -47,8 +43,9 @@ const ProductRegisterModal = (props: any) => {
     const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(props.currentProduct);
     const [supplierId, setSupplierId] = useState(props.currentProduct.supplierId);
-    const [customOptions, setCustomOptions] = useState<any>([])
-    const [currentCategory, setCurrentCategory] = useState(props.currentProduct?.itemCategory?.name)
+
+    const [categoryId, setCategoryId] = useState('all');
+    
     // const [applyUnitWeight, setApplyUnitWeight] = useState(false)
     // console.log("currentProduct", currentProduct);
     // console.log("currentCategory", currentCategory);
@@ -57,7 +54,7 @@ const ProductRegisterModal = (props: any) => {
     useEffect(() => {
         setCurrentProduct(props.currentProduct);
         setSupplierId(props.currentProduct.supplierId);
-        setCurrentCategory(props.currentProduct?.itemCategory?.name);
+        setCategoryId(props.currentProduct.itemCategoryId);
     }, [props.modalMode, props.currentProduct]);
 
     const getSupplierObject = (id: any) => {
@@ -73,7 +70,7 @@ const ProductRegisterModal = (props: any) => {
             setIsSaveButtonDisabled(false);
             return;
         }
-        if (currentProduct.itemCategoryId === '') {
+        if (categoryId === '') {
             warnAlert('Please select a category');
             setIsSaveButtonDisabled(false);
             return;
@@ -90,7 +87,7 @@ const ProductRegisterModal = (props: any) => {
                     dispensaryId: props.dispensaryId,
                     userId: props.userId,
                     supplierId: supplierId,
-                    itemCategoryId: currentProduct.itemCategoryId,
+                    itemCategoryId: categoryId,
                     name: currentProductInput.name,
                     sku: currentProductInput.sku,
                     upc: currentProductInput.upc,
@@ -129,7 +126,7 @@ const ProductRegisterModal = (props: any) => {
             setIsSaveButtonDisabled(false);
             return;
         }
-        if (currentProduct.itemCategoryId === '') {
+        if (categoryId === '') {
             warnAlert('Please select a category');
             setIsSaveButtonDisabled(false);
             return;
@@ -144,7 +141,7 @@ const ProductRegisterModal = (props: any) => {
                 input: {
                     id: currentProduct.id,
                     supplierId: supplierId,
-                    itemCategoryId: currentProduct.itemCategoryId,
+                    itemCategoryId: categoryId,
                     name: currentProductInput.name,
                     sku: currentProductInput.sku,
                     upc: currentProductInput.upc,
@@ -183,28 +180,16 @@ const ProductRegisterModal = (props: any) => {
     const handleSupplierSelect = (supplier: any | null | undefined) => {
         setSupplierId(supplier.value);
     };
+    
+    const handleUpdateCategory = (id: any) => {
+        console.log("selected category id", id);
+        setCategoryId(id);
+    };
+
     const submitForm = (currentProductInput: any) => {
         setIsSaveButtonDisabled(true);
         props.modalMode === 'new' ? handleCreateProduct(currentProductInput) : handleUpdateProduct(currentProductInput);
     };
-
-    useEffect(() => {
-        let categoryOption: any[] = [];
-        itemCategories?.map((item: any) => {
-            categoryOption.push({ value: item?.id, label: item?.name });
-        });
-        setCustomOptions(categoryOption);
-    },[itemCategories])
-
-    const handleUpdateCurrentProduct = (id: any) => {
-        // console.log("handleUpdateCurrentProduct", id)
-        setCurrentProduct({ ...currentProduct, itemCategoryId: id });
-
-        const matched = customOptions.find((item: any) => item.value === id);
-        const name = matched?.label || '';
-        // console.log("matched", matched)
-        setCurrentCategory(name);
-    }
 
     const formSchema = Yup.object().shape({
         name: Yup.string().required('Please fill the Product Name'),
@@ -215,6 +200,7 @@ const ProductRegisterModal = (props: any) => {
         // netWeight: Yup.string().required('Please fill the netWeight'),
         // metrcPackage: Yup.string().optional(),
     });
+
 
     return (
         <div className="mb-5">
@@ -288,15 +274,17 @@ const ProductRegisterModal = (props: any) => {
                                                                         Category
                                                                         <span className="absolute -right-3 text-sm text-red-500 ml-2">*</span>
                                                                     </label>
-                                                                    <div className={`min-w-[500px] mt-1 ${submitCount ? (!currentProduct.itemCategoryId ? '!border-[#e7515a] !bg-[#e7515a14] ' : '') : ''}`}>
-                                                                    <CustomSelect
+                                                                    <div className={`min-w-[500px] mt-1 ${submitCount ? (!categoryId ? '!border-[#e7515a] !bg-[#e7515a14] ' : '') : ''}`}>
+                                                                    {/* <CustomSelect
                                                                         options={customOptions}
                                                                         onChange={handleUpdateCurrentProduct}
                                                                         currentOption={currentCategory}
                                                                         showingSearch={false}
                                                                         showingText='Select a category'
                                                                         disabled={false}
-                                                                    /></div>
+                                                                    /> */}
+                                                                    <CategorySelect onChange={handleUpdateCategory} currentCategoryId={categoryId} className='w-60'/>
+                                                                    </div>
                                                                     {/* <select
                                                                         onChange={(e) => {
                                                                             setCurrentProduct({ ...currentProduct, itemCategoryId: e.target.value });
@@ -532,7 +520,7 @@ const ProductRegisterModal = (props: any) => {
                                                                     </button>
                                                                     <button
                                                                         onClick={() => {
-                                                                            if (props.modalMode === "new" ? ( Object.keys(touched).length !== 0 && Object.keys(errors).length === 0 && supplierId && currentProduct.itemCategoryId) : (Object.keys(errors).length === 0)) {
+                                                                            if (props.modalMode === "new" ? ( Object.keys(touched).length !== 0 && Object.keys(errors).length === 0 && supplierId && categoryId) : (Object.keys(errors).length === 0)) {
                                                                                 submitForm(values);
                                                                             } else {
                                                                             }

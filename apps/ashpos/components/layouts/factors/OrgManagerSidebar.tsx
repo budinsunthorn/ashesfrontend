@@ -282,7 +282,7 @@ const OrgManagerSidebar = () => {
                                         <li onClick={() => handleSetActiveItem('drawers')} className={`menu nav-item ml-5 ${activeItem == 'drawers' ? 'bg-[#ebebeb] dark:bg-[#191f33]' : ''}`}>
                                             <Link href={`/drawers-manage`} className="group">
                                                 <div className="flex items-center">
-                                                    <FaHistory className={`shrink-0 group-hover:!text-primary ${activeItem == 'drawers' ? '!text-primary' : ''}`} />
+                                                    <MdPendingActions className={`shrink-0 group-hover:!text-primary ${activeItem == 'actionHistory' ? '!text-primary' : ''}`} />
                                                     <span
                                                         className={`text-dark ltr:pl-3 rtl:pr-3 dark:text-white-dark dark:group-hover:text-white-dark group-hover:!text-primary ${
                                                             activeItem == 'drawers' ? '!text-primary' : ''
@@ -563,7 +563,7 @@ const OrgManagerSidebar = () => {
                                             </Link>
                                             <Link href="/action-history" className={`group ${activeItem == 'actionHistory' ? 'bg-[#ebebeb] dark:bg-[#191f33]' : ''}`} onClick={() => handleSetActiveItem('actionHistory')}>
                                                 <div className="flex items-center">
-                                                    <MdPendingActions className={`shrink-0 group-hover:!text-primary ${activeItem == 'actionHistory' ? '!text-primary' : ''}`} />
+                                                    <FaHistory className={`shrink-0 group-hover:!text-primary ${activeItem == 'drawers' ? '!text-primary' : ''}`} />
                                                     <span
                                                         className={`ltr:pl-3 rtl:pr-3 group-hover:!text-primary ${
                                                             activeItem == 'actionHistory' ? '!text-primary dark:!text-primary' : 'text-dark dark:text-white-dark'
