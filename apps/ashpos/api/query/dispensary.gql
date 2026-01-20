@@ -18,5 +18,7 @@ query Dispensary($id: String!) {
         storeTimeZone
         smsOrderStart
         smsOrderEnd
+        autoPrintExitLabelsOnComplete
+        autoPrintReceiptOnComplete
     }
 }

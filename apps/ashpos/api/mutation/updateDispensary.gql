@@ -13,5 +13,7 @@ mutation updateDispensary($input: DispensaryUpdateInput!) {
     locationCity
     locationState
     locationZipCode
+    autoPrintReceiptOnComplete
+    autoPrintExitLabelsOnComplete
   }
 }
