@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { useCreatePrintSettingMutation, useDispensaryQuery, usePrintSettingByDispensaryIdQuery, useUpdateDispensaryMutation } from '@/src/__generated__/operations';
+import { useCancelDiscountForOrderMutation, useCreatePrintSettingMutation, useDispensaryQuery, usePrintSettingByDispensaryIdQuery, useUpdateDispensaryMutation } from '@/src/__generated__/operations';
 import { userDataSave } from '@/store/userData';
 import warnAlert from '../notification/warnAlert';
 import successAlert from '../notification/successAlert';
@@ -509,6 +509,10 @@ export default function PrintSetting() {
 
     // handle windows app setting 
     const handleWindowAppSetting = async () => {
+        if (dispensaryData == null || dispensaryData == undefined) {
+            warnAlert("Dispensary Data is null, please reload page.")
+            return;
+        }
         await updateDispensaryMutation.mutate(
             {
                 input: {
