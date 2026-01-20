@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { PrintType, useAppPrintSettingByDispensaryIdQuery, useCreatePrintSettingMutation, usePrintSettingByDispensaryIdQuery, useUpdateAppPrintSettingByDispensaryIdMutation } from '@/src/__generated__/operations';
+import { useCreatePrintSettingMutation, useDispensaryQuery, usePrintSettingByDispensaryIdQuery, useUpdateDispensaryMutation } from '@/src/__generated__/operations';
 import { userDataSave } from '@/store/userData';
 import warnAlert from '../notification/warnAlert';
 import successAlert from '../notification/successAlert';
@@ -19,6 +19,7 @@ export default function PrintSetting() {
     // User Data
     const { userData } = userDataSave();
     const dispensaryId = userData.dispensaryId;
+    const organizationId = userData.organizationId;
 
     // Toggle states
     const [disableExitLabels, setDisableExitLabels] = useState<boolean>(false);
@@ -121,8 +122,8 @@ export default function PrintSetting() {
     // Query
     const printSettingRowData = usePrintSettingByDispensaryIdQuery({ dispensaryId: dispensaryId });
     const printSettingData = printSettingRowData.data?.printSettingByDispensaryId;
-    const appPrintSetting = useAppPrintSettingByDispensaryIdQuery({dispensaryId: dispensaryId});
-    console.log("appPrintSetting", appPrintSetting);
+    const dispensary = useDispensaryQuery({ id: dispensaryId });
+    const dispensaryData = dispensary.data?.dispensary;
 
     const exitLabelPrintSettingData = useMemo(() => printSettingData?.find((item) => item?.printType === 'exitLabel') || null, [printSettingData]);
     const receiptPrintSettingData = useMemo(() => printSettingData?.find((item) => item?.printType === 'receipt') || null, [printSettingData]);
@@ -133,21 +134,18 @@ export default function PrintSetting() {
         // Initialize Windows app print settings once from server data
         if (appPrintInitialized) return;
 
-        const appPrintSettingData = appPrintSetting.data?.appPrintSettingByDispensaryId;
-        if (!appPrintSettingData) return;
-
         console.log("useEffect - setEnableAutoPrintSetting");
-        setEnableAutoPrintExitLabels(appPrintSettingData.autoPrintExitLabelsOnComplete ?? false);
-        setEnableAutoPrintReceipt(appPrintSettingData.autoPrintReceiptOnComplete ?? false);
+        setEnableAutoPrintExitLabels(dispensaryData?.autoPrintExitLabelsOnComplete || false);
+        setEnableAutoPrintReceipt(dispensaryData?.autoPrintReceiptOnComplete || false);
         setAppPrintInitialized(true);
-    }, [appPrintSetting.data, appPrintInitialized]);
+    }, [dispensaryData, appPrintInitialized]);
 
     // console.log('exitLabelPrintSettingData', exitLabelPrintSettingData);
     // console.log("deliveryReceiptPrintSettingData", deliveryReceiptPrintSettingData)
 
     // Mutation
     const createPrintSettingMutation = useCreatePrintSettingMutation();
-    const updateAppPrintSettingMutation = useUpdateAppPrintSettingByDispensaryIdMutation()
+    const updateDispensaryMutation = useUpdateDispensaryMutation()
 
     useEffect(() => {
         // console.log('useEffect --> exitLabelPrintSettingData', exitLabelPrintSettingData);
@@ -504,16 +502,33 @@ export default function PrintSetting() {
     });
 
 
-    console.log("enableAutoPrintReceipt", enableAutoPrintReceipt)
-    console.log("enableAutoPrintExitLabels", enableAutoPrintExitLabels)
+    // console.log("enableAutoPrintReceipt", enableAutoPrintReceipt)
+    // console.log("enableAutoPrintExitLabels", enableAutoPrintExitLabels)
+
+    console.log('dispensaryData', dispensaryData)
+
     // handle windows app setting 
     const handleWindowAppSetting = async () => {
-        await updateAppPrintSettingMutation.mutate(
+        await updateDispensaryMutation.mutate(
             {
                 input: {
-                    dispensaryId: dispensaryId,
-                    autoPrintReceiptOnComplete: enableAutoPrintReceipt,
-                    autoPrintExitLabelsOnComplete: enableAutoPrintExitLabels
+                    id: dispensaryId,
+                    name: dispensaryData.name,
+                    dispensaryType: dispensaryData.dispensaryType,
+                    cannabisLicense: dispensaryData.cannabisLicense,
+                    cannabisLicenseExpireDate: dispensaryData.cannabisLicenseExpireDate,
+                    businessLicense: dispensaryData.businessLicense.toUpperCase(),
+                    phone: dispensaryData.phone,
+                    email: dispensaryData.email,
+                    locationAddress: dispensaryData.locationAddress,
+                    locationCity: dispensaryData.locationCity,
+                    locationState: dispensaryData.locationState,
+                    locationZipCode: dispensaryData.locationZipCode,
+                    storeTimeZone: dispensaryData.storeTimeZone,
+                    isCustomerAgeVerify: dispensaryData.isCustomerAgeVerify,
+                    customerAgeLimit: +dispensaryData.customerAgeLimit,
+                    autoPrintExitLabelsOnComplete: enableAutoPrintExitLabels,
+                    autoPrintReceiptOnComplete: enableAutoPrintReceipt
                 },
             },
             {
@@ -522,13 +537,10 @@ export default function PrintSetting() {
                 },
                 onSuccess(data) {
                     if (!data) return;
-                    {
-                        successAlert('App Print Setting Saved Successfully');
-                        printSettingRowData.refetch();
-                    }
+                    dispensary.refetch()
+                    successAlert('App Print Setting has been updated successfully!');
                 },
                 onSettled() {
-                    // setIsNewOrderItemButtonDisabled(false);
                 },
             }
         );

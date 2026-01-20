@@ -1,7 +1,0 @@
-query AppPrintSettingByDispensaryId( $dispensaryId: String!) {
-  appPrintSettingByDispensaryId(dispensaryId: $dispensaryId) {
-      dispensaryId
-      autoPrintReceiptOnComplete
-      autoPrintExitLabelsOnComplete
-  }
-}
