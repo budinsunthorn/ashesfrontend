@@ -1664,8 +1664,8 @@ export default function PrintSetting() {
                     <div className='text-md mt-5'>Install AshesPos app to take auto priting functions.</div>
                     <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 my-3 dark:bg-yellow-900 dark:border-yellow-400 dark:text-yellow-400 p-4" role="alert">
                         <strong className="font-bold">Note:</strong>
-                        <span className="block sm:inline ml-2">These settings do not apply</span>
-                        <div className='mt-4'>when accessing AshesPos through a web browser (i.e. Google Chrome).</div>
+                        <span className="block sm:inline ml-2">These settings do not apply when accessing AshesPos through a web browser (i.e. Google Chrome).</span>
+                        {/* <div className='mt-4'>when accessing AshesPos through a web browser (i.e. Google Chrome).</div> */}
                     </div>
                     {/* Setting switches */}
                     <div className='flex flex-col my-3 w-full md:w-1/2 ml-5'>
